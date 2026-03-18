@@ -2,6 +2,8 @@
 name: soql-optimization
 description: SOQL query optimization including query plans, selective filters, indexing, and bulk query patterns
 origin: claude-sfdx-iq
+tokens: 2227
+domain: soql
 ---
 
 # SOQL Optimization

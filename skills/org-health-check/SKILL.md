@@ -2,6 +2,8 @@
 name: org-health-check
 description: Org health monitoring, Security Health Check score, limits analysis, technical debt scoring, and automated health scripts
 origin: claude-sfdx-iq
+tokens: 3605
+domain: metadata
 ---
 
 # Org Health Check

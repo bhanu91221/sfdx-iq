@@ -2,6 +2,8 @@
 name: apex-coding-standards
 description: Naming conventions, documentation standards, code structure rules, and PMD compliance for Apex
 origin: claude-sfdx-iq
+tokens: 2171
+domain: apex
 ---
 
 # Apex Coding Standards

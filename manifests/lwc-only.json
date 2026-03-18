@@ -1,8 +1,17 @@
 {
   "name": "lwc-only",
   "description": "LWC-focused manifest for frontend Salesforce development",
+  "tokenEstimate": 20636,
+  "tokenBreakdown": {
+    "skills": 14438,
+    "rules": 6198,
+    "agents": 0,
+    "commands": 0,
+    "hooks": 0
+  },
   "components": {
     "agents": [
+      "context-assigner",
       "lwc-reviewer",
       "security-reviewer",
       "planner"

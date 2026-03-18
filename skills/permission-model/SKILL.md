@@ -2,6 +2,8 @@
 name: permission-model
 description: Salesforce permission model including Permission Sets, sharing rules, OWD, custom permissions, and Apex managed sharing
 origin: claude-sfdx-iq
+tokens: 3101
+domain: security
 ---
 
 # Permission Model

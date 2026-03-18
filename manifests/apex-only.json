@@ -1,8 +1,17 @@
 {
   "name": "apex-only",
   "description": "Apex-focused manifest for backend Salesforce development",
+  "tokenEstimate": 49863,
+  "tokenBreakdown": {
+    "skills": 33850,
+    "rules": 16013,
+    "agents": 0,
+    "commands": 0,
+    "hooks": 0
+  },
   "components": {
     "agents": [
+      "context-assigner",
       "apex-reviewer",
       "security-reviewer",
       "test-guide",

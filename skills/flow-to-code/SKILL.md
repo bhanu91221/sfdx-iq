@@ -2,6 +2,8 @@
 name: flow-to-code
 description: When and how to convert Flows to Apex, migration patterns, hybrid approaches, and Invocable methods
 origin: claude-sfdx-iq
+tokens: 2766
+domain: flows
 ---
 
 # Flow to Code Migration

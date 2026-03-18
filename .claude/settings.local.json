@@ -39,7 +39,14 @@
       "Bash(find skills:*)",
       "Bash(grep -rl claude-sfdx-iq --include=*.md --include=*.js --include=*.json --include=*.yaml .)",
       "Bash(grep -rl \"CSIQ\\\\|csiq\" --include=*.md --include=*.js --include=*.json --include=*.yaml .)",
-      "Read(//c/Users/bhanu91221/AppData/Local/Temp/claude/C--Users-bhanu91221-Downloads-everthing-sfdc/a65047bb-06ea-4dd6-8a5e-a9d5c709bba7/tasks/**)"
+      "Read(//c/Users/bhanu91221/AppData/Local/Temp/claude/C--Users-bhanu91221-Downloads-everthing-sfdc/a65047bb-06ea-4dd6-8a5e-a9d5c709bba7/tasks/**)",
+      "Bash(node scripts/estimate-tokens.js --all)",
+      "Bash(node scripts/tokens.js --profile default)",
+      "Bash(node scripts/tokens.js --profile minimal)",
+      "Bash(node -e \":*)",
+      "Bash(node scripts/refresh-claude-md.js --target /tmp/csiq-test --profile default)",
+      "Bash(node scripts/install-apply.js --profile minimal --target /tmp/csiq-install-test)",
+      "Bash(node scripts/pick.js --non-interactive --category apex)"
     ]
   }
 }

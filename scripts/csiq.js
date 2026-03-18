@@ -40,6 +40,18 @@ const COMMANDS = {
     description: 'Fix broken configurations and missing files',
     script: './repair.js',
   },
+  pick: {
+    description: 'Interactively select components for a custom manifest',
+    script: './pick.js',
+  },
+  tokens: {
+    description: 'Show token budget for installed or profile components',
+    script: './tokens.js',
+  },
+  refresh: {
+    description: 'Regenerate .claude/CLAUDE.md from template + active profile',
+    script: './refresh-claude-md.js',
+  },
   help: {
     description: 'Show this help message',
     script: null,
@@ -73,6 +85,12 @@ function showHelp() {
   console.log('  npx csiq install --profile minimal --dry-run');
   console.log('  npx csiq status');
   console.log('  npx csiq doctor');
+  console.log('  npx csiq pick --category apex');
+  console.log('  npx csiq pick --output manifests/custom.json');
+  console.log('  npx csiq install --interactive');
+  console.log('  npx csiq tokens --profile default');
+  console.log('  npx csiq tokens --all');
+  console.log('  npx csiq refresh --profile minimal');
   console.log('');
 }
 

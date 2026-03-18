@@ -25,6 +25,7 @@ let profileName = 'default';
 let manifestPath = null;
 let targetDir = process.cwd();
 const dryRun = args.includes('--dry-run');
+const interactive = args.includes('--interactive');
 
 for (let i = 0; i < args.length; i++) {
   if (args[i] === '--profile' && args[i + 1]) {
@@ -43,6 +44,29 @@ if (dryRun) {
   // Redirect to install-plan
   process.argv = [process.argv[0], path.resolve(__dirname, 'install-plan.js'), ...args];
   require('./install-plan.js');
+  return;
+}
+
+// Interactive mode: let user pick components before installing
+if (interactive) {
+  const { runPicker } = require('./pick');
+  runPicker().then(manifest => {
+    if (!manifest) {
+      console.log('No components selected. Aborting.');
+      process.exit(0);
+    }
+    // Save custom manifest for reuse
+    const customPath = path.join(MANIFESTS_DIR, 'custom.json');
+    fs.writeFileSync(customPath, JSON.stringify(manifest, null, 2) + '\n', 'utf8');
+    console.log(`\n  Custom manifest saved to: ${customPath}`);
+    // Re-run install with the custom manifest
+    process.argv = [process.argv[0], __filename, '--manifest', customPath, '--target', targetDir];
+    delete require.cache[require.resolve(__filename)];
+    require(__filename);
+  }).catch(err => {
+    console.error('Error:', err.message);
+    process.exit(1);
+  });
   return;
 }
 
@@ -78,9 +102,10 @@ const sourceResolvers = {
 };
 
 // Target resolution — install into .claude/ directory of target project
+// Skills go to skills-available/ (NOT skills/) to prevent auto-loading by Claude Code
 const targetResolvers = {
   agents: (name) => path.join(targetDir, '.claude', 'agents', `${name}.md`),
-  skills: (name) => path.join(targetDir, '.claude', 'skills', name, 'SKILL.md'),
+  skills: (name) => path.join(targetDir, '.claude', 'skills-available', name, 'SKILL.md'),
   commands: (name) => path.join(targetDir, '.claude', 'commands', `${name}.md`),
   hooks: (name) => path.join(targetDir, '.claude', 'hooks', `${name}.json`),
   rules: (name) => path.join(targetDir, '.claude', 'rules', `${name}.md`),
@@ -145,14 +170,89 @@ for (const [category, items] of Object.entries(manifest.components || {})) {
   console.log('');
 }
 
-// Also copy CLAUDE.md rules reference if it doesn't exist
-const targetClaudeMd = path.join(targetDir, '.claude', 'CLAUDE.md');
-if (!fs.existsSync(targetClaudeMd)) {
-  const srcClaudeMd = path.join(ROOT, 'CLAUDE.md');
-  if (fs.existsSync(srcClaudeMd)) {
-    copyFile(srcClaudeMd, targetClaudeMd);
-    console.log('  ✅ CLAUDE.md reference copied\n');
+// Copy skill index to .claude/skills/index.md (this IS auto-loaded by Claude Code)
+const skillIndexSrc = path.join(ROOT, 'skills', 'index.md');
+const skillIndexDest = path.join(targetDir, '.claude', 'skills', 'index.md');
+if (fs.existsSync(skillIndexSrc)) {
+  try {
+    copyFile(skillIndexSrc, skillIndexDest);
+    console.log('  ✅ skills/index.md (skill catalog for context-assigner)\n');
+    installed++;
+  } catch (e) {
+    console.log(`  ❌ skills/index.md — ${e.message}\n`);
+    errors++;
   }
+}
+
+// Copy rule index to .claude/rules/index.md
+const ruleIndexSrc = path.join(ROOT, 'rules', 'index.md');
+const ruleIndexDest = path.join(targetDir, '.claude', 'rules', 'index.md');
+if (fs.existsSync(ruleIndexSrc)) {
+  try {
+    copyFile(ruleIndexSrc, ruleIndexDest);
+    console.log('  ✅ rules/index.md (rule catalog for context-assigner)\n');
+    installed++;
+  } catch (e) {
+    console.log(`  ❌ rules/index.md — ${e.message}\n`);
+    errors++;
+  }
+}
+
+// Generate dynamic CLAUDE.md from template (replaces static CLAUDE.md copy)
+try {
+  const { generateClaudeMd } = require('./refresh-claude-md');
+  const result = generateClaudeMd({ targetDir, profileName: manifest.name });
+  console.log(`  ✅ CLAUDE.md generated (profile: ${result.profileName}, dynamic context loading enabled)\n`);
+  installed++;
+} catch (e) {
+  // Fallback: copy static CLAUDE.md if template generation fails
+  const targetClaudeMd = path.join(targetDir, '.claude', 'CLAUDE.md');
+  const srcClaudeMd = path.join(ROOT, 'CLAUDE.md');
+  if (!fs.existsSync(targetClaudeMd) && fs.existsSync(srcClaudeMd)) {
+    copyFile(srcClaudeMd, targetClaudeMd);
+    console.log('  ✅ CLAUDE.md copied (static fallback)\n');
+    installed++;
+  }
+}
+
+// Write active-profile.json for token tracking
+const activeProfilePath = path.join(targetDir, '.claude', 'active-profile.json');
+const activeProfile = {
+  version: '1',
+  installedFrom: 'claude-sfdx-iq@1.1.0',
+  baseProfile: manifest.name,
+  active: {
+    skills: manifest.components.skills || [],
+    rules: manifest.components.rules || [],
+    agents: manifest.components.agents || [],
+    hooks: manifest.components.hooks || [],
+  },
+  inactive: {
+    skills: [],
+    rules: [],
+    agents: [],
+    hooks: [],
+  },
+  savedProfiles: {},
+  tokenBudget: {
+    active: manifest.tokenEstimate || 0,
+    installed: manifest.tokenEstimate || 0,
+    potential: 143684,
+  },
+  lastRefreshed: new Date().toISOString(),
+};
+
+try {
+  const profileDir = path.dirname(activeProfilePath);
+  if (!fs.existsSync(profileDir)) {
+    fs.mkdirSync(profileDir, { recursive: true });
+  }
+  fs.writeFileSync(activeProfilePath, JSON.stringify(activeProfile, null, 2) + '\n', 'utf8');
+  console.log('  ✅ active-profile.json (token tracking + profile state)\n');
+  installed++;
+} catch (e) {
+  console.log(`  ❌ active-profile.json — ${e.message}\n`);
+  errors++;
 }
 
 console.log('─'.repeat(50));
@@ -162,6 +262,7 @@ if (errors > 0) {
   console.log(`  Errors:    ${errors}`);
 }
 console.log(`\n  Profile "${manifest.name}" installation complete.`);
+console.log(`  Skills installed to .claude/skills-available/ (loaded on-demand by context-assigner)`);
 console.log(`  Run "npx csiq status" to verify.\n`);
 
 process.exit(errors > 0 ? 1 : 0);

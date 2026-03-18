@@ -2,6 +2,8 @@
 name: packaging-2gp
 description: Second-generation package creation, versioning, ancestry, namespace management, and ISV distribution
 origin: claude-sfdx-iq
+tokens: 2147
+domain: metadata
 ---
 
 # Second-Generation Packages (2GP)

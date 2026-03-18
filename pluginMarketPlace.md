@@ -55,7 +55,7 @@ Your repo already has the required files:
   "version": "1.0.0",
   "description": "Complete Salesforce DX plugin for Claude Code — agents, skills, hooks, commands, and rules for Apex, LWC, SOQL, Flows, and SFDX CI/CD",
   "author": {
-    "name": "Bhargav Vakati"
+    "name": "Bhanu Vakati"
   },
   "homepage": "https://github.com/bhanu91221/claude-sfdx-iq",
   "repository": "https://github.com/bhanu91221/claude-sfdx-iq",
@@ -74,7 +74,7 @@ Your repo already has the required files:
 {
   "name": "claude-sfdx-iq",
   "owner": {
-    "name": "Bhargav Vakati",
+    "name": "Bhanu Vakati",
     "email": "bhanu91221@github.com"
   },
   "plugins": [
@@ -308,7 +308,7 @@ If you later create more Salesforce plugins, you can list them all:
 ```json
 {
   "name": "bhanu91221-salesforce-plugins",
-  "owner": { "name": "Bhargav Vakati" },
+  "owner": { "name": "Bhanu Vakati" },
   "plugins": [
     {
       "name": "claude-sfdx-iq",

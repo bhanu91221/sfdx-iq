@@ -6,7 +6,7 @@ const fs = require('fs');
 const path = require('path');
 
 const AGENTS_DIR = path.resolve(__dirname, '..', '..', 'agents');
-const EXPECTED_AGENT_COUNT = 14;
+const EXPECTED_AGENT_COUNT = 15;
 const REQUIRED_FRONTMATTER_FIELDS = ['name', 'description', 'tools', 'model'];
 
 function parseFrontmatter(content) {

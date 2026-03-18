@@ -2,6 +2,8 @@
 name: experience-cloud
 description: Experience Cloud site configuration, LWC in communities, guest user security, and deployment strategies
 origin: claude-sfdx-iq
+tokens: 2988
+domain: platform
 ---
 
 # Experience Cloud

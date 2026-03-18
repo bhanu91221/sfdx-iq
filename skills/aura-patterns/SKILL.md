@@ -2,6 +2,8 @@
 name: aura-patterns
 description: Aura component architecture, events, server communication, and Aura-to-LWC migration strategies
 origin: claude-sfdx-iq
+tokens: 2719
+domain: lwc
 ---
 
 # Aura Patterns

@@ -13,19 +13,18 @@
 
 ## Installation
 
-### Option 1: Claude Code Marketplace (Recommended)
+### Option A: Claude Marketplace (Full Control)
 
-Once published, install directly from the Claude Code CLI:
+After pushing to GitHub, your repo acts as both the plugin AND the marketplace.
+
+**Users install with 2 commands:**
 
 ```bash
-# Install the plugin from the marketplace
-claude plugin add bhanu91221/claude-sfdx-iq
+# 1. Add your marketplace (one-time setup)
+/plugin marketplace add bhanu91221/claude-sfdx-iq
 
-# Install into your current SFDX project
-claude plugin install claude-sfdx-iq
-
-# Verify installation
-claude plugin list
+# 2. Install the plugin
+/plugin install claude-sfdx-iq@claude-sfdx-iq
 ```
 
 Then copy the example CLAUDE.md into your SFDX project root:
@@ -37,21 +36,31 @@ cp ~/.claude/plugins/claude-sfdx-iq/examples/CLAUDE.md ./CLAUDE.md
 
 Open Claude Code in your project — all 42 commands, 14 agents, and 44 rules are immediately available.
 
-### Option 2: Clone and Install Manually
+### Activating the Rules (Required)
+
+Because Claude Code plugins cannot currently automatically distribute the core `rules/` folder (the system prompts), you need to activate them manually in your SFDX project's CLAUDE.md:
 
 ```bash
-# 1. Clone the repository
-git clone https://github.com/bhanu91221/claude-sfdx-iq.git
-cd claude-sfdx-iq
+# After installing the plugin, add the rules to your project CLAUDE.md
+cat >> ./CLAUDE.md << 'EOF'
 
-# 2. Install dependencies
-npm install
+## Loaded Rules (claude-sfdx-iq)
 
-# 3. Install a profile into your SFDX project
-node scripts/csiq.js install --profile developer --target /path/to/your/sfdx-project
+@~/.claude/plugins/claude-sfdx-iq/rules/common/security.md
+@~/.claude/plugins/claude-sfdx-iq/rules/common/code-quality.md
+@~/.claude/plugins/claude-sfdx-iq/rules/apex/bulkification.md
+@~/.claude/plugins/claude-sfdx-iq/rules/apex/patterns.md
+@~/.claude/plugins/claude-sfdx-iq/rules/lwc/patterns.md
+@~/.claude/plugins/claude-sfdx-iq/rules/soql/performance.md
+@~/.claude/plugins/claude-sfdx-iq/rules/flows/best-practices.md
+@~/.claude/plugins/claude-sfdx-iq/rules/metadata/deployment.md
+EOF
+```
 
-# 4. Copy example CLAUDE.md into your SFDX project
-cp examples/CLAUDE.md /path/to/your/sfdx-project/CLAUDE.md
+Or copy the pre-built example CLAUDE.md which includes all rule references:
+
+```bash
+cp ~/.claude/plugins/claude-sfdx-iq/examples/CLAUDE.md ./CLAUDE.md
 ```
 
 ### Installation Profiles

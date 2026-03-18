@@ -1,8 +1,17 @@
 {
   "name": "admin",
   "description": "Admin-focused manifest for declarative development, flows, metadata, and data modeling",
+  "tokenEstimate": 28720,
+  "tokenBreakdown": {
+    "skills": 16347,
+    "rules": 12373,
+    "agents": 0,
+    "commands": 0,
+    "hooks": 0
+  },
   "components": {
     "agents": [
+      "context-assigner",
       "admin-advisor",
       "flow-analyst",
       "data-modeler",

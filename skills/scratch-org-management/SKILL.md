@@ -2,6 +2,8 @@
 name: scratch-org-management
 description: Scratch org definition, creation, source push/pull, data seeding, org shapes, snapshots, and pooling strategies
 origin: claude-sfdx-iq
+tokens: 2581
+domain: devops
 ---
 
 # Scratch Org Management

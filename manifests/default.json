@@ -1,8 +1,17 @@
 {
   "name": "default",
   "description": "Full installation manifest with all agents, rules, skills, commands, and hooks",
+  "tokenEstimate": 143684,
+  "tokenBreakdown": {
+    "skills": 100265,
+    "rules": 43419,
+    "agents": 0,
+    "commands": 0,
+    "hooks": 0
+  },
   "components": {
     "agents": [
+      "context-assigner",
       "admin-advisor",
       "apex-reviewer",
       "architect",

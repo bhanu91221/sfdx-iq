@@ -2,6 +2,8 @@
 name: data-modeling
 description: Master-Detail vs Lookup, junction objects, external IDs, record types, big objects, data skew prevention
 origin: claude-sfdx-iq
+tokens: 3092
+domain: platform
 ---
 
 # Data Modeling

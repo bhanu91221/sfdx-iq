@@ -2,6 +2,8 @@
 name: trigger-framework
 description: TriggerHandler base class, one-trigger-per-object pattern, recursion prevention, and execution order
 origin: claude-sfdx-iq
+tokens: 3138
+domain: apex
 ---
 
 # Trigger Framework

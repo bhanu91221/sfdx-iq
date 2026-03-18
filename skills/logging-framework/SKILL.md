@@ -2,6 +2,8 @@
 name: logging-framework
 description: Custom logging framework with Platform Events, log levels, structured format, and retention management
 origin: claude-sfdx-iq
+tokens: 3277
+domain: apex
 ---
 
 # Logging Framework
