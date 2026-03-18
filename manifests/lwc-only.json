@@ -1,0 +1,40 @@
+{
+  "name": "lwc-only",
+  "description": "LWC-focused manifest for frontend Salesforce development",
+  "components": {
+    "agents": [
+      "lwc-reviewer",
+      "security-reviewer",
+      "planner"
+    ],
+    "rules": [
+      "common/security",
+      "common/testing",
+      "lwc/coding-style",
+      "lwc/hooks",
+      "lwc/patterns",
+      "lwc/performance",
+      "lwc/security",
+      "lwc/testing"
+    ],
+    "skills": [
+      "lwc-patterns",
+      "lwc-performance",
+      "lwc-testing",
+      "security-patterns",
+      "aura-patterns"
+    ],
+    "commands": [
+      "deploy",
+      "lwc-review",
+      "lwc-test",
+      "scaffold-lwc",
+      "security-scan",
+      "explain-error"
+    ],
+    "hooks": [
+      "lwc-post-edit",
+      "pre-commit"
+    ]
+  }
+}

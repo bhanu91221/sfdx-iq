@@ -1,0 +1,8 @@
+{
+  "hooks": [
+    {
+      "matcher": { "event": "post-edit", "filePattern": "**/*.flow-meta.xml" },
+      "command": "node scripts/hooks/flow-check.js \"$FILE\""
+    }
+  ]
+}

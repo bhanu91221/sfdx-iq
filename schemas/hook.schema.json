@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "title": "Hook Definition",
+  "type": "object",
+  "required": ["hooks"],
+  "properties": {
+    "hooks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["matcher", "command"],
+        "properties": {
+          "matcher": {
+            "type": "object",
+            "anyOf": [
+              { "required": ["event"] },
+              { "required": ["filePattern"] }
+            ],
+            "properties": {
+              "event": { "type": "string" },
+              "filePattern": { "type": "string" }
+            }
+          },
+          "command": { "type": "string" }
+        }
+      },
+      "minItems": 1
+    }
+  }
+}

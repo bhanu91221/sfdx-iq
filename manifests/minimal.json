@@ -1,0 +1,37 @@
+{
+  "name": "minimal",
+  "description": "Core-only manifest with essential Apex development tools",
+  "components": {
+    "agents": [
+      "apex-reviewer",
+      "security-reviewer",
+      "test-guide",
+      "planner"
+    ],
+    "rules": [
+      "common/security",
+      "common/testing",
+      "apex/coding-style",
+      "apex/patterns",
+      "apex/bulkification",
+      "apex/governor-limits",
+      "apex/error-handling",
+      "apex/security"
+    ],
+    "skills": [
+      "governor-limits",
+      "apex-patterns",
+      "security-patterns"
+    ],
+    "commands": [
+      "deploy",
+      "test",
+      "apex-review",
+      "security-scan"
+    ],
+    "hooks": [
+      "apex-post-edit",
+      "pre-commit"
+    ]
+  }
+}

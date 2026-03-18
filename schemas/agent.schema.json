@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "title": "Agent Definition",
+  "type": "object",
+  "required": ["name", "description", "tools", "model"],
+  "properties": {
+    "name": { "type": "string", "pattern": "^[a-z][a-z0-9-]+$" },
+    "description": { "type": "string", "minLength": 10 },
+    "tools": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "model": { "type": "string", "enum": ["sonnet", "opus", "haiku"] }
+  }
+}

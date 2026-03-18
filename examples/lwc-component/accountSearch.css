@@ -1,0 +1,22 @@
+:host {
+    display: block;
+}
+
+.search-input {
+    max-width: 400px;
+}
+
+.results-table {
+    --slds-c-datatable-header-color-background: var(--lwc-colorBackgroundAlt, #f3f3f3);
+    margin-top: var(--lwc-spacingSmall, 0.75rem);
+}
+
+@media (max-width: 480px) {
+    .search-input {
+        max-width: 100%;
+    }
+
+    .results-table {
+        font-size: var(--lwc-fontSizeTextSmall, 0.75rem);
+    }
+}

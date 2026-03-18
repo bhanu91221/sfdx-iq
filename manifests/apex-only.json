@@ -1,0 +1,62 @@
+{
+  "name": "apex-only",
+  "description": "Apex-focused manifest for backend Salesforce development",
+  "components": {
+    "agents": [
+      "apex-reviewer",
+      "security-reviewer",
+      "test-guide",
+      "soql-optimizer",
+      "governor-limits-checker",
+      "planner"
+    ],
+    "rules": [
+      "common/security",
+      "common/testing",
+      "apex/coding-style",
+      "apex/patterns",
+      "apex/bulkification",
+      "apex/governor-limits",
+      "apex/error-handling",
+      "apex/security",
+      "soql/anti-patterns",
+      "soql/performance",
+      "soql/query-patterns",
+      "soql/security"
+    ],
+    "skills": [
+      "apex-patterns",
+      "apex-coding-standards",
+      "apex-enterprise-patterns",
+      "apex-async-patterns",
+      "apex-testing",
+      "governor-limits",
+      "security-patterns",
+      "soql-optimization",
+      "trigger-framework",
+      "error-handling",
+      "tdd-workflow",
+      "logging-framework"
+    ],
+    "commands": [
+      "deploy",
+      "test",
+      "apex-review",
+      "security-scan",
+      "governor-check",
+      "soql-review",
+      "tdd",
+      "scaffold-apex",
+      "scaffold-trigger",
+      "scaffold-batch",
+      "test-data",
+      "explain-error"
+    ],
+    "hooks": [
+      "apex-post-edit",
+      "trigger-post-edit",
+      "soql-check",
+      "pre-commit"
+    ]
+  }
+}

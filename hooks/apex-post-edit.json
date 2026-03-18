@@ -1,0 +1,8 @@
+{
+  "hooks": [
+    {
+      "matcher": { "event": "post-edit", "filePattern": "**/*.cls" },
+      "command": "node scripts/hooks/apex-lint.js \"$FILE\""
+    }
+  ]
+}

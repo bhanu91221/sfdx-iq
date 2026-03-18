@@ -1,0 +1,22 @@
+{
+  "name": "jest-lwc",
+  "description": "Jest testing framework with @salesforce/sfdx-lwc-jest for LWC component testing",
+  "command": "npx jest",
+  "capabilities": ["run tests", "watch mode", "coverage report", "snapshot testing"],
+  "requiredTools": ["Bash"],
+  "setup": "npm install --save-dev @salesforce/sfdx-lwc-jest",
+  "configuration": {
+    "configFile": "jest.config.js",
+    "testMatch": ["**/__tests__/**/*.test.js"],
+    "coverageDirectory": "coverage",
+    "coverageThreshold": {
+      "global": {
+        "branches": 75,
+        "functions": 75,
+        "lines": 75,
+        "statements": 75
+      }
+    }
+  },
+  "documentation": "https://github.com/salesforce/sfdx-lwc-jest"
+}

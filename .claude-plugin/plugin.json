@@ -1,0 +1,27 @@
+{
+  "name": "claude-sfdx-iq",
+  "version": "1.0.0",
+  "description": "Complete Salesforce DX plugin for Claude Code — agents, skills, hooks, commands, and rules for Apex, LWC, SOQL, Flows, and SFDX CI/CD",
+  "author": {
+    "name": "Bhargav Vakati"
+  },
+  "homepage": "https://github.com/bhanu91221/claude-sfdx-iq",
+  "repository": "https://github.com/bhanu91221/claude-sfdx-iq",
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "salesforce",
+    "sfdx",
+    "apex",
+    "lwc",
+    "soql",
+    "flows",
+    "governor-limits",
+    "tdd",
+    "code-review",
+    "security",
+    "workflow",
+    "automation",
+    "best-practices"
+  ]
+}

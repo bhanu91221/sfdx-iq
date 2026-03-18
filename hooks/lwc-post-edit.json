@@ -1,0 +1,8 @@
+{
+  "hooks": [
+    {
+      "matcher": { "event": "post-edit", "filePattern": "**/lwc/**/*.js" },
+      "command": "node scripts/hooks/lwc-lint.js \"$FILE\""
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "hooks": [
+    {
+      "matcher": { "event": "pre-commit" },
+      "command": "node scripts/hooks/pre-commit-check.js"
+    }
+  ]
+}

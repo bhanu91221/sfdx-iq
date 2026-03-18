@@ -1,0 +1,46 @@
+{
+  "name": "admin",
+  "description": "Admin-focused manifest for declarative development, flows, metadata, and data modeling",
+  "components": {
+    "agents": [
+      "admin-advisor",
+      "flow-analyst",
+      "data-modeler",
+      "metadata-analyst",
+      "planner"
+    ],
+    "rules": [
+      "common/security",
+      "flows/best-practices",
+      "flows/patterns",
+      "flows/performance",
+      "flows/security",
+      "metadata/deployment",
+      "metadata/naming-conventions",
+      "metadata/organization",
+      "metadata/version-control"
+    ],
+    "skills": [
+      "flow-best-practices",
+      "data-modeling",
+      "permission-model",
+      "metadata-management",
+      "flow-to-code",
+      "deployment-strategies"
+    ],
+    "commands": [
+      "deploy",
+      "retrieve",
+      "flow-review",
+      "data-model",
+      "metadata-analyze",
+      "org-health",
+      "scaffold-flow",
+      "validate"
+    ],
+    "hooks": [
+      "flow-post-edit",
+      "pre-commit"
+    ]
+  }
+}

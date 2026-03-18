@@ -1,0 +1,23 @@
+{
+  "name": "github-actions",
+  "description": "GitHub Actions CI/CD configuration for Salesforce DX with SFDX auth and automated deployments",
+  "command": "gh",
+  "capabilities": ["workflow run", "workflow view", "run list", "run view"],
+  "requiredTools": ["Bash"],
+  "setup": "Configure SFDX_AUTH_URL as a GitHub repository secret",
+  "configuration": {
+    "workflowDirectory": ".github/workflows",
+    "requiredSecrets": [
+      "SFDX_AUTH_URL",
+      "SFDX_AUTH_URL_STAGING",
+      "SFDX_AUTH_URL_PRODUCTION"
+    ],
+    "defaultWorkflows": {
+      "validate": "Validate source on PR to develop",
+      "deploy-staging": "Deploy to staging on merge to develop",
+      "deploy-production": "Deploy to production on merge to main",
+      "run-tests": "Run Apex tests and LWC Jest tests"
+    }
+  },
+  "documentation": "https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ci_circle.htm"
+}

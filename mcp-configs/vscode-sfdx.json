@@ -1,0 +1,28 @@
+{
+  "name": "vscode-sfdx",
+  "description": "VS Code Salesforce Extension Pack configuration for IDE integration",
+  "command": "code",
+  "capabilities": ["extension install", "settings sync"],
+  "requiredTools": ["Bash"],
+  "setup": "code --install-extension salesforce.salesforcedx-vscode",
+  "configuration": {
+    "extensions": [
+      "salesforce.salesforcedx-vscode",
+      "salesforce.salesforcedx-vscode-apex",
+      "salesforce.salesforcedx-vscode-apex-debugger",
+      "salesforce.salesforcedx-vscode-apex-replay-debugger",
+      "salesforce.salesforcedx-vscode-core",
+      "salesforce.salesforcedx-vscode-lightning",
+      "salesforce.salesforcedx-vscode-lwc",
+      "salesforce.salesforcedx-vscode-soql",
+      "salesforce.salesforcedx-vscode-visualforce"
+    ],
+    "recommendedSettings": {
+      "salesforcedx-vscode-apex.enable-semantic-errors": true,
+      "salesforcedx-vscode-apex.enable-sobject-refresh-on-startup": true,
+      "editor.formatOnSave": true,
+      "editor.defaultFormatter": "salesforce.salesforcedx-vscode-apex"
+    }
+  },
+  "documentation": "https://developer.salesforce.com/tools/vscode"
+}

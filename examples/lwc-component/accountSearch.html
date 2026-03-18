@@ -1,0 +1,45 @@
+<template>
+    <lightning-card title="Account Search" icon-name="standard:account">
+        <div class="slds-var-m-around_medium">
+            <lightning-input
+                type="search"
+                label="Search Accounts"
+                placeholder="Enter account name..."
+                onchange={handleSearchChange}
+                class="search-input"
+            ></lightning-input>
+        </div>
+
+        <template lwc:if={isLoading}>
+            <div class="slds-var-m-around_medium slds-align_absolute-center">
+                <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+            </div>
+        </template>
+
+        <template lwc:if={error}>
+            <div class="slds-var-m-around_medium">
+                <div class="slds-notify slds-notify_alert slds-alert_error" role="alert">
+                    <p>{error}</p>
+                </div>
+            </div>
+        </template>
+
+        <template lwc:if={hasResults}>
+            <lightning-datatable
+                key-field="Id"
+                data={accounts}
+                columns={columns}
+                hide-checkbox-column
+                class="results-table"
+            ></lightning-datatable>
+        </template>
+
+        <template lwc:if={noResultsFound}>
+            <div class="slds-var-m-around_medium slds-align_absolute-center">
+                <p class="slds-text-body_regular slds-text-color_weak">
+                    No accounts found matching your search.
+                </p>
+            </div>
+        </template>
+    </lightning-card>
+</template>

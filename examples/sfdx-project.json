@@ -1,0 +1,25 @@
+{
+  "packageDirectories": [
+    {
+      "path": "force-app",
+      "default": true,
+      "package": "MyPackage",
+      "versionName": "Spring '26",
+      "versionNumber": "1.0.0.NEXT"
+    },
+    {
+      "path": "unpackaged",
+      "default": false
+    }
+  ],
+  "name": "my-sfdc-project",
+  "namespace": "",
+  "sfdcLoginUrl": "https://login.salesforce.com",
+  "sourceApiVersion": "62.0",
+  "plugins": {
+    "claude-sfdx-iq": {
+      "profile": "developer",
+      "hookProfile": "standard"
+    }
+  }
+}

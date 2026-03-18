@@ -1,0 +1,8 @@
+{
+  "hooks": [
+    {
+      "matcher": { "event": "post-edit", "filePattern": "**/*.trigger" },
+      "command": "node scripts/hooks/trigger-lint.js \"$FILE\""
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "pmd-apex",
+  "description": "PMD standalone static analysis for Apex code quality and best practices",
+  "command": "pmd",
+  "capabilities": ["check", "designer"],
+  "requiredTools": ["Bash"],
+  "setup": "Download PMD from https://pmd.github.io/ and add to PATH",
+  "configuration": {
+    "language": "apex",
+    "rulesets": [
+      "category/apex/bestpractices.xml",
+      "category/apex/codestyle.xml",
+      "category/apex/design.xml",
+      "category/apex/errorprone.xml",
+      "category/apex/performance.xml",
+      "category/apex/security.xml"
+    ],
+    "format": "json",
+    "minimumPriority": 3
+  },
+  "documentation": "https://pmd.github.io/latest/pmd_rules_apex.html"
+}

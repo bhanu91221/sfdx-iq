@@ -1,0 +1,15 @@
+{
+  "name": "claude-sfdx-iq",
+  "owner": {
+    "name": "Bhargav Vakati",
+    "email": "bhanu91221@github.com"
+  },
+  "plugins": [
+    {
+      "name": "claude-sfdx-iq",
+      "source": ".",
+      "description": "Complete Salesforce DX plugin for Claude Code — 14 agents, 36 skills, 42 commands, 44 rules, 16 hooks for Apex, LWC, SOQL, Flows, and SFDX CI/CD",
+      "version": "1.0.0"
+    }
+  ]
+}

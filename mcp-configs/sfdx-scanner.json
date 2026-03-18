@@ -1,0 +1,15 @@
+{
+  "name": "sfdx-scanner",
+  "description": "Salesforce Code Analyzer for static analysis using PMD rules and custom rulesets",
+  "command": "sf scanner",
+  "capabilities": ["scanner run", "scanner rule list", "scanner rule describe", "scanner run dfa"],
+  "requiredTools": ["Bash"],
+  "setup": "sf plugins install @salesforce/sfdx-scanner",
+  "configuration": {
+    "defaultEngine": "pmd",
+    "defaultFormat": "json",
+    "customRulesets": "config/pmd-ruleset.xml",
+    "severityThreshold": 3
+  },
+  "documentation": "https://forcedotcom.github.io/sfdx-scanner/"
+}

@@ -1,0 +1,9 @@
+{
+  "name": "salesforce-cli",
+  "description": "Salesforce CLI (sf) integration for deploy, retrieve, test, and org management",
+  "command": "sf",
+  "capabilities": ["project deploy", "project retrieve", "apex run test", "org create scratch", "org list", "data query"],
+  "requiredTools": ["Bash"],
+  "setup": "npm install -g @salesforce/cli",
+  "documentation": "https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/"
+}
