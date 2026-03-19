@@ -13,6 +13,8 @@ Think of it as hiring 14 Salesforce specialists who:
 
 **Without the plugin**, Claude knows Salesforce in general terms. **With the plugin**, Claude knows the exact patterns, limits, and pitfalls that distinguish junior Salesforce code from senior-level architecture.
 
+**Token Optimization**: The plugin includes a context-assigner agent that loads only 5-8 relevant rules per task (5-15k tokens) instead of all 44 rules (43k tokens), saving ~30k tokens per session while maintaining full coverage.
+
 ---
 
 ## How It Improves Salesforce Development
@@ -86,33 +88,94 @@ Every file save triggers background checks:
 
 ## Getting Started
 
-### Installation
+### Installation (2 Steps)
 
 ```bash
-# Clone the plugin
-git clone https://github.com/bhanu91221/claude-sfdx-iq.git
-cd claude-sfdx-iq
-npm install
+# Step 1: Install plugin globally via Claude Code marketplace
+/plugin marketplace add bhanu91221/claude-sfdx-iq
+/plugin install claude-sfdx-iq@claude-sfdx-iq
 
-# Copy the example CLAUDE.md into your SFDX project
-cp examples/CLAUDE.md /path/to/your/sfdx-project/CLAUDE.md
+# Step 2: Setup your SFDX project (copies rules + config)
+cd /path/to/your/sfdx-project
+npx csiq setup-project
 ```
+
+**What gets installed:**
+- **Global** (`~/.claude/plugins/claude-sfdx-iq/`): Agents, skills, commands, hooks
+- **Project** (`.claude/`): 44 rules, settings.json, CLAUDE.md
 
 ### First Steps After Installation
 
 1. **Check your environment:**
-   ```
+   ```bash
    npx csiq doctor
    ```
    This verifies Node.js, Salesforce CLI, Git, and your org connection.
 
 2. **See what's installed:**
-   ```
+   ```bash
    npx csiq status
    ```
+   Shows plugin version, component counts, and org status.
 
-3. **Try a command:**
-   Open your SFDX project and type `/csiq-apex-review` to review your Apex code.
+3. **Verify project setup:**
+   ```bash
+   ls .claude/rules/
+   cat .claude/rules/index.md
+   ```
+   Should show 44 rules organized by domain.
+
+4. **Try a command:**
+   Open your SFDX project in Claude Code:
+   ```
+   /csiq-apex-review
+   ```
+   The context-assigner will load only the relevant rules for Apex review (~6k tokens instead of 43k).
+
+---
+
+## Token Optimization Strategy
+
+One of the plugin's smartest features is **dynamic rule loading**:
+
+### The Problem
+- 44 rules = ~43,000 tokens
+- Loading all rules for every task wastes context
+- Most tasks only need 5-8 specific rules
+
+### The Solution: context-assigner Agent
+```
+User: /csiq-apex-review
+         ↓
+context-assigner (Haiku model, 900 tokens):
+  1. Detects task type: "Apex review"
+  2. Loads only: apex/bulkification, apex/security, apex/patterns, common/security
+  3. Total: ~6,000 tokens (saves 37,000 tokens!)
+         ↓
+apex-reviewer agent:
+  - Reviews code with loaded rules
+  - Returns findings
+```
+
+### Results by Task Type
+
+| Task | Rules Loaded | Tokens | Savings |
+|------|--------------|--------|---------|
+| Apex review | 5 rules | ~6k | 37k saved |
+| LWC review | 4 rules | ~4k | 39k saved |
+| Security scan | 8 rules | ~12k | 31k saved |
+| Full code review | 10 rules | ~18k | 25k saved |
+| Deployment | 6 rules | ~8k | 35k saved |
+
+### Manual Control
+
+Add `--custom rules` to manually select:
+
+```
+Review this Apex class --custom rules
+```
+
+Claude shows the rules catalog and you pick by number or domain.
 
 ---
 

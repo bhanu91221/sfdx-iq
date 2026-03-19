@@ -13,7 +13,8 @@ const COLORS = {
 const projectFile = path.join(process.cwd(), 'sfdx-project.json');
 
 if (!fs.existsSync(projectFile)) {
-  console.log(`${COLORS.YELLOW}No sfdx-project.json found in CWD. SFDX hooks will be limited.${COLORS.RESET}`);
+  console.log(`${COLORS.DIM}[claude-sfdx-iq] Not an SFDX project - plugin commands available but context not loaded${COLORS.RESET}`);
+  console.log(`${COLORS.DIM}[claude-sfdx-iq] To use in a Salesforce project: cd your-sfdx-project && npx csiq setup-project${COLORS.RESET}`);
   process.exit(0);
 }
 

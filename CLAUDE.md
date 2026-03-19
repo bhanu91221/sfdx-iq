@@ -1,8 +1,19 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code when working with Salesforce DX projects using the claude-sfdx-iq plugin.
+This file provides guidance to Claude Code when working with the claude-sfdx-iq plugin repository.
 
 ## Project Overview
+
+This is the **claude-sfdx-iq plugin repository** — a Claude Code plugin that transforms Claude into a Salesforce development expert.
+
+**Distribution Model:**
+- **Global Installation** (marketplace): Agents, skills, commands, hooks → `~/.claude/plugins/claude-sfdx-iq/`
+- **Project Installation** (per SFDX project): Rules → `.claude/rules/` (copied via `npx csiq setup-project`)
+
+**Why This Approach:**
+- Agents/skills/commands work globally (available in all SFDX projects)
+- Rules are project-specific (avoid loading 43k tokens in non-SFDX contexts)
+- context-assigner agent loads only 5-8 relevant rules per task (saves ~30k tokens)
 
 This is a **Claude Code plugin** — a collection of production-ready agents, skills, hooks, commands, rules, and MCP configurations specialized for Salesforce DX development. Covers Apex, LWC, SOQL, Flows, metadata management, packaging, and CI/CD.
 
@@ -23,15 +34,28 @@ node scripts/ci/validate-hooks.js
 
 The project is organized into core components:
 
-- **agents/** — 14 specialized subagents (apex-reviewer, lwc-reviewer, soql-optimizer, etc.)
+### Distributed Globally (via plugin installation)
+- **agents/** — 14 specialized subagents (apex-reviewer, lwc-reviewer, soql-optimizer, context-assigner, etc.)
 - **skills/** — 36 Salesforce domain skills (apex-patterns, governor-limits, lwc-testing, etc.)
-- **commands/** — 42 slash commands (/csiq-deploy, /csiq-test, /csiq-apex-review, /csiq-security-scan, /csiq-code-review, /csiq-debug-log, etc.)
-- **hooks/** — Trigger-based automations with 16 hook scripts (post-edit PMD scan, governor limit check, security scan)
-- **rules/** — 44 always-follow guidelines across 6 categories (common + apex + lwc + soql + flows + metadata)
+- **commands/** — 42 slash commands (/csiq-deploy, /csiq-test, /csiq-apex-review, etc.)
+- **hooks/** — 6 hook JSON definitions + 16 hook scripts (post-edit scans, quality gates)
 - **contexts/** — 5 mode-specific context files (develop, review, debug, deploy, admin)
-- **scripts/** — Cross-platform Node.js utilities: 7 CLI tools (csiq.js + subcommands), 10 library scripts, 16 hook scripts
+- **scripts/** — Cross-platform Node.js utilities (csiq CLI, setup-project, hook scripts, lib)
 - **mcp-configs/** — MCP server configurations for Salesforce integrations
-- **tests/** — Test suite for scripts and utilities
+
+### Copied Per-Project (via npx csiq setup-project)
+- **rules/** — 44 rules (~43k tokens total, loaded dynamically by context-assigner)
+  - common/ (9 rules)
+  - apex/ (9 rules)
+  - lwc/ (6 rules)
+  - soql/ (6 rules)
+  - flows/ (6 rules)
+  - metadata/ (8 rules)
+- **.claude-project-template/** — Project configuration templates (settings.json, CLAUDE.md)
+
+### Development Only
+- **tests/** — Test suite for scripts and utilities (validators, unit tests)
+- **examples/** — Example code (trigger-handler, LWC, integration, batch)
 
 ## Key Commands
 
@@ -52,12 +76,12 @@ The project is organized into core components:
 
 ## CLI Tools
 
-- `csiq help` — Show available CLI commands
-- `csiq install` — Install a configuration profile
-- `csiq status` — Check plugin and org status
-- `csiq doctor` — Diagnose configuration issues
-- `csiq repair` — Auto-fix common configuration problems
-- `csiq config` — View or update plugin configuration
+- `npx csiq setup-project` — **Most Important**: Copy rules + config to an SFDX project
+- `npx csiq help` — Show available CLI commands
+- `npx csiq status` — Check plugin and org status
+- `npx csiq doctor` — Diagnose configuration issues (Node, sf CLI, Git, org)
+- `npx csiq repair` — Auto-fix common configuration problems
+- `npx csiq list` — List installed components (agents, skills, commands, rules)
 
 ## Core Principles
 
@@ -67,6 +91,7 @@ The project is organized into core components:
 4. **Bulkification Always** — All code must handle 200+ records in trigger context
 5. **Agent-First** — Delegate to specialized agents for domain tasks
 6. **Plan Before Execute** — Plan complex features before writing code
+7. **Token Optimized** — Dynamic rule loading via context-assigner (5-8 rules per task)
 
 ## Development Notes
 

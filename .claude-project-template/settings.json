@@ -1,0 +1,19 @@
+{
+  "plugins": {
+    "claude-sfdx-iq": {
+      "enabled": true,
+      "rulesPath": "./.claude/rules",
+      "contextAssignerEnabled": true,
+      "hookProfile": "standard"
+    }
+  },
+  "environment": {
+    "CSIQ_HOOK_PROFILE": "standard",
+    "CSIQ_DISABLED_HOOKS": ""
+  },
+  "metadata": {
+    "projectType": "sfdx",
+    "setupComplete": true,
+    "installedVersion": "1.0.0"
+  }
+}

@@ -90,20 +90,46 @@ Your repo already has the required files:
 
 ---
 
+## Recommended Distribution Model
+
+**claude-sfdx-iq uses a hybrid approach:**
+
+1. **Global Plugin** (via marketplace) — Agents, skills, commands, hooks
+2. **Project Rules** (manual copy) — 44 rules copied to each SFDX project
+
+### Why This Approach?
+
+| Aspect | Marketplace | Project-Level |
+|--------|------------|---------------|
+| **Agents** | ✅ Global | Commands work everywhere |
+| **Skills** | ✅ Global | Knowledge available everywhere |
+| **Commands** | ✅ Global | Available in all projects |
+| **Hooks** | ✅ Global | But only activate in SFDX projects |
+| **Rules** | ❌ Not global | ✅ Copied per-project to avoid token waste |
+
+**Token Impact:**
+- Global rules = Loaded for ALL Claude sessions (~43k tokens everywhere)
+- Project rules = Only loaded in SFDX projects + dynamic loading (5-15k tokens)
+- **Savings: ~30k tokens per non-SFDX session**
+
 ## Distribution Options
 
-### Option A: Self-Hosted Marketplace (Full Control)
+### Option A: Self-Hosted Marketplace (Recommended)
 
-After pushing to GitHub, your repo acts as both the plugin AND the marketplace.
+Your GitHub repo acts as both the plugin AND the marketplace.
 
 **Users install with 2 commands:**
 
 ```bash
-# 1. Add your marketplace (one-time setup)
+# 1. Add marketplace (one-time)
 /plugin marketplace add bhanu91221/claude-sfdx-iq
 
-# 2. Install the plugin
+# 2. Install plugin (one-time)
 /plugin install claude-sfdx-iq@claude-sfdx-iq
+
+# 3. Setup each SFDX project
+cd /path/to/sfdx-project
+npx csiq setup-project
 ```
 
 **Advantages:**
@@ -111,6 +137,7 @@ After pushing to GitHub, your repo acts as both the plugin AND the marketplace.
 - No approval process
 - Immediate availability
 - Private repos supported (users need git credentials)
+- **Best for: Early releases, beta testing, private teams**
 
 ### Option B: Official Anthropic Marketplace (Wider Reach)
 
@@ -124,10 +151,15 @@ Submit to Anthropic's official plugin registry for maximum discoverability.
 1. Go to the submission URL
 2. Enter your GitHub repo URL: `https://github.com/bhanu91221/claude-sfdx-iq`
 3. Anthropic reviews for quality, security, and usefulness
-4. Once approved, users install with a single command:
+4. Once approved, users install with simplified commands:
 
 ```bash
+# 1. Install plugin (one-time)
 /plugin install claude-sfdx-iq
+
+# 2. Setup each SFDX project
+cd /path/to/sfdx-project
+npx csiq setup-project
 ```
 
 **Advantages:**
@@ -135,6 +167,7 @@ Submit to Anthropic's official plugin registry for maximum discoverability.
 - One-command install (no marketplace add step)
 - Anthropic quality seal
 - Higher visibility to all Claude Code users
+- **Best for: Public release, wide adoption**
 
 ### Option C: Direct Local Install (For Testing / Teams)
 
@@ -152,61 +185,76 @@ claude --plugin-dir ./claude-sfdx-iq
 
 ## How Users Install & Use the Plugin
 
-### Installation
+### Installation (2-Step Process)
 
 ```bash
-# From your self-hosted marketplace
+# Step 1: Install plugin globally
 /plugin marketplace add bhanu91221/claude-sfdx-iq
 /plugin install claude-sfdx-iq@claude-sfdx-iq
 
-# OR from official marketplace (after approval)
-/plugin install claude-sfdx-iq
-
-# OR test locally
-git clone https://github.com/bhanu91221/claude-sfdx-iq.git
-claude --plugin-dir ./claude-sfdx-iq
+# Step 2: Setup each SFDX project
+cd /path/to/sfdx-project
+npx csiq setup-project
 ```
+
+**What gets installed:**
+
+| Location | Components | Purpose |
+|----------|-----------|---------|
+| `~/.claude/plugins/claude-sfdx-iq/` | Agents, skills, commands, hooks | Global availability |
+| `.claude/rules/` | 44 rules (~43k tokens) | Project-specific, dynamically loaded |
+| `.claude/settings.json` | Plugin configuration | Project-specific settings |
+| `CLAUDE.md` | Project documentation | Project guidance |
 
 ### Using Commands
 
-After installation, skills are namespaced:
+Commands use the `/csiq-*` prefix for uniqueness:
 
 ```bash
 # Deploy source to org
-/claude-sfdx-iq:deploy
+/csiq-deploy
 
 # Review Apex code quality
-/claude-sfdx-iq:apex-review
+/csiq-apex-review
 
 # Run TDD workflow
-/claude-sfdx-iq:tdd
+/csiq-tdd
 
 # Full code review (parallel agents)
-/claude-sfdx-iq:code-review
+/csiq-code-review
 
 # Security scan
-/claude-sfdx-iq:security-scan
+/csiq-security-scan
 
 # Scaffold a trigger
-/claude-sfdx-iq:scaffold-trigger
+/csiq-scaffold-trigger
 
 # Governor limit analysis
-/claude-sfdx-iq:governor-check
+/csiq-governor-check
 
 # Run Apex tests with coverage
-/claude-sfdx-iq:test
+/csiq-test
 ```
+
+**Note:** If commands are namespaced (`/claude-sfdx-iq:csiq-deploy`), both forms work:
+- Short: `/csiq-deploy`
+- Full: `/claude-sfdx-iq:csiq-deploy`
 
 ### Verify Installation
 
 ```bash
-# Check installed plugins
+# Check plugin is installed
 /help
+# Should show all /csiq-* commands
+
+# Verify project setup
+ls .claude/rules/
+cat .claude/rules/index.md
 
 # Run environment diagnostics
 npx csiq doctor
 
-# Check plugin status
+# Check plugin and org status
 npx csiq status
 ```
 

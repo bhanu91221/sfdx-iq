@@ -13,86 +13,77 @@
 
 ## Installation
 
-### Option A: Claude Marketplace (Full Control)
-
-After pushing to GitHub, your repo acts as both the plugin AND the marketplace.
-
-**Users install with 2 commands:**
+### Quick Start (Recommended)
 
 ```bash
-# 1. Add your marketplace (one-time setup)
+# Step 1: Install the plugin globally via Claude Code
 /plugin marketplace add bhanu91221/claude-sfdx-iq
-
-# 2. Install the plugin
 /plugin install claude-sfdx-iq@claude-sfdx-iq
+
+# Step 2: Setup your SFDX project (copies rules + config)
+cd /path/to/your/sfdx-project
+npx csiq setup-project
 ```
 
-Then copy the example CLAUDE.md into your SFDX project root:
+**What this does:**
+1. **Global plugin** — Installs agents, skills, commands to `~/.claude/plugins/claude-sfdx-iq/`
+2. **Project rules** — Copies 44 rules (~43k tokens) to your project's `.claude/rules/`
+3. **Token optimization** — context-assigner agent loads only 5-8 rules per task (saves ~30k tokens)
 
-```bash
-# From inside your SFDX project
-cp ~/.claude/plugins/claude-sfdx-iq/examples/CLAUDE.md ./CLAUDE.md
+### How It Works
+
+```
+┌─────────────────────────────────────────────────┐
+│ GLOBAL (installed once via marketplace)         │
+│ Location: ~/.claude/plugins/claude-sfdx-iq/    │
+├─────────────────────────────────────────────────┤
+│ ✅ Agents (14)     — Domain specialists         │
+│ ✅ Skills (36)     — Knowledge modules          │
+│ ✅ Commands (42)   — /csiq-* slash commands     │
+│ ✅ Hooks (16)      — Automated checks           │
+└─────────────────────────────────────────────────┘
+                      ↓
+┌─────────────────────────────────────────────────┐
+│ PROJECT (setup per SFDX project)                │
+│ Location: /your-sfdx-project/.claude/          │
+├─────────────────────────────────────────────────┤
+│ ✅ Rules (44)      — Loaded dynamically         │
+│ ✅ settings.json   — Plugin configuration       │
+│ ✅ CLAUDE.md       — Project documentation      │
+└─────────────────────────────────────────────────┘
 ```
 
-Open Claude Code in your project — all 42 commands and 14 agents are immediately available.
+**Key Benefits:**
+- Commands available globally (work in any SFDX project)
+- Rules only load in SFDX projects (no token waste elsewhere)
+- Dynamic rule loading (5-8 rules per task instead of all 44)
 
-### Activating the Rules (Required)
+### Manual Setup (Alternative)
 
-Because Claude Code plugins cannot currently automatically distribute the `rules/` folder, you must activate the 44 rules manually. Add them to your SFDX project's CLAUDE.md:
-
-```bash
-# After installing the plugin, append rule references to your project CLAUDE.md
-cat >> ./CLAUDE.md << 'EOF'
-
-## Loaded Rules (claude-sfdx-iq)
-
-@~/.claude/plugins/claude-sfdx-iq/rules/common/security.md
-@~/.claude/plugins/claude-sfdx-iq/rules/common/code-quality.md
-@~/.claude/plugins/claude-sfdx-iq/rules/apex/bulkification.md
-@~/.claude/plugins/claude-sfdx-iq/rules/apex/patterns.md
-@~/.claude/plugins/claude-sfdx-iq/rules/lwc/patterns.md
-@~/.claude/plugins/claude-sfdx-iq/rules/soql/performance.md
-@~/.claude/plugins/claude-sfdx-iq/rules/flows/best-practices.md
-@~/.claude/plugins/claude-sfdx-iq/rules/metadata/deployment.md
-EOF
-```
-
-> **Shortcut:** The pre-built `examples/CLAUDE.md` already includes all rule references — use it instead of appending manually (see the `cp` command above).
-
-### Installation Profiles (Clone Workflow)
-
-If you cloned the repo manually, use `csiq` to install only the components you need:
+If you prefer manual control:
 
 ```bash
-git clone https://github.com/bhanu91221/claude-sfdx-iq.git
-cd claude-sfdx-iq
-npm install
+# 1. Install plugin
+/plugin marketplace add bhanu91221/claude-sfdx-iq
+/plugin install claude-sfdx-iq@claude-sfdx-iq
 
-# Install a profile into your SFDX project
-node scripts/csiq.js install --profile developer --target /path/to/your/sfdx-project
-```
+# 2. Manually copy files to your SFDX project
+cd /path/to/your/sfdx-project
+mkdir -p .claude
 
-Choose the profile that matches your role:
+# Copy rules
+cp -r ~/.claude/plugins/claude-sfdx-iq/rules ./.claude/rules
 
-| Profile | Agents | Skills | Commands | Rules | Hooks | Best For |
-|---------|--------|--------|----------|-------|-------|----------|
-| `core` | 4 | 8 | 10 | 12 | 4 | Minimal setup, CI environments |
-| `developer` | 8 | 20 | 25 | 24 | 8 | Individual Apex/LWC developers |
-| `architect` | 10 | 28 | 30 | 32 | 10 | Solution architects, tech leads |
-| `admin` | 6 | 15 | 18 | 20 | 6 | Salesforce admins, declarative dev |
-| `isv` | 12 | 30 | 35 | 38 | 12 | ISV partners, managed packages |
-| `full` | 14 | 36 | 42 | 44 | 16 | Everything enabled |
-
-```bash
-node scripts/csiq.js install --profile developer
-node scripts/csiq.js install --profile full
+# Copy configuration templates
+cp ~/.claude/plugins/claude-sfdx-iq/.claude-project-template/settings.json ./.claude/settings.json
+cp ~/.claude/plugins/claude-sfdx-iq/.claude-project-template/CLAUDE.md ./CLAUDE.md
 ```
 
 ### Prerequisites
 
 | Tool | Version | Required For |
 |------|---------|-------------|
-| Node.js | 18+ | CLI tools, hooks |
+| Node.js | 18+ | CLI tools, hooks, setup script |
 | Salesforce CLI (`sf`) | latest | Deploy, test, org commands |
 | Claude Code | latest | All commands and agents |
 | Git | any | Version control hooks |
@@ -101,7 +92,7 @@ node scripts/csiq.js install --profile full
 
 ## Quick Start
 
-After installation, open your SFDX project in Claude Code and try:
+After installation and project setup, open your SFDX project in Claude Code:
 
 ```
 # Review your Apex code for quality issues
@@ -110,7 +101,7 @@ After installation, open your SFDX project in Claude Code and try:
 # Run Apex tests with coverage
 /csiq-test
 
-# Full security scan
+# Full security scan (CRUD/FLS, sharing, injection)
 /csiq-security-scan
 
 # Start a new feature with TDD
@@ -119,9 +110,13 @@ After installation, open your SFDX project in Claude Code and try:
 # Scaffold a complete trigger with handler and tests
 /csiq-scaffold-trigger Opportunity
 
-# Deploy to sandbox
+# Deploy to sandbox with validation
 /csiq-deploy
 ```
+
+**Note:** If you see a message "Not an SFDX project", make sure:
+1. You're in a directory with `sfdx-project.json`
+2. You've run `npx csiq setup-project` to copy rules to `.claude/rules/`
 
 ---
 
@@ -159,6 +154,37 @@ The plugin enforces:
 - **Security by default** — `with sharing`, CRUD/FLS, bind variables, no injection
 - **Bulkification always** — All code handles 200+ records
 - **Test-driven** — 75% minimum coverage, 90%+ target, bulk tests required
+- **Token optimized** — Loads only 5-8 relevant rules per task (~5-15k tokens vs 43k)
+
+---
+
+## Token Optimization
+
+The plugin uses a **context-assigner agent** to minimize token usage:
+
+| Approach | Tokens Loaded | When to Use |
+|----------|---------------|-------------|
+| **All 44 rules** | ~43,000 tokens | ❌ Never (wasteful) |
+| **Auto-selected** | 5,000-15,000 tokens | ✅ Default (smart) |
+| **Custom selection** | Variable | ✅ Add `--custom rules` to your message |
+
+### How It Works
+
+1. You run a command (e.g., `/csiq-apex-review`)
+2. context-assigner analyzes your request
+3. Loads only relevant rules:
+   - Apex review → `apex/bulkification`, `apex/security`, `apex/patterns`, `common/security`
+   - LWC review → `lwc/patterns`, `lwc/security`, `common/security`
+   - Full review → Broader set (8-10 rules)
+4. Saves ~30,000 tokens per session
+
+### Manual Rule Selection
+
+```
+Review this Apex class --custom rules
+```
+
+Claude will show you the rules catalog and let you pick specific rules by number or domain.
 
 ---
 
@@ -300,28 +326,32 @@ Salesforce CLI  →  Salesforce Org
 
 ## CLI Tools
 
-The `csiq` CLI manages plugin installation and health. Available when you clone the repo (see Installation Profiles above):
+The `csiq` CLI manages plugin installation and health:
 
 ```bash
-# Show help
-node scripts/csiq.js help
+# Setup a Salesforce project (copies rules + config)
+npx csiq setup-project
+npx csiq setup-project /path/to/sfdx-project
 
-# Install profile into an SFDX project
-node scripts/csiq.js install --profile developer --target ./my-sfdx-project
+# Show help
+npx csiq help
 
 # See plugin status and component counts
-node scripts/csiq.js status
+npx csiq status
 
 # Diagnose environment (Node, sf CLI, Git, org connection)
-node scripts/csiq.js doctor
+npx csiq doctor
 
 # Check and repair plugin integrity
-node scripts/csiq.js repair
+npx csiq repair
 
 # List all installed components
-node scripts/csiq.js list --category agents
-node scripts/csiq.js list --category commands
+npx csiq list --category agents
+npx csiq list --category commands
+npx csiq list --category rules
 ```
+
+**Most Important:** After installing the plugin, run `npx csiq setup-project` in each SFDX project to copy the rules.
 
 ---
 

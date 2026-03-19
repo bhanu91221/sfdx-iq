@@ -1,7 +1,20 @@
 # Claude SFDX IQ — End-to-End Test Plan
 
-> Last updated: 2026-03-17
-> Prerequisites: Node.js 18+, Salesforce CLI (`sf`), Claude Code CLI, Git
+> **Last updated: 2026-03-18**
+> **Plugin Version: 1.0.0**
+> **Prerequisites:** Node.js 18+, Salesforce CLI (`sf`), Claude Code, Git
+
+## Architecture Overview (for Testing)
+
+This plugin uses a **hybrid distribution model:**
+
+| Component | Location | Distribution |
+|-----------|----------|--------------|
+| Agents, Skills, Commands, Hooks | `~/.claude/plugins/claude-sfdx-iq/` | Via marketplace (global) |
+| Rules (44 files, ~43k tokens) | `.claude/rules/` | Per-project via `npx csiq setup-project` |
+| Project config | `.claude/settings.json`, `CLAUDE.md` | Per-project via `npx csiq setup-project` |
+
+**Token Optimization:** context-assigner agent loads 5-8 rules per task (~5-15k tokens) instead of all 44 rules (~43k tokens).
 
 ---
 
@@ -11,11 +24,11 @@
 2. [Unit Tests & Validators](#2-unit-tests--validators)
 3. [Linting & Code Quality](#3-linting--code-quality-after-npm-install)
 4. [CLI Tool Testing](#4-cli-tool-testing)
-5. [Plugin Registration Testing](#5-plugin-registration-testing)
+5. [Plugin Installation & Registration Testing](#5-plugin-installation--registration-testing)
 6. [Hook Script Testing](#6-hook-script-testing)
 7. [Command Testing in Real SFDX Project](#7-command-testing-in-real-sfdx-project)
 8. [Agent Delegation Testing](#8-agent-delegation-testing)
-9. [Manifest & Profile Testing](#9-manifest--profile-testing)
+9. [Rules & Token Optimization Testing](#9-rules--token-optimization-testing)
 10. [Regression & Edge Cases](#10-regression--edge-cases)
 
 ---
@@ -58,12 +71,19 @@ claude --version
 ### 1.5 Create Test SFDX Project (for E2E tests)
 
 ```bash
-mkdir C:\Users\bhanu91221\Downloads\test-sfdc-project
-cd C:\Users\bhanu91221\Downloads\test-sfdc-project
+mkdir /tmp/test-sfdc-project
+cd /tmp/test-sfdc-project
 sf project generate --name test-sfdc-project --template standard
 ```
 
-This creates a fresh SFDX project to test plugin installation into.
+This creates a fresh SFDX project to test plugin installation and project setup.
+
+**Alternative for Windows:**
+```bash
+mkdir C:\temp\test-sfdc-project
+cd C:\temp\test-sfdc-project
+sf project generate --name test-sfdc-project --template standard
+```
 
 ---
 
@@ -72,7 +92,7 @@ This creates a fresh SFDX project to test plugin installation into.
 ### 2.1 Run All Tests
 
 ```bash
-cd C:\Users\bhanu91221\Downloads\everthing-sfdc
+cd /path/to/claude-sfdx-iq
 npm test
 ```
 
@@ -205,7 +225,7 @@ process.exit(fail > 0 ? 1 : 0);
 npx csiq help
 ```
 
-**Expected:** Prints banner, version, list of available commands (help, install, plan, status, list, doctor, repair).
+**Expected:** Prints banner, version, list of available commands (help, setup-project, status, list, doctor, repair).
 
 ### 4.2 Status Command
 
@@ -268,80 +288,110 @@ npx csiq list --category rules
 
 **Expected:** Each prints the components in that category.
 
-### 4.6 Plan Command (Dry Run)
+### 4.6 Setup Project Command
 
 ```bash
-# Show what minimal profile would install
-npx csiq plan --profile minimal
-
-# Show what developer profile would install
-npx csiq plan --profile developer
-
-# Show what full profile would install
-npx csiq plan --profile full
+# Test with an SFDX project
+cd C:\Users\bhanu91221\Downloads\test-sfdc-project
+npx csiq setup-project
 ```
 
-**Expected:** Lists components with ✅/❌ showing what would be installed per profile.
-
-### 4.7 Install Command (Dry Run First)
-
-```bash
-# Dry run into test project
-npx csiq install --profile developer --target C:\Users\bhanu91221\Downloads\test-sfdc-project --dry-run
-
-# Actual install
-npx csiq install --profile developer --target C:\Users\bhanu91221\Downloads\test-sfdc-project
-```
-
-**Expected:** Copies agents, rules, skills, commands into the target project's `.claude/` directory.
+**Expected:**
+- Detects sfdx-project.json ✅
+- Creates .claude/ directory if needed
+- Copies 44 rules to .claude/rules/
+- Copies settings.json to .claude/
+- Copies CLAUDE.md to project root
+- Prints success message with next steps
 
 **Verify installation:**
 ```bash
-ls C:\Users\bhanu91221\Downloads\test-sfdc-project/.claude/
-# Should contain: agents/, rules/, skills/, commands/
+ls .claude/rules/
+# Should contain: index.md, apex/, common/, lwc/, soql/, flows/, metadata/
+
+cat .claude/rules/index.md
+# Should show 44 rules catalog with token counts
+
+cat .claude/settings.json
+# Should show plugin configuration
+
+cat CLAUDE.md
+# Should show project documentation template
 ```
+
+**Test with non-SFDX directory:**
+```bash
+cd /tmp
+npx csiq setup-project
+```
+
+**Expected:** Error message "Not a Salesforce DX project" with exit code 1
 
 ---
 
-## 5. Plugin Registration Testing
+## 5. Plugin Installation & Registration Testing
 
-### 5.1 Register as Claude Code Plugin
-
-```bash
-# From the plugin directory
-cd C:\Users\bhanu91221\Downloads\everthing-sfdc
-claude plugin add .
-```
-
-**Expected:** Plugin registered successfully.
-
-### 5.2 Verify Plugin Appears
+### 5.1 Install Plugin via Marketplace
 
 ```bash
-claude plugin list
+# Add marketplace (one-time)
+/plugin marketplace add bhanu91221/claude-sfdx-iq
+
+# Install plugin (one-time)
+/plugin install claude-sfdx-iq@claude-sfdx-iq
 ```
 
-**Expected:** `claude-sfdx-iq` appears in the list.
+**Expected:** Plugin installed to `~/.claude/plugins/claude-sfdx-iq/`
 
-### 5.3 Test Plugin Commands Available
+### 5.2 Verify Plugin Installation
 
-Open Claude Code in an SFDX project directory and verify:
+```bash
+# Check plugin is registered
+/help
 ```
-/deploy
-/test
-/apex-review
-/security-scan
+
+**Expected:** Shows all `/csiq-*` commands in the help output.
+
+**Verify files installed globally:**
+```bash
+ls ~/.claude/plugins/claude-sfdx-iq/
+# Should contain: agents/, skills/, commands/, hooks/, scripts/, rules/ (for copying), .claude-project-template/
+```
+
+### 5.3 Setup SFDX Project
+
+```bash
+cd C:\Users\bhanu91221\Downloads\test-sfdc-project
+npx csiq setup-project
+```
+
+**Expected:** Copies rules, settings.json, and CLAUDE.md to project.
+
+### 5.4 Test Plugin Commands Available
+
+Open Claude Code in the test SFDX project and verify commands work:
+```
+/csiq-deploy
+/csiq-test
+/csiq-apex-review
+/csiq-security-scan
 ```
 
 **Expected:** Each command is recognized and shows its description.
 
-### 5.4 Unregister Plugin
+### 5.5 Test Non-SFDX Project Detection
+
+Open Claude Code in a non-SFDX directory:
+
+**Expected:** Session-start hook shows message "Not an SFDX project - plugin commands available but context not loaded"
+
+### 5.6 Uninstall Plugin
 
 ```bash
-claude plugin remove claude-sfdx-iq
+/plugin uninstall claude-sfdx-iq@claude-sfdx-iq
 ```
 
-**Expected:** Plugin removed cleanly.
+**Expected:** Plugin removed cleanly from global installation.
 
 ---
 
@@ -464,10 +514,10 @@ node scripts/hooks/post-edit-debug-warn.js /tmp/test-debug.cls
 
 ```bash
 # Stage a bad Apex file and run quality gate
-cd C:\Users\bhanu91221\Downloads\test-sfdc-project
+cd /tmp/test-sfdc-project
 cp /tmp/test-apex.cls force-app/main/default/classes/BadExample.cls
 git add force-app/main/default/classes/BadExample.cls
-node C:\Users\bhanu91221\Downloads\everthing-sfdc\scripts\hooks\quality-gate.js
+node /path/to/claude-sfdx-iq/scripts/hooks/quality-gate.js
 ```
 
 **Expected:** Exit code 1 with CRITICAL findings blocking commit.
@@ -475,20 +525,28 @@ node C:\Users\bhanu91221\Downloads\everthing-sfdc\scripts\hooks\quality-gate.js
 ### 6.9 Test session-start Hook
 
 ```bash
-# In an SFDX project directory
-cd C:\Users\bhanu91221\Downloads\test-sfdc-project
-node C:\Users\bhanu91221\Downloads\everthing-sfdc\scripts\hooks\session-start.js
+# In an SFDX project directory (with rules setup)
+cd /tmp/test-sfdc-project
+npx csiq setup-project  # Ensure rules are installed
+node /path/to/claude-sfdx-iq/scripts/hooks/session-start.js
 ```
 
-**Expected:** Detects sfdx-project.json, prints API version and package directories.
+**Expected:**
+- Detects sfdx-project.json ✅
+- Prints "SFDX Project Detected"
+- Shows API version, package directories, namespace (if any)
+- Shows default org and DevHub status
 
 ```bash
 # In a non-SFDX directory
 cd /tmp
-node C:\Users\bhanu91221\Downloads\everthing-sfdc\scripts\hooks\session-start.js
+node /path/to/claude-sfdx-iq/scripts/hooks/session-start.js
 ```
 
-**Expected:** "No sfdx-project.json found" message.
+**Expected:**
+- "[claude-sfdx-iq] Not an SFDX project - plugin commands available but context not loaded"
+- "[claude-sfdx-iq] To use in a Salesforce project: cd your-sfdx-project && npx csiq setup-project"
+- Exit code 0 (clean exit, no error)
 
 ### 6.10 Test run-with-flags Hook Wrapper
 
@@ -512,9 +570,9 @@ CSIQ_DISABLED_HOOKS=test-hook node scripts/hooks/run-with-flags.js test-hook min
 
 ```bash
 # From test SFDX project with staged files
-cd C:\Users\bhanu91221\Downloads\test-sfdc-project
+cd /tmp/test-sfdc-project
 git add force-app/main/default/classes/BadExample.cls
-node C:\Users\bhanu91221\Downloads\everthing-sfdc\scripts\hooks\pre-commit-check.js
+node /path/to/claude-sfdx-iq/scripts/hooks/pre-commit-check.js
 ```
 
 **Expected:** Runs apex-lint on staged .cls files, reports findings.
@@ -527,59 +585,73 @@ node C:\Users\bhanu91221\Downloads\everthing-sfdc\scripts\hooks\pre-commit-check
 - Authenticated Salesforce org (`sf org login web --alias testOrg`)
 - OR a scratch org (`sf org create scratch --definition-file config/project-scratch-def.json --alias testScratch`)
 
-### 7.1 Test /deploy Command
+### 7.1 Test /csiq-deploy Command
 
 Open Claude Code in the test SFDX project and run:
 ```
-/deploy
+/csiq-deploy
 ```
 
 **Expected:** Claude recognizes the command, checks for sfdx-project.json, identifies target org, runs `sf project deploy start`.
 
-### 7.2 Test /test Command
+### 7.2 Test /csiq-test Command
 
 ```
-/test
+/csiq-test
 ```
 
 **Expected:** Claude runs `sf apex run test --code-coverage`, parses results, reports pass/fail and coverage.
 
-### 7.3 Test /apex-review Command
+### 7.3 Test /csiq-apex-review Command
 
 ```
-/apex-review
+/csiq-apex-review
 ```
 
-**Expected:** Claude identifies Apex files, delegates to apex-reviewer agent, reports findings by severity.
+**Expected:**
+- context-assigner loads relevant Apex rules (~6k tokens: apex/bulkification, apex/security, apex/patterns, common/security)
+- Claude identifies Apex files, delegates to apex-reviewer agent
+- Reports findings by severity
 
-### 7.4 Test /security-scan Command
-
-```
-/security-scan
-```
-
-**Expected:** Claude delegates to security-reviewer agent, scans for CRUD/FLS, sharing, injection issues.
-
-### 7.5 Test /governor-check Command
+### 7.4 Test /csiq-security-scan Command
 
 ```
-/governor-check
+/csiq-security-scan
 ```
 
-**Expected:** Analyzes Apex for governor limit risks, reports findings.
+**Expected:**
+- context-assigner loads security rules (~12k tokens: all **/security.md rules)
+- Claude delegates to security-reviewer agent
+- Scans for CRUD/FLS, sharing, injection issues
 
-### 7.6 Test /tdd Command
-
-```
-/tdd
-```
-
-**Expected:** Claude asks what to build, writes test first, runs it (expect fail), writes implementation, runs again (expect pass).
-
-### 7.7 Test /scaffold-trigger Command
+### 7.5 Test /csiq-governor-check Command
 
 ```
-/scaffold-trigger
+/csiq-governor-check
+```
+
+**Expected:**
+- context-assigner loads governor-limits rules
+- Analyzes Apex for governor limit risks
+- Reports findings
+
+### 7.6 Test /csiq-tdd Command
+
+```
+/csiq-tdd
+```
+
+**Expected:**
+- Claude asks what to build
+- Writes test first
+- Runs it (expect fail)
+- Writes implementation
+- Runs again (expect pass)
+
+### 7.7 Test /csiq-scaffold-trigger Command
+
+```
+/csiq-scaffold-trigger
 ```
 
 **Expected:** Claude asks for object name (e.g., "Account"), generates:
@@ -587,10 +659,10 @@ Open Claude Code in the test SFDX project and run:
 - `AccountTriggerHandler.cls`
 - `AccountTriggerHandlerTest.cls`
 
-### 7.8 Test /scaffold-lwc Command
+### 7.8 Test /csiq-scaffold-lwc Command
 
 ```
-/scaffold-lwc
+/csiq-scaffold-lwc
 ```
 
 **Expected:** Claude asks for component name, generates:
@@ -600,37 +672,54 @@ Open Claude Code in the test SFDX project and run:
 - `componentName.js-meta.xml`
 - `__tests__/componentName.test.js`
 
-### 7.9 Test /scratch-org or /create-scratch-org Command
+### 7.9 Test /csiq-create-scratch-org Command
 
 ```
-/create-scratch-org
+/csiq-create-scratch-org
 ```
 
 **Expected:** Creates scratch org, pushes source, assigns permission sets.
 
-### 7.10 Test /explain-error Command
+### 7.10 Test /csiq-explain-error Command
 
 ```
-/explain-error UNABLE_TO_LOCK_ROW
+/csiq-explain-error UNABLE_TO_LOCK_ROW
 ```
 
 **Expected:** Claude explains the error, common causes, and step-by-step fix.
 
-### 7.11 Test /sf-help Command
+### 7.11 Test /csiq-sf-help Command
 
 ```
-/sf-help deploy to production
+/csiq-sf-help deploy to production
 ```
 
 **Expected:** Recommends the right `sf` CLI command with flags and examples.
 
-### 7.12 Test /code-review Command
+### 7.12 Test /csiq-code-review Command
 
 ```
-/code-review
+/csiq-code-review
 ```
 
-**Expected:** Orchestrates multiple agents (apex-reviewer, security-reviewer, governor-limits-checker), produces consolidated report.
+**Expected:**
+- context-assigner loads broader rule set (~18k tokens: apex, lwc, soql, security rules)
+- Orchestrates multiple agents (apex-reviewer, security-reviewer, governor-limits-checker)
+- Produces consolidated report
+
+### 7.13 Test Token Optimization (context-assigner)
+
+```
+/csiq-apex-review
+
+# Then manually check:
+Review this Apex class --custom rules
+```
+
+**Expected:**
+- First command: context-assigner automatically loads ~5-8 relevant rules
+- Second command: Claude shows rules catalog and asks user to select
+- Verify only selected rules are loaded (not all 44)
 
 ---
 
@@ -675,41 +764,81 @@ Do a full code review of the entire project
 
 ---
 
-## 9. Manifest & Profile Testing
+## 9. Rules & Token Optimization Testing
 
-### 9.1 Validate All Manifests
-
-```bash
-node scripts/ci/validate-install-manifests.js
-```
-
-**Expected:** All 5 manifests pass (default, minimal, apex-only, lwc-only, admin).
-
-### 9.2 Test Profile Installation
+### 9.1 Validate Rules Structure
 
 ```bash
-# Test each profile installs correctly
-for profile in minimal apex-only lwc-only admin default; do
-  echo "=== Testing profile: $profile ==="
-  mkdir -p /tmp/test-$profile
-  cd /tmp/test-$profile
-  sf project generate --name test-$profile --template standard 2>/dev/null
-  npx csiq install --profile $profile --target /tmp/test-$profile --dry-run
-  echo ""
-done
+node scripts/ci/validate-rules.js
 ```
 
-**Expected:** Each profile shows its component list without errors.
+**Expected:** All 44 rules validate successfully.
 
-### 9.3 Verify Profile Component Counts
+### 9.2 Test rules/index.md
 
-| Profile | Agents | Rules | Skills | Commands |
-|---------|--------|-------|--------|----------|
-| minimal | 4 | ~8 | 3 | 4 |
-| apex-only | ~6 | ~12 | ~12 | ~12 |
-| lwc-only | ~3 | ~8 | ~5 | ~6 |
-| admin | ~5 | ~9 | ~6 | ~8 |
-| default | 14 | all | all | all |
+```bash
+cat rules/index.md
+```
+
+**Expected:** Shows all 44 rules with:
+- Rule path (e.g., apex/bulkification)
+- Domain (apex, lwc, soql, flows, metadata, common)
+- Approximate token count
+- Description
+- Total: ~43,419 tokens
+
+### 9.3 Test setup-project Copies Rules
+
+```bash
+cd C:\Users\bhanu91221\Downloads\test-sfdc-project
+npx csiq setup-project
+
+# Verify rules copied
+ls .claude/rules/
+# Expected: index.md, apex/, common/, lwc/, soql/, flows/, metadata/
+
+# Count rules
+find .claude/rules/ -name "*.md" -type f | wc -l
+# Expected: 45 files (44 rules + 1 index.md)
+```
+
+### 9.4 Test context-assigner Agent
+
+Create a test file with Apex code:
+```bash
+cat > force-app/main/default/classes/TestClass.cls << 'EOF'
+public class TestClass {
+    public void processAccounts(List<Account> accounts) {
+        for (Account acc : accounts) {
+            update acc;
+        }
+    }
+}
+EOF
+```
+
+Open Claude Code and run:
+```
+/csiq-apex-review
+```
+
+**Expected:**
+- context-assigner agent detects "Apex review" task
+- Loads only: apex/bulkification, apex/security, apex/patterns, apex/governor-limits, common/security
+- Does NOT load all 44 rules
+- apex-reviewer finds: DML in loop (CRITICAL)
+
+### 9.5 Test Manual Rule Selection
+
+```
+Review TestClass.cls --custom rules
+```
+
+**Expected:**
+- Claude shows rules catalog from rules/index.md
+- Grouped by domain
+- User can select by number or domain name
+- Only selected rules are loaded
 
 ---
 
