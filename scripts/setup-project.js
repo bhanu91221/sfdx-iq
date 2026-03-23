@@ -98,7 +98,7 @@ if (fs.existsSync(targetClaudeMdPath)) {
   console.log('   You can manually merge the template content if needed.');
 } else {
   fs.copyFileSync(sourceClaudeMdPath, targetClaudeMdPath);
-  console.log('✅ Copied CLAUDE.md to project root');
+  console.log('✅ Copied CLAUDE.md to .claude/');
 }
 
 // Step 6: Summary
