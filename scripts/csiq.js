@@ -14,8 +14,13 @@
  */
 
 const path = require('path');
+const { version } = require('../package.json');
 
 const COMMANDS = {
+  'setup-project': {
+    description: 'Copy rules + config to an SFDX project',
+    script: './setup-project.js',
+  },
   install: {
     description: 'Install components from a profile/manifest',
     script: './install-apply.js',
@@ -61,9 +66,10 @@ const COMMANDS = {
 const PROFILES = ['minimal', 'default', 'apex-only', 'lwc-only', 'admin'];
 
 function showBanner() {
+  const ver = `v${version}`;
   console.log(`
   ╔══════════════════════════════════════════╗
-  ║      claude-sfdx-iq  v1.2.0             ║
+  ║      claude-sfdx-iq  ${ver.padEnd(18)}║
   ║  Salesforce DX plugin for Claude Code    ║
   ╚══════════════════════════════════════════╝
 `);
@@ -81,6 +87,7 @@ function showHelp() {
     console.log(`  ${p}`);
   }
   console.log('\nExamples:');
+  console.log('  npx claude-sfdx-iq setup-project');
   console.log('  npx claude-sfdx-iq install --profile developer');
   console.log('  npx claude-sfdx-iq install --profile minimal --dry-run');
   console.log('  npx claude-sfdx-iq status');
