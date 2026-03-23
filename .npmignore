@@ -1,0 +1,9 @@
+tests/
+.github/
+.claude/
+docs/
+*.test.js
+.eslintrc*
+eslint.config.*
+.markdownlint*
+CONTRIBUTING.md

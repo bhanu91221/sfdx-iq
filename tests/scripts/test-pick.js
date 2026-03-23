@@ -85,4 +85,97 @@ describe('pick.js', () => {
     const parsed = JSON.parse(output);
     assert.ok(Array.isArray(parsed.skills));
   });
+
+  it('non-interactive catalog includes commands with descriptions', async () => {
+    delete require.cache[require.resolve('../../scripts/pick')];
+    const { runPicker } = require('../../scripts/pick');
+    await runPicker({ nonInteractive: true });
+    const output = logs.join('\n');
+    const parsed = JSON.parse(output);
+    assert.ok(Array.isArray(parsed.commands));
+    assert.ok(parsed.commands.length > 0, 'Should discover commands');
+    // Each command should have a name
+    for (const cmd of parsed.commands) {
+      assert.ok(cmd.name, 'Command should have a name');
+    }
+  });
+
+  it('non-interactive catalog includes hooks', async () => {
+    delete require.cache[require.resolve('../../scripts/pick')];
+    const { runPicker } = require('../../scripts/pick');
+    await runPicker({ nonInteractive: true });
+    const output = logs.join('\n');
+    const parsed = JSON.parse(output);
+    assert.ok(Array.isArray(parsed.hooks));
+    assert.ok(parsed.hooks.length > 0, 'Should discover hooks');
+    for (const hook of parsed.hooks) {
+      assert.ok(hook.name, 'Hook should have a name');
+    }
+  });
+
+  it('commands are sorted by name', async () => {
+    delete require.cache[require.resolve('../../scripts/pick')];
+    const { runPicker } = require('../../scripts/pick');
+    await runPicker({ nonInteractive: true });
+    const output = logs.join('\n');
+    const parsed = JSON.parse(output);
+    for (let i = 1; i < parsed.commands.length; i++) {
+      assert.ok(
+        parsed.commands[i - 1].name.localeCompare(parsed.commands[i].name) <= 0,
+        `Commands not sorted: ${parsed.commands[i - 1].name} > ${parsed.commands[i].name}`
+      );
+    }
+  });
+
+  it('hooks are sorted by name', async () => {
+    delete require.cache[require.resolve('../../scripts/pick')];
+    const { runPicker } = require('../../scripts/pick');
+    await runPicker({ nonInteractive: true });
+    const output = logs.join('\n');
+    const parsed = JSON.parse(output);
+    for (let i = 1; i < parsed.hooks.length; i++) {
+      assert.ok(
+        parsed.hooks[i - 1].name.localeCompare(parsed.hooks[i].name) <= 0,
+        `Hooks not sorted: ${parsed.hooks[i - 1].name} > ${parsed.hooks[i].name}`
+      );
+    }
+  });
+
+  it('output path arg is parsed from argv', async () => {
+    process.argv = ['node', 'pick.js', '--output', '/tmp/test-manifest.json'];
+    delete require.cache[require.resolve('../../scripts/pick')];
+    const { runPicker } = require('../../scripts/pick');
+    // non-interactive mode ignores output path and returns null
+    const result = await runPicker({ nonInteractive: true });
+    assert.strictEqual(result, null);
+  });
+
+  it('category filter filters by domain match', async () => {
+    process.argv = ['node', 'pick.js', '--category', 'lwc'];
+    delete require.cache[require.resolve('../../scripts/pick')];
+    const { runPicker } = require('../../scripts/pick');
+    await runPicker({ nonInteractive: true });
+    const output = logs.join('\n');
+    const parsed = JSON.parse(output);
+    // All skills should be lwc domain or have lwc in name
+    for (const skill of parsed.skills) {
+      const match = (skill.domain && skill.domain.toLowerCase() === 'lwc') ||
+                    skill.name.toLowerCase().includes('lwc');
+      assert.ok(match, `Skill ${skill.name} should match lwc filter`);
+    }
+  });
+
+  it('search filter matches description text', async () => {
+    process.argv = ['node', 'pick.js', '--search', 'deploy'];
+    delete require.cache[require.resolve('../../scripts/pick')];
+    const { runPicker } = require('../../scripts/pick');
+    await runPicker({ nonInteractive: true });
+    const output = logs.join('\n');
+    const parsed = JSON.parse(output);
+    for (const cmd of parsed.commands) {
+      const match = cmd.name.toLowerCase().includes('deploy') ||
+                    (cmd.description && cmd.description.toLowerCase().includes('deploy'));
+      assert.ok(match, `Command ${cmd.name} should match deploy search`);
+    }
+  });
 });

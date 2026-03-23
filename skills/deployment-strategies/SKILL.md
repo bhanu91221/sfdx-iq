@@ -2,7 +2,7 @@
 name: deployment-strategies
 description: Org-based vs package-based development models, sandbox strategies, Quick Deploy, and rollback planning
 origin: claude-sfdx-iq
-tokens: 2301
+tokens: 2374
 domain: devops
 ---
 

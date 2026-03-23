@@ -1,6 +1,6 @@
 {
   "name": "claude-sfdx-iq",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Complete Salesforce DX plugin for Claude Code — agents, skills, hooks, commands, and rules for Apex, LWC, SOQL, Flows, and SFDX CI/CD",
   "keywords": [
     "claude-code",
@@ -39,16 +39,17 @@
     "agents/",
     "commands/",
     "contexts/",
-    "examples/",
     "hooks/",
     "manifests/",
     "mcp-configs/",
     "rules/",
-    "schemas/",
-    "scripts/ci/",
     "scripts/csiq.js",
     "scripts/hooks/",
     "scripts/lib/",
+    "scripts/pick.js",
+    "scripts/tokens.js",
+    "scripts/refresh-claude-md.js",
+    "scripts/estimate-tokens.js",
     "scripts/doctor.js",
     "scripts/status.js",
     "scripts/install-apply.js",
@@ -62,11 +63,10 @@
     ".claude-project-template/"
   ],
   "bin": {
-    "csiq": "scripts/csiq.js",
-    "csiq-setup": "scripts/setup-project.js"
+    "claude-sfdx-iq": "scripts/csiq.js",
+    "claude-sfdx-iq-setup": "scripts/setup-project.js"
   },
   "scripts": {
-    "postinstall": "echo '\\n  ✅ claude-sfdx-iq installed!\\n\\n  📋 Next steps:\\n  1. Install plugin: /plugin install claude-sfdx-iq@claude-sfdx-iq\\n  2. Setup project: cd your-sfdx-project && npx csiq setup-project\\n\\n  📖 Docs: https://github.com/bhanu91221/claude-sfdx-iq\\n'",
     "lint": "eslint . && markdownlint **/*.md --ignore node_modules",
     "test": "node scripts/ci/validate-agents.js && node scripts/ci/validate-commands.js && node scripts/ci/validate-rules.js && node scripts/ci/validate-skills.js && node scripts/ci/validate-hooks.js && node scripts/ci/validate-install-manifests.js && node tests/run-all.js",
     "coverage": "c8 --all --include=\"scripts/**/*.js\" --check-coverage --lines 80 --functions 80 --branches 80 --statements 80 --reporter=text --reporter=lcov node tests/run-all.js"

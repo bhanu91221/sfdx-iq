@@ -2,7 +2,7 @@
 name: apex-enterprise-patterns
 description: fflib enterprise patterns including Application factory, UnitOfWork, Selector base, Domain base, and Service layer
 origin: claude-sfdx-iq
-tokens: 3299
+tokens: 3400
 domain: apex
 ---
 

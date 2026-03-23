@@ -6,7 +6,7 @@
  *
  * Usage:
  *   node scripts/status.js
- *   npx csiq status
+ *   npx claude-sfdx-iq status
  */
 
 const fs = require('fs');
@@ -93,7 +93,7 @@ console.log(`
 console.log('  📊 Component Summary:\n');
 console.log(`    Agents       ${String(agents).padStart(3)}   Specialized Salesforce subagents`);
 console.log(`    Skills       ${String(skills).padStart(3)}   Domain knowledge modules`);
-console.log(`    Commands     ${String(commands).padStart(3)}   Slash commands (/csiq-deploy, /csiq-test, etc.)`);
+console.log(`    Commands     ${String(commands).padStart(3)}   Slash commands (/deploy, /test, etc.)`);
 console.log(`    Rules        ${String(rules).padStart(3)}   Always-follow guidelines`);
 console.log(`    Hooks        ${String(hooks).padStart(3)}   Automated triggers`);
 console.log(`    Schemas      ${String(schemas).padStart(3)}   JSON Schema validators`);

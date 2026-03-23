@@ -6,7 +6,7 @@
 User
   |
   v
-Commands (/csiq-deploy, /csiq-test, /csiq-apex-review, ...)
+Commands (/deploy, /test, /apex-review, ...)
   |
   v
 Agents (deployment-specialist, apex-reviewer, ...)
@@ -22,11 +22,11 @@ SF CLI / External Tools (sf project deploy, sf apex run test, ...)
 Salesforce Org
 ```
 
-## Component Flow: /csiq-deploy Example
+## Component Flow: /deploy Example
 
-When a user runs `/csiq-deploy`, the following sequence occurs:
+When a user runs `/deploy`, the following sequence occurs:
 
-1. **Command layer** (`commands/csiq-deploy.md`) parses flags and validates the project structure. It checks for `sfdx-project.json` and determines the target org.
+1. **Command layer** (`commands/deploy.md`) parses flags and validates the project structure. It checks for `sfdx-project.json` and determines the target org.
 
 2. **Agent delegation** The deployment-specialist agent (`agents/deployment-specialist.md`) is invoked. It reads the project metadata, determines the test level, and plans the deployment strategy.
 

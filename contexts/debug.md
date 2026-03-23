@@ -1,6 +1,6 @@
 # Debug / Troubleshoot Mode Context
 
-Active during `/csiq-debug-log`, `/csiq-build-fix`, `/csiq-explain-error`, and troubleshooting workflows.
+Active during `/debug-log`, `/build-fix`, `/explain-error`, and troubleshooting workflows.
 
 ## Common Salesforce Errors
 

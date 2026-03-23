@@ -42,4 +42,4 @@ The hook automatically suggests the `flow-analyst` agent when:
 
 - Flow XML analysis is structural — it cannot detect all runtime bulkification issues.
 - Some flow element connections are indirect (via scheduled paths, subflows) and may not be caught.
-- For comprehensive flow analysis, use the `/csiq-flow-review` command which delegates to the `flow-analyst` agent.
+- For comprehensive flow analysis, use the `/flow-review` command which delegates to the `flow-analyst` agent.

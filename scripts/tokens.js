@@ -5,9 +5,9 @@
  * tokens.js — Token budget reporter for claude-sfdx-iq
  *
  * Usage:
- *   npx csiq tokens                       # Show installed component costs
- *   npx csiq tokens --profile <name>      # Show costs for a named profile
- *   npx csiq tokens --all                 # Show all available components
+ *   npx claude-sfdx-iq tokens                       # Show installed component costs
+ *   npx claude-sfdx-iq tokens --profile <name>      # Show costs for a named profile
+ *   npx claude-sfdx-iq tokens --all                 # Show all available components
  */
 
 const fs = require('fs');

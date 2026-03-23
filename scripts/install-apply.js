@@ -263,6 +263,6 @@ if (errors > 0) {
 }
 console.log(`\n  Profile "${manifest.name}" installation complete.`);
 console.log(`  Skills installed to .claude/skills-available/ (loaded on-demand by context-assigner)`);
-console.log(`  Run "npx csiq status" to verify.\n`);
+console.log(`  Run "npx claude-sfdx-iq status" to verify.\n`);
 
 process.exit(errors > 0 ? 1 : 0);

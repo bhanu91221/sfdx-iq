@@ -2,7 +2,7 @@
 name: platform-events
 description: Platform Event definition, publishing, subscribing, replay, and event-driven architecture patterns
 origin: claude-sfdx-iq
-tokens: 2331
+tokens: 2416
 domain: integration
 ---
 

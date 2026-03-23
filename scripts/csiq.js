@@ -5,12 +5,12 @@
  * csiq — CLI entry point for claude-sfdx-iq plugin
  *
  * Usage:
- *   npx csiq install [--profile <name>] [--dry-run]
- *   npx csiq status
- *   npx csiq list
- *   npx csiq doctor
- *   npx csiq repair
- *   npx csiq help
+ *   npx claude-sfdx-iq install [--profile <name>] [--dry-run]
+ *   npx claude-sfdx-iq status
+ *   npx claude-sfdx-iq list
+ *   npx claude-sfdx-iq doctor
+ *   npx claude-sfdx-iq repair
+ *   npx claude-sfdx-iq help
  */
 
 const path = require('path');
@@ -71,7 +71,7 @@ function showBanner() {
 
 function showHelp() {
   showBanner();
-  console.log('Usage: npx csiq <command> [options]\n');
+  console.log('Usage: npx claude-sfdx-iq <command> [options]\n');
   console.log('Commands:');
   for (const [name, cmd] of Object.entries(COMMANDS)) {
     console.log(`  ${name.padEnd(12)} ${cmd.description}`);
@@ -81,16 +81,16 @@ function showHelp() {
     console.log(`  ${p}`);
   }
   console.log('\nExamples:');
-  console.log('  npx csiq install --profile developer');
-  console.log('  npx csiq install --profile minimal --dry-run');
-  console.log('  npx csiq status');
-  console.log('  npx csiq doctor');
-  console.log('  npx csiq pick --category apex');
-  console.log('  npx csiq pick --output manifests/custom.json');
-  console.log('  npx csiq install --interactive');
-  console.log('  npx csiq tokens --profile default');
-  console.log('  npx csiq tokens --all');
-  console.log('  npx csiq refresh --profile minimal');
+  console.log('  npx claude-sfdx-iq install --profile developer');
+  console.log('  npx claude-sfdx-iq install --profile minimal --dry-run');
+  console.log('  npx claude-sfdx-iq status');
+  console.log('  npx claude-sfdx-iq doctor');
+  console.log('  npx claude-sfdx-iq pick --category apex');
+  console.log('  npx claude-sfdx-iq pick --output manifests/custom.json');
+  console.log('  npx claude-sfdx-iq install --interactive');
+  console.log('  npx claude-sfdx-iq tokens --profile default');
+  console.log('  npx claude-sfdx-iq tokens --all');
+  console.log('  npx claude-sfdx-iq refresh --profile minimal');
   console.log('');
 }
 
@@ -106,7 +106,7 @@ if (!command || command === 'help' || command === '--help' || command === '-h') 
 if (!COMMANDS[command]) {
   console.error(`Unknown command: "${command}"\n`);
   console.error('Available commands: ' + Object.keys(COMMANDS).join(', '));
-  console.error('Run "npx csiq help" for usage information.');
+  console.error('Run "npx claude-sfdx-iq help" for usage information.');
   process.exit(1);
 }
 
@@ -126,7 +126,7 @@ try {
 } catch (err) {
   if (err.code === 'MODULE_NOT_FOUND') {
     console.error(`Command script not found: ${scriptPath}`);
-    console.error('Run "npx csiq repair" to fix missing files.');
+    console.error('Run "npx claude-sfdx-iq repair" to fix missing files.');
     process.exit(1);
   }
   throw err;

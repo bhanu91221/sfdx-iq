@@ -20,17 +20,17 @@ This project uses the **claude-sfdx-iq** plugin for Salesforce development.
 
 ### Available Commands
 
-Run `/help` to see all 43 commands, including:
-- `/csiq-deploy` — Deploy to Salesforce org with validation
-- `/csiq-test` — Run Apex tests with coverage analysis
-- `/csiq-apex-review` — Review Apex code quality
-- `/csiq-lwc-review` — Review LWC components
-- `/csiq-security-scan` — CRUD/FLS/sharing/injection scan
-- `/csiq-governor-check` — Governor limit risk analysis
-- `/csiq-tdd` — Test-driven development workflow
-- `/csiq-scaffold-trigger` — Generate trigger + handler + test
-- `/csiq-scaffold-lwc` — Generate LWC component boilerplate
-- `/csiq-code-review` — Full code review with parallel agents
+Run `/help` to see all 53 commands, including:
+- `/deploy` — Deploy to Salesforce org with validation
+- `/test` — Run Apex tests with coverage analysis
+- `/apex-review` — Review Apex code quality
+- `/lwc-review` — Review LWC components
+- `/security-scan` — CRUD/FLS/sharing/injection scan
+- `/governor-check` — Governor limit risk analysis
+- `/tdd` — Test-driven development workflow
+- `/scaffold-trigger` — Generate trigger + handler + test
+- `/scaffold-lwc` — Generate LWC component boilerplate
+- `/code-review` — Full code review with parallel agents
 
 ### Context Loading (Skills & Rules) — CRITICAL
 
@@ -69,7 +69,7 @@ Rules ([count]): [comma-separated names]
 When delegating to specialized agents (e.g., apex-reviewer, lwc-reviewer, soql-optimizer):
 
 1. **Include loaded context in the agent prompt** — When invoking a subagent via the Agent tool, include the relevant skill/rule content directly in the prompt so the subagent has access to it. Subagents run in isolated contexts and cannot see what the main agent has loaded.
-2. **Domain-specific delegation** — When launching multiple agents (e.g., /csiq-code-review), each agent should receive ONLY the context relevant to its domain:
+2. **Domain-specific delegation** — When launching multiple agents (e.g., /code-review), each agent should receive ONLY the context relevant to its domain:
    - apex-reviewer gets: apex skills + apex rules + common rules + soql rules (SOQL is part of Apex)
    - lwc-reviewer gets: lwc skills + lwc rules + common rules
    - soql-optimizer gets: soql skills + soql rules + common rules
@@ -90,9 +90,9 @@ If the user includes `--custom skills`, `--custom rules`, or `--custom skills ru
 5. **Display the context summary** as above
 6. **Proceed with the original task**
 
-#### On-demand: /csiq-context
+#### On-demand: /context
 
-Use `/csiq-context` to inspect currently loaded context or browse available components.
+Use `/context` to inspect currently loaded context or browse available components.
 
 **Available components:**
 

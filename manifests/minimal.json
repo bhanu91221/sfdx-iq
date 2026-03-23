@@ -33,11 +33,15 @@
       "security-patterns"
     ],
     "commands": [
-      "csiq-context",
-      "csiq-deploy",
-      "csiq-test",
-      "csiq-apex-review",
-      "csiq-security-scan"
+      "context",
+      "deploy",
+      "test",
+      "apex-review",
+      "security-scan",
+      "csiq-help",
+      "doctor",
+      "setup-project",
+      "status"
     ],
     "hooks": [
       "apex-post-edit",

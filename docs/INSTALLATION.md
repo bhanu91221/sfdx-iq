@@ -133,7 +133,7 @@ sf org login web --alias <your-org-alias>
 3. Run the doctor script to diagnose issues:
 
 ```bash
-npx csiq doctor
+npx claude-sfdx-iq doctor
 ```
 
 ### Validators failing on install

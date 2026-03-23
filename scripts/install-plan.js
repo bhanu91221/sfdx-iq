@@ -96,7 +96,7 @@ for (const [category, items] of Object.entries(manifest.components || {})) {
 console.log('─'.repeat(50));
 console.log(`  Total components: ${totalComponents}`);
 if (missingComponents > 0) {
-  console.log(`  ❌ Missing: ${missingComponents} (run "npx csiq repair" to fix)`);
+  console.log(`  ❌ Missing: ${missingComponents} (run "npx claude-sfdx-iq repair" to fix)`);
 } else {
   console.log(`  ✅ All components available`);
 }

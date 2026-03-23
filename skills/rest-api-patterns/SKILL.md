@@ -2,7 +2,7 @@
 name: rest-api-patterns
 description: Salesforce REST API patterns including custom endpoints, Composite API, Bulk API 2.0, and authentication
 origin: claude-sfdx-iq
-tokens: 2735
+tokens: 2854
 domain: integration
 ---
 

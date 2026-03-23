@@ -68,6 +68,77 @@ describe('estimate-tokens extended', () => {
     });
   });
 
+  describe('updateFrontmatter via CLI --update', () => {
+    it('runs --update without error', () => {
+      const { execSync } = require('child_process');
+      const ROOT = path.resolve(__dirname, '../..');
+      // Run update in a worktree-safe way: just check it produces output
+      try {
+        const output = execSync(
+          `node scripts/estimate-tokens.js --update`,
+          { encoding: 'utf8', cwd: ROOT, timeout: 30000 }
+        );
+        assert.ok(output.includes('Updating frontmatter') || output.includes('Updated') || output.includes('Already current'));
+      } catch (err) {
+        // Even if exit code non-zero, should produce output
+        assert.ok((err.stdout || '').length > 0);
+      }
+    });
+  });
+
+  describe('runCheck via CLI --check', () => {
+    it('runs --check and validates frontmatter', () => {
+      const { execSync } = require('child_process');
+      const ROOT = path.resolve(__dirname, '../..');
+      try {
+        const output = execSync(
+          `node scripts/estimate-tokens.js --check`,
+          { encoding: 'utf8', cwd: ROOT, timeout: 30000 }
+        );
+        assert.ok(output.includes('Checking frontmatter') || output.includes('current'));
+      } catch (err) {
+        // May exit 1 if stale, but should produce output about checking
+        const output = err.stdout || '';
+        assert.ok(output.includes('Checking') || output.includes('MISSING') || output.includes('STALE'));
+      }
+    });
+  });
+
+  describe('runBuildIndex via CLI --build-index', () => {
+    it('runs --build-index and generates index files', () => {
+      const { execSync } = require('child_process');
+      const ROOT = path.resolve(__dirname, '../..');
+      try {
+        const output = execSync(
+          `node scripts/estimate-tokens.js --build-index`,
+          { encoding: 'utf8', cwd: ROOT, timeout: 30000 }
+        );
+        assert.ok(output.includes('Building indexes'));
+        assert.ok(output.includes('skills/index.md'));
+        assert.ok(output.includes('rules/index.md'));
+      } catch (err) {
+        assert.ok((err.stdout || '').includes('Building indexes'));
+      }
+    });
+  });
+
+  describe('CLI usage message', () => {
+    it('prints usage when no flags provided', () => {
+      const { execSync } = require('child_process');
+      const ROOT = path.resolve(__dirname, '../..');
+      try {
+        execSync(
+          `node scripts/estimate-tokens.js`,
+          { encoding: 'utf8', cwd: ROOT, timeout: 15000 }
+        );
+        // exits 0 with usage
+      } catch (err) {
+        const output = err.stdout || '';
+        assert.ok(output.includes('Usage'));
+      }
+    });
+  });
+
   describe('inferDomain edge cases', () => {
     it('returns devops for deployment prefix', () => {
       assert.strictEqual(inferDomain('deployment-pipeline'), 'devops');

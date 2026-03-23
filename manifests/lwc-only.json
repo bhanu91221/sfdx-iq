@@ -34,13 +34,17 @@
       "aura-patterns"
     ],
     "commands": [
-      "csiq-context",
-      "csiq-deploy",
-      "csiq-lwc-review",
-      "csiq-lwc-test",
-      "csiq-scaffold-lwc",
-      "csiq-security-scan",
-      "csiq-explain-error"
+      "context",
+      "deploy",
+      "lwc-review",
+      "lwc-test",
+      "scaffold-lwc",
+      "security-scan",
+      "explain-error",
+      "csiq-help",
+      "doctor",
+      "setup-project",
+      "status"
     ],
     "hooks": [
       "lwc-post-edit",

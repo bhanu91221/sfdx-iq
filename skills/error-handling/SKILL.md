@@ -2,7 +2,7 @@
 name: error-handling
 description: Custom exceptions, try-catch patterns, Database.SaveResult handling, error aggregation, and Platform Event logging
 origin: claude-sfdx-iq
-tokens: 3360
+tokens: 3473
 domain: apex
 ---
 

@@ -8,7 +8,7 @@
  *
  * Usage:
  *   node scripts/doctor.js
- *   npx csiq doctor
+ *   npx claude-sfdx-iq doctor
  */
 
 const { execSync } = require('child_process');
@@ -162,7 +162,7 @@ console.log('\n' + '─'.repeat(40));
 console.log(`  ✅ Pass: ${passCount}  ⚠️  Warn: ${warnCount}  ❌ Fail: ${failCount}`);
 
 if (failCount > 0) {
-  console.log('\n  Some checks failed. Fix the issues above and run "npx csiq doctor" again.\n');
+  console.log('\n  Some checks failed. Fix the issues above and run "npx claude-sfdx-iq doctor" again.\n');
   process.exit(1);
 } else if (warnCount > 0) {
   console.log('\n  Environment is functional with some warnings.\n');

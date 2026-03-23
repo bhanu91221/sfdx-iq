@@ -2,7 +2,7 @@
 name: ci-cd-pipeline
 description: GitHub Actions workflows for SFDX, JWT auth, scratch org CI, test execution, code coverage gates, and artifact management
 origin: claude-sfdx-iq
-tokens: 2995
+tokens: 3108
 domain: devops
 ---
 

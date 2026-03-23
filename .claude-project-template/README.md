@@ -14,7 +14,8 @@ This directory contains the project-level configuration template for claude-sfdx
 From your Salesforce DX project root:
 
 ```bash
-npx csiq setup-project
+npx claude-sfdx-iq setup-project
+# Or if npm is blocked (corporate VPN): use /setup-project slash command in Claude Code
 ```
 
 This will:
@@ -124,6 +125,6 @@ Edit `CLAUDE.md` to add your team's conventions, integrations, and environment n
 
 ## Need Help?
 
-- Run `/csiq-help` in Claude Code
+- Run `/help` in Claude Code
 - Visit: https://github.com/bhanu91221/claude-sfdx-iq
 - Issues: https://github.com/bhanu91221/claude-sfdx-iq/issues

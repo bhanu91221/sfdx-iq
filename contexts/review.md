@@ -1,6 +1,6 @@
 # Code Review Mode Context
 
-Active during `/csiq-code-review`, `/csiq-apex-review`, `/csiq-lwc-review`, and manual review workflows.
+Active during `/code-review`, `/apex-review`, `/lwc-review`, and manual review workflows.
 
 ## Review Checklist
 

@@ -51,12 +51,12 @@ Add these tags to your message for explicit control:
 
 ## CLI Tools
 
-- `csiq help` — Show available CLI commands
-- `csiq install` — Install a configuration profile
-- `csiq tokens` — Show token budget for installed components
-- `csiq status` — Check plugin and org status
-- `csiq doctor` — Diagnose configuration issues
-- `csiq repair` — Auto-fix common configuration problems
+- `claude-sfdx-iq help` — Show available CLI commands
+- `claude-sfdx-iq install` — Install a configuration profile
+- `claude-sfdx-iq tokens` — Show token budget for installed components
+- `claude-sfdx-iq status` — Check plugin and org status
+- `claude-sfdx-iq doctor` — Diagnose configuration issues
+- `claude-sfdx-iq repair` — Auto-fix common configuration problems
 
 ## Development Notes
 

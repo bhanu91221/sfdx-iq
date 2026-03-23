@@ -8,7 +8,7 @@ This is the **claude-sfdx-iq plugin repository** — a Claude Code plugin that t
 
 **Distribution Model:**
 - **Global Installation** (marketplace): Agents, skills, commands, hooks → `~/.claude/plugins/claude-sfdx-iq/`
-- **Project Installation** (per SFDX project): Rules → `.claude/rules/` (copied via `npx csiq setup-project`)
+- **Project Installation** (per SFDX project): Rules → `.claude/rules/` (copied via `npx claude-sfdx-iq setup-project`)
 
 **Why This Approach:**
 - Agents/skills/commands work globally (available in all SFDX projects)
@@ -37,13 +37,13 @@ The project is organized into core components:
 ### Distributed Globally (via plugin installation)
 - **agents/** — 14 specialized subagents (apex-reviewer, lwc-reviewer, soql-optimizer, context-assigner, etc.)
 - **skills/** — 36 Salesforce domain skills (apex-patterns, governor-limits, lwc-testing, etc.)
-- **commands/** — 43 slash commands (/csiq-deploy, /csiq-test, /csiq-apex-review, etc.)
+- **commands/** — 53 slash commands (/deploy, /test, /apex-review, etc.)
 - **hooks/** — 6 hook JSON definitions + 16 hook scripts (post-edit scans, quality gates)
 - **contexts/** — 5 mode-specific context files (develop, review, debug, deploy, admin)
-- **scripts/** — Cross-platform Node.js utilities (csiq CLI, setup-project, hook scripts, lib)
+- **scripts/** — Cross-platform Node.js utilities (claude-sfdx-iq CLI, setup-project, hook scripts, lib)
 - **mcp-configs/** — MCP server configurations for Salesforce integrations
 
-### Copied Per-Project (via npx csiq setup-project)
+### Copied Per-Project (via npx claude-sfdx-iq setup-project)
 - **rules/** — 44 rules (~43k tokens total, loaded dynamically by context-assigner)
   - common/ (9 rules)
   - apex/ (9 rules)
@@ -59,30 +59,32 @@ The project is organized into core components:
 
 ## Key Commands
 
-- `/csiq-deploy` — Source deploy with validation and tests
-- `/csiq-test` — Run Apex tests with coverage analysis
-- `/csiq-apex-review` — Apex code quality review
-- `/csiq-security-scan` — CRUD/FLS/sharing/injection scan
-- `/csiq-governor-check` — Governor limit risk analysis
-- `/csiq-tdd` — Salesforce TDD workflow (Apex + LWC Jest)
-- `/csiq-scaffold-trigger` — Generate trigger + handler boilerplate
-- `/csiq-scaffold-lwc` — Generate LWC component boilerplate
-- `/csiq-code-review` — Full code review with parallel agent orchestration
-- `/csiq-debug-log` — Analyze Salesforce debug logs
-- `/csiq-build-fix` — Diagnose and fix build/deploy errors
-- `/csiq-explain-error` — Explain Salesforce error messages
-- `/csiq-validate` — Validate deployment without executing
-- `/csiq-destructive` — Manage destructive metadata changes
-- `/csiq-context` — Show loaded context, browse available skills/rules
+- `/deploy` — Source deploy with validation and tests
+- `/test` — Run Apex tests with coverage analysis
+- `/apex-review` — Apex code quality review
+- `/security-scan` — CRUD/FLS/sharing/injection scan
+- `/governor-check` — Governor limit risk analysis
+- `/tdd` — Salesforce TDD workflow (Apex + LWC Jest)
+- `/scaffold-trigger` — Generate trigger + handler boilerplate
+- `/scaffold-lwc` — Generate LWC component boilerplate
+- `/code-review` — Full code review with parallel agent orchestration
+- `/debug-log` — Analyze Salesforce debug logs
+- `/build-fix` — Diagnose and fix build/deploy errors
+- `/explain-error` — Explain Salesforce error messages
+- `/validate` — Validate deployment without executing
+- `/destructive` — Manage destructive metadata changes
+- `/context` — Show loaded context, browse available skills/rules
 
 ## CLI Tools
 
-- `npx csiq setup-project` — **Most Important**: Copy rules + config to an SFDX project
-- `npx csiq help` — Show available CLI commands
-- `npx csiq status` — Check plugin and org status
-- `npx csiq doctor` — Diagnose configuration issues (Node, sf CLI, Git, org)
-- `npx csiq repair` — Auto-fix common configuration problems
-- `npx csiq list` — List installed components (agents, skills, commands, rules)
+Available via `npx` or as slash commands (for corporate VPN / blocked npm):
+
+- `npx claude-sfdx-iq setup-project` or `/setup-project` — **Most Important**: Copy rules + config to an SFDX project
+- `npx claude-sfdx-iq help` or `/csiq-help` — Show available CLI commands
+- `npx claude-sfdx-iq status` or `/status` — Check plugin and org status
+- `npx claude-sfdx-iq doctor` or `/doctor` — Diagnose configuration issues (Node, sf CLI, Git, org)
+- `npx claude-sfdx-iq repair` or `/repair` — Auto-fix common configuration problems
+- `npx claude-sfdx-iq list` or `/list` — List installed components (agents, skills, commands, rules)
 
 ## Core Principles
 

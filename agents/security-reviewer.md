@@ -3,7 +3,7 @@ name: security-reviewer
 description: Use this agent to review Salesforce code and configuration for security vulnerabilities including CRUD/FLS enforcement, sharing model compliance, SOQL injection, CSP compliance, Connected App security, and Experience Cloud guest user risks.
 tools: ["Read", "Write", "Edit", "Bash", "Grep", "Glob"]
 model: sonnet
-tokens: 2938
+tokens: 3018
 domain: security
 ---
 

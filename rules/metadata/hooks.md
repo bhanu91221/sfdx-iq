@@ -61,5 +61,5 @@ When metadata hooks detect complex issues (dependency conflicts, naming inconsis
 
 When a metadata file is deleted from the project:
 1. Hook warns that a `destructiveChanges.xml` entry may be needed.
-2. Suggests running `/csiq-destructive-deploy` command for safe removal.
+2. Suggests running `/destructive-deploy` command for safe removal.
 3. Never auto-delete metadata from the org — always require explicit confirmation.

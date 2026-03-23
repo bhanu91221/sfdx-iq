@@ -2,7 +2,7 @@
 name: sosl-patterns
 description: SOSL search patterns including FIND syntax, RETURNING clauses, search groups, and SOSL vs SOQL decisions
 origin: claude-sfdx-iq
-tokens: 2358
+tokens: 2454
 domain: soql
 ---
 

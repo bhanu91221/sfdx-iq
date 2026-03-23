@@ -6,9 +6,9 @@
  * Sets up a Salesforce DX project with claude-sfdx-iq configuration.
  *
  * Usage:
- *   npx csiq setup-project [target-directory]
- *   npx csiq setup-project /path/to/sfdx-project
- *   npx csiq setup-project  (uses current directory)
+ *   npx claude-sfdx-iq setup-project [target-directory]
+ *   npx claude-sfdx-iq setup-project /path/to/sfdx-project
+ *   npx claude-sfdx-iq setup-project  (uses current directory)
  *
  * What it does:
  *   1. Verifies target is an SFDX project (sfdx-project.json exists)
@@ -37,7 +37,7 @@ if (!fs.existsSync(sfdxProjectPath)) {
   console.error('\n❌ ERROR: Not a Salesforce DX project');
   console.error(`   sfdx-project.json not found in: ${absoluteTargetDir}`);
   console.error('\n   Please run this command from an SFDX project root, or specify the path:');
-  console.error('   npx csiq setup-project /path/to/sfdx-project\n');
+  console.error('   npx claude-sfdx-iq setup-project /path/to/sfdx-project\n');
   process.exit(1);
 }
 
@@ -119,9 +119,9 @@ console.log('   • Typical usage: 5k-15k tokens (saves ~30k tokens per session)
 
 console.log('\n🚀 Next steps:');
 console.log('   1. Open your project in Claude Code');
-console.log('   2. Run /help to see all 42 available commands');
-console.log('   3. Try /csiq-apex-review to review your Apex code');
-console.log('   4. Use /csiq-tdd to start test-driven development');
+console.log('   2. Run /csiq-help to see all available commands');
+console.log('   3. Try /apex-review to review your Apex code');
+console.log('   4. Use /tdd to start test-driven development');
 
 console.log('\n📖 Documentation:');
 console.log('   • Project docs: CLAUDE.md');

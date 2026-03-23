@@ -2,7 +2,7 @@
 name: apex-async-patterns
 description: Future methods, Queueable, Batch Apex, and Schedulable patterns with chaining and governor limit strategies
 origin: claude-sfdx-iq
-tokens: 2910
+tokens: 3011
 domain: apex
 ---
 

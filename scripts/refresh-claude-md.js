@@ -10,7 +10,7 @@
  *
  * Usage:
  *   node scripts/refresh-claude-md.js [--target /path/to/project] [--profile <name>]
- *   npx csiq refresh
+ *   npx claude-sfdx-iq refresh
  */
 
 const fs = require('fs');
@@ -38,7 +38,7 @@ for (let i = 0; i < args.length; i++) {
 // Read template
 if (!fs.existsSync(TEMPLATE_PATH)) {
   console.error(`Template not found: ${TEMPLATE_PATH}`);
-  console.error('Run "npx csiq repair" to restore missing files.');
+  console.error('Run "npx claude-sfdx-iq repair" to restore missing files.');
   process.exit(1);
 }
 

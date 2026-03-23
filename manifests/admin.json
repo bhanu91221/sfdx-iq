@@ -38,15 +38,19 @@
       "deployment-strategies"
     ],
     "commands": [
-      "csiq-context",
-      "csiq-deploy",
-      "csiq-retrieve",
-      "csiq-flow-review",
-      "csiq-data-model",
-      "csiq-metadata-analyze",
-      "csiq-org-health",
-      "csiq-scaffold-flow",
-      "csiq-validate"
+      "context",
+      "deploy",
+      "retrieve",
+      "flow-review",
+      "data-model",
+      "metadata-analyze",
+      "org-health",
+      "scaffold-flow",
+      "validate",
+      "csiq-help",
+      "doctor",
+      "setup-project",
+      "status"
     ],
     "hooks": [
       "flow-post-edit",

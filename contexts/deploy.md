@@ -1,6 +1,6 @@
 # Deployment Mode Context
 
-Active during `/csiq-deploy`, `/csiq-push`, `/csiq-validate`, `/csiq-destructive`, and deployment workflows.
+Active during `/deploy`, `/push`, `/validate`, `/destructive`, and deployment workflows.
 
 ## Pre-Deploy Checklist
 

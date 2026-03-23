@@ -20,17 +20,17 @@ This project uses the **claude-sfdx-iq** plugin for Salesforce development.
 
 ### Available Commands
 
-Run `/help` to see all 43 commands, including:
-- `/csiq-deploy` — Deploy to Salesforce org with validation
-- `/csiq-test` — Run Apex tests with coverage analysis
-- `/csiq-apex-review` — Review Apex code quality
-- `/csiq-lwc-review` — Review LWC components
-- `/csiq-security-scan` — CRUD/FLS/sharing/injection scan
-- `/csiq-governor-check` — Governor limit risk analysis
-- `/csiq-tdd` — Test-driven development workflow
-- `/csiq-scaffold-trigger` — Generate trigger + handler + test
-- `/csiq-scaffold-lwc` — Generate LWC component boilerplate
-- `/csiq-code-review` — Full code review with parallel agents
+Run `/help` to see all 53 commands, including:
+- `/deploy` — Deploy to Salesforce org with validation
+- `/test` — Run Apex tests with coverage analysis
+- `/apex-review` — Review Apex code quality
+- `/lwc-review` — Review LWC components
+- `/security-scan` — CRUD/FLS/sharing/injection scan
+- `/governor-check` — Governor limit risk analysis
+- `/tdd` — Test-driven development workflow
+- `/scaffold-trigger` — Generate trigger + handler + test
+- `/scaffold-lwc` — Generate LWC component boilerplate
+- `/code-review` — Full code review with parallel agents
 
 ### Rules Loading
 

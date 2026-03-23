@@ -28,7 +28,7 @@
 6. Validate in scratch org
 7. Run all Apex tests (must pass with 90%+ coverage)
 8. Create pull request
-9. Code review (use /csiq-code-review command)
+9. Code review (use /code-review command)
 10. Merge to main
 11. Deploy to integration sandbox
 12. Deploy to UAT → Production

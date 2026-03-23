@@ -2,7 +2,7 @@
 name: salesforce-dx-project
 description: sfdx-project.json configuration, SF CLI commands, source tracking, alias management, and .forceignore patterns
 origin: claude-sfdx-iq
-tokens: 2422
+tokens: 2514
 domain: devops
 ---
 

@@ -3,7 +3,7 @@ name: context-assigner
 description: Analyzes user requests and recommends which skills and rules to load. Returns a structured recommendation — does not load files directly.
 tools: ["Glob"]
 model: haiku
-tokens: 900
+tokens: 998
 domain: common
 ---
 
