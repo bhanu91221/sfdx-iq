@@ -2,7 +2,8 @@
 name: tdd-workflow
 description: Test-Driven Development workflow for Apex and LWC using Red-Green-Refactor cycle
 origin: claude-sfdx-iq
-tokens: 3043
+user-invocable: false
+tokens: 3049
 domain: apex
 ---
 

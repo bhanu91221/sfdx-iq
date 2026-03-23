@@ -2,7 +2,8 @@
 name: apex-patterns
 description: Enterprise design patterns for Apex including Service, Selector, Domain, Factory, and Strategy patterns
 origin: claude-sfdx-iq
-tokens: 2221
+user-invocable: false
+tokens: 2227
 domain: apex
 ---
 

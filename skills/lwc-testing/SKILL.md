@@ -2,7 +2,8 @@
 name: lwc-testing
 description: LWC Jest testing patterns including wire adapters, DOM queries, event testing, and mocking
 origin: claude-sfdx-iq
-tokens: 3350
+user-invocable: false
+tokens: 3356
 domain: lwc
 ---
 

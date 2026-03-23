@@ -2,7 +2,8 @@
 name: apex-testing
 description: Apex test class patterns, TestDataFactory, assertion methods, and coverage strategies
 origin: claude-sfdx-iq
-tokens: 2991
+user-invocable: false
+tokens: 2997
 domain: apex
 ---
 

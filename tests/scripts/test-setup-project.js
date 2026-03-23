@@ -103,7 +103,8 @@ describe('setup-project script', () => {
 
   it('skips CLAUDE.md if it already exists', () => {
     fs.writeFileSync(path.join(TEMP_DIR, 'sfdx-project.json'), '{}', 'utf8');
-    fs.writeFileSync(path.join(TEMP_DIR, 'CLAUDE.md'), '# My Project', 'utf8');
+    fs.mkdirSync(path.join(TEMP_DIR, '.claude'), { recursive: true });
+    fs.writeFileSync(path.join(TEMP_DIR, '.claude', 'CLAUDE.md'), '# My Project', 'utf8');
 
     const output = execSync(`node "${SCRIPT}" "${TEMP_DIR}"`, {
       encoding: 'utf8', cwd: ROOT, timeout: 15000
@@ -111,7 +112,7 @@ describe('setup-project script', () => {
 
     assert.ok(output.includes('CLAUDE.md already exists'));
     // Verify it was NOT overwritten
-    const content = fs.readFileSync(path.join(TEMP_DIR, 'CLAUDE.md'), 'utf8');
+    const content = fs.readFileSync(path.join(TEMP_DIR, '.claude', 'CLAUDE.md'), 'utf8');
     assert.strictEqual(content, '# My Project');
   });
 

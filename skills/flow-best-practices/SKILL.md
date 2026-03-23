@@ -2,7 +2,8 @@
 name: flow-best-practices
 description: Flow design best practices including entry conditions, fault paths, bulkification, and naming conventions
 origin: claude-sfdx-iq
-tokens: 2233
+user-invocable: false
+tokens: 2239
 domain: flows
 ---
 
