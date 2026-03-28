@@ -8,6 +8,8 @@ Generate a complete Lightning Web Component with JavaScript controller, HTML tem
 
 ## Workflow
 
+0. **Load context** — Invoke the context-assigner agent with the description of this scaffolding task. Display the announcement block (loaded skills, rules, token count) to the user before proceeding.
+
 1. **Gather requirements**
    - Ask for the component name in camelCase (e.g., `accountList`, `contactForm`)
    - Ask for the component purpose or description
@@ -43,20 +45,32 @@ Generate a complete Lightning Web Component with JavaScript controller, HTML tem
 5. **Generate HTML template**
    - File: `<componentName>/<componentName>.html`
    - Use `<template>` as root element
-   - Include `lightning-card` with appropriate title and icon
+   - **Base components FIRST**: Before writing any `<div>` or `<span>`, check the base component selection matrix and use the matching Lightning component
+   - Always wrap content in `lightning-card` with appropriate title and icon-name
    - Add conditional rendering with `lwc:if` / `lwc:else` (not `if:true` which is deprecated)
    - Include `lightning-spinner` for loading states
-   - Add error display block for error states
-   - Use appropriate Lightning base components: `lightning-datatable`, `lightning-record-form`, `lightning-input`, etc.
-   - Always Include SLDS classes for all kinds of component styling like layout, spacing, colors, kinetics, etc.
+   - Add error display block for error states using SLDS alert classes
+   - Layout: use `lightning-layout` + `lightning-layout-item`, or SLDS grid classes (`slds-grid`, `slds-col`, `slds-size_*`) for multi-column layouts
+   - Tables/lists of records: `lightning-datatable` — never a custom table or `<ul>`
+   - Forms: `lightning-record-form`, `lightning-record-edit-form`, or `lightning-record-view-form` with `lightning-input-field` / `lightning-output-field`
+   - Inputs: `lightning-input`, `lightning-combobox`, `lightning-textarea` — never raw `<input>` or `<select>`
+   - Buttons: `lightning-button` or `lightning-button-icon` — never `<button>`
+   - Status labels / badges: `lightning-badge` with SLDS theme class — never a custom `<span>` with color CSS
+   - Icons: `lightning-icon` — never inline SVG or `<img>`
+   - Formatted values: `lightning-formatted-number`, `lightning-formatted-date-time`, `lightning-formatted-currency` — never custom JS formatting in template
+   - Raw `<div>` and `<span>` are only permitted for structural wrappers (grid columns, spacing containers) where no base component applies
+   - Use SLDS utility classes for all spacing (`slds-p-around_medium`), text styles (`slds-text-heading_small`), and colors (`slds-text-color_success`) — never write CSS for these
 
 6. **Generate CSS stylesheet**
    - File: `<componentName>/<componentName>.css`
-   - Generate Custom CSS only when its absolutely necessary, or else leave this as-is.
-   - Include host element styling with `:host`
-   - Add responsive layout rules
-   - Use CSS custom properties for theming consistency
-   - Keep styles minimal and leverage SLDS utility classes in the template
+   - **Default: write zero CSS.** If the design can be achieved with SLDS utility classes in the template, leave the CSS file empty (just the generated placeholder)
+   - Only generate CSS when SLDS utility classes and Lightning base components genuinely cannot satisfy the requirement
+   - If CSS is required, restrict `:host` to structural rules only: `display`, `overflow`, `position`, `width`, `height`
+   - Never write custom colors — use `var(--lwc-colorTextDefault)`, `var(--lwc-brandPrimary)`, etc.
+   - Never write custom spacing — use SLDS utility classes (`slds-p-around_medium`, `slds-m-bottom_small`) in the template instead
+   - Never write custom shadows, border-radius, or font styles — SLDS covers all of these
+   - Never override `.slds-*` classes — this breaks theme consistency
+   - If you find yourself writing more than 10 lines of CSS, stop and reconsider whether SLDS utility classes can replace them
 
 7. **Generate metadata configuration**
    - File: `<componentName>/<componentName>.js-meta.xml`

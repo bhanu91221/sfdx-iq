@@ -3,7 +3,7 @@ name: metadata-management
 description: Metadata API types, source format, package.xml, deploy/retrieve commands, and destructive changes workflow
 origin: claude-sfdx-iq
 user-invocable: false
-tokens: 2988
+tokens: 2903
 domain: metadata
 ---
 

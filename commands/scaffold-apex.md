@@ -8,6 +8,8 @@ Generate an Apex class following a specific design pattern (Service, Selector, D
 
 ## Workflow
 
+0. **Load context** — Invoke the context-assigner agent with the description of this scaffolding task. Display the announcement block (loaded skills, rules, token count) to the user before proceeding.
+
 1. **Gather requirements**
    - Ask for the class type / pattern:
      - **Service**: Business logic layer, stateless methods, bulkified operations

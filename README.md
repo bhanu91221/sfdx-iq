@@ -1,8 +1,8 @@
 # claude-sfdx-iq
 
-![npm test](https://img.shields.io/badge/npm%20test-800+%20passing-brightgreen)
+![npm test](https://img.shields.io/badge/npm%20test-829+%20passing-brightgreen)
 ![License: MIT](https://img.shields.io/badge/License-MIT-blue)
-![53 commands](https://img.shields.io/badge/commands-53-orange)
+![56 commands](https://img.shields.io/badge/commands-56-orange)
 ![14 agents](https://img.shields.io/badge/agents-14-purple)
 ![36 skills](https://img.shields.io/badge/skills-36-teal)
 ![44 rules](https://img.shields.io/badge/rules-44-red)
@@ -110,7 +110,7 @@ Try typing `/org-health` in Claude Code. The plugin will analyze your org's perm
 | `/test` | Runs Apex tests with coverage analysis |
 | `/code-review` | Full review with all specialist agents running in parallel |
 
-Run `/help` for the complete list of all 53 commands.
+Run `/help` for the complete list of all 56 commands.
 
 > **Note:** If you see "Not an SFDX project", make sure you are in a directory with `sfdx-project.json` and you have run the setup-project step above.
 
@@ -155,6 +155,14 @@ The plugin adds three layers of Salesforce intelligence to Claude:
 
 ## Commands for Developers
 
+### Code Understanding and Modification
+
+| Command | What it does |
+|---------|-------------|
+| `/explain` | Explain what any file does — LWC components, Apex classes, triggers, Flows. Works on the active editor file or a path you provide |
+| `/analyze` | Answer specific questions about code behavior. Use `--field Status__c` to trace where a field is read or written across the codebase |
+| `/modify` | Add features, change behavior, or add field logic to existing Apex, LWC, or triggers. Reads the file first, plans the change, then applies it |
+
 ### Code Review and Quality
 
 | Command | What it does |
@@ -193,7 +201,26 @@ The plugin adds three layers of Salesforce intelligence to Claude:
 | `/debug-log` | Retrieve and analyze Salesforce debug logs |
 | `/build-fix` | Diagnose and fix deployment or compilation errors |
 
-Run `/help` for the complete list of all 53 commands, or see the [full command reference](docs/COMMAND-REFERENCE.md).
+Run `/help` for the complete list of all 56 commands, or see the [full command reference](docs/COMMAND-REFERENCE.md).
+
+---
+
+## Context Loading and Token Optimization
+
+The plugin loads only the rules and skills relevant to your current task — not all 43k tokens at once.
+
+When you run any command, you will see a context announcement before work begins:
+
+```
+Context Loaded for: Scaffold LWC opportunity tiles component
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Skills (3): lwc-patterns, lwc-performance, lwc-testing
+Rules (5):  lwc/coding-style, lwc/patterns, lwc/security, common/security, common/testing
+~Tokens: 9,240 / 200k session budget
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+Use `/context` to see what is currently loaded. Use `/context --reload` to reload context for a new task.
 
 ---
 

@@ -48,8 +48,11 @@
       "logging-framework"
     ],
     "commands": [
+      "analyze",
       "context",
       "deploy",
+      "explain",
+      "modify",
       "test",
       "apex-review",
       "security-scan",

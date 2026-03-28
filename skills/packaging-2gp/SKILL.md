@@ -3,7 +3,7 @@ name: packaging-2gp
 description: Second-generation package creation, versioning, ancestry, namespace management, and ISV distribution
 origin: claude-sfdx-iq
 user-invocable: false
-tokens: 2227
+tokens: 2160
 domain: metadata
 ---
 

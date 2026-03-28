@@ -3,7 +3,7 @@ name: flow-analyst
 description: Use this agent to analyze Salesforce Flows for best practices including DML optimization, fault path coverage, before-save vs after-save patterns, subflow decomposition, variable naming, and recursion prevention.
 tools: ["Read", "Grep", "Glob"]
 model: sonnet
-tokens: 2772
+tokens: 2699
 domain: flows
 ---
 

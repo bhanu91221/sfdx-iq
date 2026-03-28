@@ -8,6 +8,8 @@ Generate a complete HTTP integration boilerplate: Named Credential reference, ca
 
 ## Workflow
 
+0. **Load context** — Invoke the context-assigner agent with the description of this scaffolding task. Display the announcement block (loaded skills, rules, token count) to the user before proceeding.
+
 1. **Gather requirements**
    - Ask for the external system name (e.g., `Stripe`, `Twilio`, `CustomERP`)
    - Ask for the endpoint base URL or Named Credential name

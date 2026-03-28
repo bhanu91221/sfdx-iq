@@ -3,7 +3,7 @@ name: integration-patterns
 description: Salesforce integration patterns including REST/SOAP callouts, Named Credentials, retry logic, and async integration
 origin: claude-sfdx-iq
 user-invocable: false
-tokens: 2705
+tokens: 2622
 domain: integration
 ---
 

@@ -8,6 +8,8 @@ Review Salesforce Flow metadata XML files for best practices, performance risks,
 
 ## Workflow
 
+0. **Load context** — Invoke the context-assigner agent with the description of this review task. Display the announcement block (loaded skills, rules, token count) to the user before proceeding.
+
 1. **Discover Flow files**
    - Find all Flow metadata files: `force-app/**/flows/*.flow-meta.xml`
    - If a specific flow is provided as argument, review only that flow

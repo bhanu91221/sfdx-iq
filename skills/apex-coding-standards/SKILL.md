@@ -3,7 +3,7 @@ name: apex-coding-standards
 description: Naming conventions, documentation standards, code structure rules, and PMD compliance for Apex
 origin: claude-sfdx-iq
 user-invocable: false
-tokens: 2256
+tokens: 2183
 domain: apex
 ---
 

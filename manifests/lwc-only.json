@@ -34,10 +34,13 @@
       "aura-patterns"
     ],
     "commands": [
+      "analyze",
       "context",
       "deploy",
+      "explain",
       "lwc-review",
       "lwc-test",
+      "modify",
       "scaffold-lwc",
       "security-scan",
       "explain-error",

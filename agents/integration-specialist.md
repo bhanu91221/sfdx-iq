@@ -3,7 +3,7 @@ name: integration-specialist
 description: Use this agent for Salesforce integration patterns including Named Credentials, REST/SOAP callouts, Platform Events, Change Data Capture, async callout patterns, retry with exponential backoff, and circuit breaker implementation.
 tools: ["Read", "Grep", "Glob", "Bash"]
 model: sonnet
-tokens: 5330
+tokens: 5177
 domain: integration
 ---
 

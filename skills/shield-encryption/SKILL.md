@@ -3,7 +3,7 @@ name: shield-encryption
 description: Salesforce Shield Platform Encryption setup, key management, encrypted field limitations, and Apex Crypto class usage
 origin: claude-sfdx-iq
 user-invocable: false
-tokens: 2823
+tokens: 2739
 domain: security
 ---
 

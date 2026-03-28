@@ -3,7 +3,7 @@ name: planner
 description: Use this agent when you need to plan a Salesforce feature implementation, break down complex requirements into phases, or create an implementation roadmap. Ideal for new features, large refactors, or multi-component changes that span metadata, Apex, LWC, testing, and deployment.
 tools: ["Read", "Grep", "Glob"]
 model: opus
-tokens: 3300
+tokens: 3235
 domain: common
 ---
 

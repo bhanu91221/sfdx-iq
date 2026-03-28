@@ -12,9 +12,13 @@ Run a check-only deployment to verify source can be successfully deployed withou
    - Confirm `sfdx-project.json` exists in the project root
    - Read source paths from `packageDirectories`
 
-2. **Identify target org**
-   - Use `--target-org` flag if provided, otherwise use default org
-   - Confirm org is accessible with `sf org display`
+2. **Identify and confirm target org — NEVER ASSUME**
+   - Use `--target-org` flag if provided
+   - Otherwise read `.sf/config.json` in the project root for `target-org`
+   - If not found, run `sf config get target-org --global`
+   - If still unresolved, stop and ask the user to provide an org alias — never fall back to Dev Hub
+   - Run `sf org display --target-org <alias>` and display org alias, username, org type, and instance URL
+   - Ask for confirmation before proceeding (production orgs require explicit alias confirmation)
 
 3. **Determine test level**
    - If `--test-level` flag is provided, use it

@@ -8,6 +8,8 @@ Generate a detailed Flow design document that serves as a blueprint for building
 
 ## Workflow
 
+0. **Load context** — Invoke the context-assigner agent with the description of this scaffolding task. Display the announcement block (loaded skills, rules, token count) to the user before proceeding.
+
 1. **Gather requirements**
    - Ask for the flow type:
      - **Record-Triggered Flow**: Runs when a record is created, updated, or deleted

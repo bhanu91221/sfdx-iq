@@ -8,6 +8,8 @@ Find and optimize all SOQL queries in the codebase for performance, security, an
 
 ## Workflow
 
+0. **Load context** — Invoke the context-assigner agent with the description of this review task. Display the announcement block (loaded skills, rules, token count) to the user before proceeding.
+
 1. **Discover all SOQL queries**
    - Scan all Apex classes and triggers for SOQL patterns (`[SELECT ...`, `Database.query(`)
    - Include both inline SOQL and dynamic SOQL

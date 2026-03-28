@@ -8,6 +8,8 @@ Analyze Apex code for governor limit risks and estimate resource consumption per
 
 ## Workflow
 
+0. **Load context** — Invoke the context-assigner agent with the description of this analysis task. Display the announcement block (loaded skills, rules, token count) to the user before proceeding.
+
 1. **Identify code to analyze**
    - If specific files are provided, analyze those
    - Otherwise, analyze all Apex classes and triggers in the project

@@ -3,7 +3,7 @@ name: visualforce-patterns
 description: Visualforce page patterns, controllers, ViewState management, and VF-to-LWC migration strategies
 origin: claude-sfdx-iq
 user-invocable: false
-tokens: 3703
+tokens: 3589
 domain: platform
 ---
 

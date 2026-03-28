@@ -8,6 +8,8 @@ Guide a strict Test-Driven Development cycle for Salesforce development, support
 
 ## Workflow
 
+0. **Load context** — Invoke the context-assigner agent with the description of this TDD task. Display the announcement block (loaded skills, rules, token count) to the user before proceeding.
+
 1. **Gather requirements**
    - Ask the user what they want to build (feature, bug fix, refactor)
    - Clarify: is this Apex or LWC?

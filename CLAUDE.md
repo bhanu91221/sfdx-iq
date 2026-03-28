@@ -37,7 +37,7 @@ The project is organized into core components:
 ### Distributed Globally (via plugin installation)
 - **agents/** — 14 specialized subagents (apex-reviewer, lwc-reviewer, soql-optimizer, context-assigner, etc.)
 - **skills/** — 36 Salesforce domain skills (apex-patterns, governor-limits, lwc-testing, etc.)
-- **commands/** — 53 slash commands (/deploy, /test, /apex-review, etc.)
+- **commands/** — 56 slash commands (/deploy, /test, /apex-review, /analyze, /explain, /modify, etc.)
 - **hooks/** — 6 hook JSON definitions + 16 hook scripts (post-edit scans, quality gates)
 - **contexts/** — 5 mode-specific context files (develop, review, debug, deploy, admin)
 - **scripts/** — Cross-platform Node.js utilities (claude-sfdx-iq CLI, setup-project, hook scripts, lib)
@@ -74,6 +74,9 @@ The project is organized into core components:
 - `/validate` — Validate deployment without executing
 - `/destructive` — Manage destructive metadata changes
 - `/context` — Show loaded context, browse available skills/rules
+- `/analyze` — Deep code analysis: answer questions about behavior, trace fields across codebase
+- `/explain` — Explain what any file does (LWC, Apex, triggers, Flows)
+- `/modify` — Add features, change behavior, or add field logic to existing code
 
 ## CLI Tools
 

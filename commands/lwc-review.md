@@ -8,6 +8,8 @@ Review Lightning Web Components for best practices, performance, accessibility, 
 
 ## Workflow
 
+0. **Load context** — Invoke the context-assigner agent with the description of this review task. Display the announcement block (loaded skills, rules, token count) to the user before proceeding.
+
 1. **Identify components to review**
    - If a specific component path is provided, review that component
    - If no arguments, check for changed LWC files (`git diff --name-only` for files under `**/lwc/**`)

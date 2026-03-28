@@ -8,6 +8,8 @@ Generate a complete Batch Apex implementation: the batch class with start/execut
 
 ## Workflow
 
+0. **Load context** — Invoke the context-assigner agent with the description of this scaffolding task. Display the announcement block (loaded skills, rules, token count) to the user before proceeding.
+
 1. **Gather requirements**
    - Ask for the SObject to process (e.g., `Account`, `Lead`, `Custom_Object__c`)
    - Ask for the processing logic description (what the batch should do)

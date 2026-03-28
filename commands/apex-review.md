@@ -8,6 +8,8 @@ Perform a comprehensive quality review of Apex code, checking for best practices
 
 ## Workflow
 
+0. **Load context** — Invoke the context-assigner agent with the description of this review task. Display the announcement block (loaded skills, rules, token count) to the user before proceeding.
+
 1. **Identify files to review**
    - If specific files are provided as arguments, review those
    - If no arguments, check for uncommitted/changed Apex files (`git diff --name-only` for `.cls` and `.trigger` files)

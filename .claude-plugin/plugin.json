@@ -23,5 +23,43 @@
     "workflow",
     "automation",
     "best-practices"
+  ],
+  "hooks": [
+    {
+      "event": "PostToolUse",
+      "matcher": "**/*.cls",
+      "command": "node scripts/hooks/apex-lint.js \"$FILE\"",
+      "description": "Apex lint — checks bulkification, governor limits, security after editing .cls files"
+    },
+    {
+      "event": "PostToolUse",
+      "matcher": "**/*.trigger",
+      "command": "node scripts/hooks/trigger-lint.js \"$FILE\"",
+      "description": "Trigger lint — validates one-trigger-per-object pattern and handler delegation after editing .trigger files"
+    },
+    {
+      "event": "PostToolUse",
+      "matcher": "**/lwc/**/*.js",
+      "command": "node scripts/hooks/lwc-lint.js \"$FILE\"",
+      "description": "LWC lint — checks component structure, wire usage, and security after editing LWC JS files"
+    },
+    {
+      "event": "PostToolUse",
+      "matcher": "**/*.flow-meta.xml",
+      "command": "node scripts/hooks/flow-check.js \"$FILE\"",
+      "description": "Flow check — validates flow best practices and DML/query budgeting after editing flow metadata"
+    },
+    {
+      "event": "PostToolUse",
+      "matcher": "**/*.cls",
+      "command": "node scripts/hooks/soql-check.js \"$FILE\"",
+      "description": "SOQL check — detects SOQL in loops, missing bind variables, and selectivity issues after editing .cls files"
+    },
+    {
+      "event": "PreToolUse",
+      "matcher": "pre-commit",
+      "command": "node scripts/hooks/pre-commit-check.js",
+      "description": "Pre-commit check — runs security and quality gate scan before every git commit"
+    }
   ]
 }

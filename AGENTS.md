@@ -1,6 +1,6 @@
 # Claude SFDX IQ — Agent Instructions
 
-This is a **Salesforce DX Claude Code plugin** providing 14 specialized agents, 36 skills, 53 commands, 44 rules across 6 categories, 16 hook scripts, 7 CLI tools, 5 mode contexts, and automated hook workflows for Salesforce development.
+This is a **Salesforce DX Claude Code plugin** providing 14 specialized agents, 36 skills, 56 commands, 44 rules across 6 categories, 16 hook scripts, 7 CLI tools, 5 mode contexts, and automated hook workflows for Salesforce development.
 
 ## Core Principles
 

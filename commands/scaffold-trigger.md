@@ -8,6 +8,8 @@ Generate a complete trigger framework for a specified SObject: a single trigger 
 
 ## Workflow
 
+0. **Load context** — Invoke the context-assigner agent with the description of this scaffolding task. Display the announcement block (loaded skills, rules, token count) to the user before proceeding.
+
 1. **Gather requirements**
    - Ask for the SObject API name (e.g., `Account`, `Custom_Object__c`)
    - Ask which trigger events are needed: before insert, before update, before delete, after insert, after update, after delete, after undelete

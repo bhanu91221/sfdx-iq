@@ -3,7 +3,7 @@ name: test-guide
 description: Use this agent for Salesforce test-driven development guidance. Enforces test-first development for Apex, TestDataFactory patterns, proper test isolation, mock patterns for callouts, and LWC Jest testing. Targets 90%+ code coverage.
 tools: ["Read", "Write", "Edit", "Bash", "Grep"]
 model: sonnet
-tokens: 4102
+tokens: 3985
 domain: apex
 ---
 

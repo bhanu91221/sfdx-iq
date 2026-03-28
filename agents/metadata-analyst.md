@@ -3,7 +3,7 @@ name: metadata-analyst
 description: Use this agent to analyze Salesforce metadata for dependencies, unused components, package organization, naming conventions, custom metadata vs custom settings decisions, and technical debt identification.
 tools: ["Read", "Grep", "Glob"]
 model: sonnet
-tokens: 2917
+tokens: 2854
 domain: metadata
 ---
 

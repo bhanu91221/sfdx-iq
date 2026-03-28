@@ -3,7 +3,7 @@ name: code-analysis
 description: PMD for Apex, Salesforce Code Analyzer, cyclomatic complexity, custom rulesets, and CI integration
 origin: claude-sfdx-iq
 user-invocable: false
-tokens: 2889
+tokens: 2800
 domain: apex
 ---
 

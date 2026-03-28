@@ -8,6 +8,8 @@ Scan the entire codebase for security vulnerabilities including CRUD/FLS enforce
 
 ## Workflow
 
+0. **Load context** — Invoke the context-assigner agent with the description of this scan task. Display the announcement block (loaded skills, rules, token count) to the user before proceeding.
+
 1. **Discover scannable files**
    - Find all Apex classes (`.cls`) and triggers (`.trigger`)
    - Find all LWC components (`.js`, `.html`)

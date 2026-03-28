@@ -3,7 +3,7 @@ name: data-modeler
 description: Use this agent for Salesforce data model design including object relationships, record types, external IDs, polymorphic lookups, junction objects, formula optimization, rollup summaries, and data volume strategies (archival, big objects).
 tools: ["Read", "Grep", "Glob"]
 model: opus
-tokens: 3886
+tokens: 3783
 domain: platform
 ---
 

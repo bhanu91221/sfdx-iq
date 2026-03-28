@@ -20,7 +20,7 @@ This project uses the **claude-sfdx-iq** plugin for Salesforce development.
 
 ### Available Commands
 
-Run `/help` to see all 53 commands, including:
+Run `/help` to see all 56 commands, including:
 - `/deploy` — Deploy to Salesforce org with validation
 - `/test` — Run Apex tests with coverage analysis
 - `/apex-review` — Review Apex code quality
@@ -31,6 +31,9 @@ Run `/help` to see all 53 commands, including:
 - `/scaffold-trigger` — Generate trigger + handler + test
 - `/scaffold-lwc` — Generate LWC component boilerplate
 - `/code-review` — Full code review with parallel agents
+- `/explain` — Explain what any file does (LWC, Apex, triggers, Flows)
+- `/analyze` — Deep code analysis and field tracing across the codebase
+- `/modify` — Add features or change behavior in existing Apex, LWC, or triggers
 
 ### Context Loading (Skills & Rules) — CRITICAL
 
@@ -93,10 +96,10 @@ If the user includes `--custom skills`, `--custom rules`, or `--custom skills ru
 #### On-demand: /context
 
 Use `/context` to inspect currently loaded context or browse available components.
-
-**Available components:**
-
-@.claude/rules/index.md
+- `/context` — Show what was loaded this session
+- `/context --list rules` — Browse the rules catalog (does NOT load them)
+- `/context --list skills` — Browse the skills catalog (does NOT load them)
+- `/context --reload` — Re-run context-assigner for a fresh recommendation
 
 ## Development Workflow
 

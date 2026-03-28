@@ -8,10 +8,14 @@ Push local source changes to the connected scratch org or sandbox with conflict 
 
 ## Workflow
 
-1. **Check target org**
-   - Identify the default org: `sf config get target-org`
-   - Verify the org is active and authenticated
-   - If no default org, prompt the user to set one or specify with `--target-org`
+1. **Identify and confirm target org — NEVER ASSUME**
+   - Use `--target-org` flag if provided
+   - Otherwise read `.sf/config.json` in the project root for `target-org`
+   - If not found, run `sf config get target-org --global`
+   - If still unresolved, stop and ask the user to provide an org alias — never fall back to Dev Hub
+   - Run `sf org display --target-org <alias>` and display org alias, username, org type, and instance URL
+   - If org type is Production or Developer Edition (non-scratch, non-sandbox): show WARNING and require explicit confirmation before proceeding
+   - Push is intended for scratch orgs and sandboxes; warn loudly if target appears to be production
 
 2. **Detect changes**
    - Run `sf project deploy preview` to show what will be pushed

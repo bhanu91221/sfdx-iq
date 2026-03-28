@@ -3,7 +3,7 @@ name: security-patterns
 description: CRUD/FLS enforcement, sharing keywords, security-enforced SOQL, permission checks, and credential management
 origin: claude-sfdx-iq
 user-invocable: false
-tokens: 2868
+tokens: 2788
 domain: security
 ---
 

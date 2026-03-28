@@ -112,6 +112,7 @@
       "visualforce-patterns"
     ],
     "commands": [
+      "analyze",
       "apex-doc",
       "apex-review",
       "build-fix",
@@ -124,6 +125,7 @@
       "deploy",
       "destructive",
       "destructive-deploy",
+      "explain",
       "explain-error",
       "flow-review",
       "governor-check",
@@ -132,6 +134,7 @@
       "lwc-test",
       "metadata-analyze",
       "metadata-diff",
+      "modify",
       "org-health",
       "package",
       "package-version",

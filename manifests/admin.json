@@ -38,12 +38,15 @@
       "deployment-strategies"
     ],
     "commands": [
+      "analyze",
       "context",
       "deploy",
+      "explain",
       "retrieve",
       "flow-review",
       "data-model",
       "metadata-analyze",
+      "modify",
       "org-health",
       "scaffold-flow",
       "validate",

@@ -8,6 +8,8 @@ Run a comprehensive code review across Apex, LWC, SOQL, security, and governor l
 
 ## Workflow
 
+0. **Load context** — Invoke the context-assigner agent with the description of this review task. Display the announcement block (loaded skills, rules, token count) to the user before proceeding.
+
 1. **Identify scope**
    - If a file path or directory is provided, review only those files
    - If no argument is given, review all changed files: run `git diff --name-only HEAD` to detect modified files

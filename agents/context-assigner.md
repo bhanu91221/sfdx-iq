@@ -3,7 +3,7 @@ name: context-assigner
 description: Analyzes user requests and recommends which skills and rules to load. Returns a structured recommendation — does not load files directly.
 tools: ["Glob"]
 model: haiku
-tokens: 998
+tokens: 1186
 domain: common
 ---
 
@@ -56,7 +56,7 @@ You are the Context Recommender for claude-sfdx-iq. Analyze the user's request a
 
 ## Output Format
 
-ALWAYS respond with this exact structured format. Nothing else.
+ALWAYS respond with this exact structured format followed by the user-visible announcement block.
 
 ```
 ---CONTEXT-RECOMMENDATION---
@@ -66,7 +66,16 @@ skills: [skill-name-1, skill-name-2, ...]
 rules: [domain/rule-name-1, domain/rule-name-2, ...]
 estimated_tokens: [sum from index tables]
 ---END-RECOMMENDATION---
+
+Context Loaded for: [task description]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Skills ([count]): [comma-separated skill names]
+Rules ([count]):  [comma-separated rule names]
+~Tokens: [estimated_tokens] / 200k session budget
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
+
+The main agent MUST display the announcement block to the user before proceeding with the task. The `---CONTEXT-RECOMMENDATION---` block is parsed programmatically; the announcement block below it is shown in chat.
 
 Example:
 ```
@@ -77,6 +86,13 @@ skills: apex-patterns, trigger-framework, governor-limits
 rules: common/security, apex/bulkification, apex/governor-limits, apex/coding-style
 estimated_tokens: 10843
 ---END-RECOMMENDATION---
+
+Context Loaded for: Review Apex trigger for best practices
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Skills (3): apex-patterns, trigger-framework, governor-limits
+Rules (4):  common/security, apex/bulkification, apex/governor-limits, apex/coding-style
+~Tokens: 10,843 / 200k session budget
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
 ## User Override: --custom

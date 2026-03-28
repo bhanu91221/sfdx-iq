@@ -3,7 +3,7 @@ name: architect
 description: Use this agent for Salesforce solution architecture decisions including data model design, integration architecture, scalability planning, packaging strategy, and declarative-vs-code decisions. Best for greenfield projects, major refactors, or when evaluating technical approaches.
 tools: ["Read", "Grep", "Glob"]
 model: opus
-tokens: 2582
+tokens: 2525
 domain: platform
 ---
 
