@@ -9,7 +9,7 @@
       "name": "claude-sfdx-iq",
       "source": "./",
       "description": "Complete Salesforce DX plugin for Claude Code — 14 agents, 36 skills, 53 commands, 44 rules, 16 hooks for Apex, LWC, SOQL, Flows, and SFDX CI/CD",
-      "version": "1.2.0"
+      "version": "1.5.4"
     }
   ]
 }

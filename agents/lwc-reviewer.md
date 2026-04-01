@@ -3,7 +3,7 @@ name: lwc-reviewer
 description: Use this agent to review Lightning Web Components for best practices including proper decorator usage, lifecycle hooks, event handling, accessibility, CSS patterns, import conventions, and component composition.
 tools: ["Read", "Grep", "Glob", "Bash"]
 model: sonnet
-tokens: 2915
+tokens: 3007
 domain: lwc
 ---
 

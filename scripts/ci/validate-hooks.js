@@ -33,20 +33,37 @@ for (const file of files) {
     continue;
   }
 
-  if (!data.hooks || !Array.isArray(data.hooks)) {
-    errors.push('missing or invalid "hooks" (array required)');
+  const validEvents = ['PostEditFile', 'PreToolUse', 'PostToolUse', 'Notification', 'Stop', 'SubagentStop'];
+
+  if (!data.hooks || typeof data.hooks !== 'object' || Array.isArray(data.hooks)) {
+    errors.push('missing or invalid "hooks" (record/object required, not array)');
   } else {
-    for (let i = 0; i < data.hooks.length; i++) {
-      const hook = data.hooks[i];
-
-      if (!hook.matcher || typeof hook.matcher !== 'object') {
-        errors.push(`hooks[${i}]: missing or invalid "matcher" (object required)`);
-      } else if (!hook.matcher.event && !hook.matcher.filePattern) {
-        errors.push(`hooks[${i}].matcher: must have "event" or "filePattern"`);
+    for (const [eventName, entries] of Object.entries(data.hooks)) {
+      if (!validEvents.includes(eventName)) {
+        errors.push(`hooks: unknown event "${eventName}" (valid: ${validEvents.join(', ')})`);
       }
-
-      if (!hook.command || typeof hook.command !== 'string') {
-        errors.push(`hooks[${i}]: missing or invalid "command" (string required)`);
+      if (!Array.isArray(entries)) {
+        errors.push(`hooks.${eventName}: must be an array`);
+        continue;
+      }
+      for (let i = 0; i < entries.length; i++) {
+        const entry = entries[i];
+        if (typeof entry.matcher !== 'string') {
+          errors.push(`hooks.${eventName}[${i}]: missing or invalid "matcher" (string required)`);
+        }
+        if (!Array.isArray(entry.hooks) || entry.hooks.length === 0) {
+          errors.push(`hooks.${eventName}[${i}]: missing or invalid "hooks" (non-empty array required)`);
+        } else {
+          for (let j = 0; j < entry.hooks.length; j++) {
+            const h = entry.hooks[j];
+            if (h.type !== 'command') {
+              errors.push(`hooks.${eventName}[${i}].hooks[${j}]: "type" must be "command"`);
+            }
+            if (!h.command || typeof h.command !== 'string') {
+              errors.push(`hooks.${eventName}[${i}].hooks[${j}]: missing or invalid "command" (string required)`);
+            }
+          }
+        }
       }
     }
   }

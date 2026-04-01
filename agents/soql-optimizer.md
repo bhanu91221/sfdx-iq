@@ -3,7 +3,7 @@ name: soql-optimizer
 description: Use this agent to analyze and optimize SOQL and SOSL queries for performance, selectivity, and governor limit compliance. Detects N+1 patterns, missing LIMIT clauses, non-selective filters, and provides query plan analysis recommendations.
 tools: ["Read", "Grep", "Glob"]
 model: sonnet
-tokens: 2559
+tokens: 2625
 domain: soql
 ---
 

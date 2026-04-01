@@ -3,7 +3,7 @@ name: deployment-specialist
 description: Use this agent for Salesforce deployment tasks including source deployments, package version creation, destructive changes, scratch org management, deployment troubleshooting, and CI/CD pipeline configuration.
 tools: ["Read", "Bash", "Grep", "Glob"]
 model: sonnet
-tokens: 2784
+tokens: 2879
 domain: devops
 ---
 

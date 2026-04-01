@@ -3,7 +3,7 @@ name: governor-limits
 description: Complete governor limits reference, Limits class usage, budgeting techniques, and async offloading strategies
 origin: claude-sfdx-iq
 user-invocable: false
-tokens: 2644
+tokens: 2727
 domain: apex
 ---
 

@@ -1,8 +1,15 @@
 {
-  "hooks": [
-    {
-      "matcher": { "event": "post-edit", "filePattern": "**/*.cls" },
-      "command": "node scripts/hooks/soql-check.js \"$FILE\""
-    }
-  ]
+  "hooks": {
+    "PostEditFile": [
+      {
+        "matcher": "**/*.cls",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node scripts/hooks/soql-check.js \"$FILE\""
+          }
+        ]
+      }
+    ]
+  }
 }

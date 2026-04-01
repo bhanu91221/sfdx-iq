@@ -3,7 +3,7 @@ name: logging-framework
 description: Custom logging framework with Platform Events, log levels, structured format, and retention management
 origin: claude-sfdx-iq
 user-invocable: false
-tokens: 3289
+tokens: 3389
 domain: apex
 ---
 

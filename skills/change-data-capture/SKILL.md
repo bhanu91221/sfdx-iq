@@ -3,7 +3,7 @@ name: change-data-capture
 description: Change Data Capture configuration, ChangeEvent triggers, replay strategies, and subscriber patterns
 origin: claude-sfdx-iq
 user-invocable: false
-tokens: 2459
+tokens: 2536
 domain: integration
 ---
 

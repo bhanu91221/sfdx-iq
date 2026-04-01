@@ -3,7 +3,7 @@ name: lwc-performance
 description: LWC performance optimization including wire caching, lazy loading, DOM efficiency, and rendering best practices
 origin: claude-sfdx-iq
 user-invocable: false
-tokens: 2708
+tokens: 2811
 domain: lwc
 ---
 

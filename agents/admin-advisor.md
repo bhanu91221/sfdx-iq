@@ -3,7 +3,7 @@ name: admin-advisor
 description: Use this agent for Salesforce admin configuration guidance including permission set design, sharing rules, validation rules, custom metadata for configuration, custom labels, approval processes, email templates, and report type configuration.
 tools: ["Read", "Grep", "Glob"]
 model: sonnet
-tokens: 4060
+tokens: 4169
 domain: admin
 ---
 

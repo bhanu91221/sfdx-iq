@@ -3,7 +3,7 @@ name: lwc-patterns
 description: LWC component patterns including wire service, events, navigation, composition, and record forms
 origin: claude-sfdx-iq
 user-invocable: false
-tokens: 3000
+tokens: 3117
 domain: lwc
 ---
 

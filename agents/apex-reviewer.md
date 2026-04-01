@@ -3,7 +3,7 @@ name: apex-reviewer
 description: Use this agent to review Apex code (classes, triggers, batch jobs, schedulable, queueable) for best practices, governor limit risks, bulkification issues, naming conventions, and code quality. Produces a structured review with severity levels.
 tools: ["Read", "Grep", "Glob", "Bash"]
 model: sonnet
-tokens: 2185
+tokens: 2244
 domain: apex
 ---
 
