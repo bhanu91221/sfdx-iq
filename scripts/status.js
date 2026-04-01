@@ -51,7 +51,7 @@ if (fs.existsSync(pluginJsonPath)) {
 
 // Read package.json for version
 const packageJsonPath = path.join(ROOT, 'package.json');
-let version = '1.5.4';
+let version = '1.5.5';
 if (fs.existsSync(packageJsonPath)) {
   try {
     version = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8')).version || version;

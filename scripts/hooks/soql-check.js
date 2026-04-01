@@ -5,7 +5,19 @@ const fs = require('fs');
 const path = require('path');
 const { formatFindings } = require('../lib/report-formatter');
 
-const filePath = process.argv[2];
+// Claude Code passes hook input as JSON on stdin; fall back to argv for direct CLI use
+function getFilePath() {
+  if (process.argv[2]) return process.argv[2];
+  try {
+    const stdin = fs.readFileSync('/dev/stdin', 'utf8');
+    const data = JSON.parse(stdin);
+    return (data.tool_input && (data.tool_input.file_path || data.tool_input.path)) || null;
+  } catch (_) {
+    return null;
+  }
+}
+
+const filePath = getFilePath();
 
 if (!filePath) {
   console.error('Usage: soql-check.js <file>');

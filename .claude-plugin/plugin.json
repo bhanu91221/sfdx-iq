@@ -1,6 +1,6 @@
 {
   "name": "claude-sfdx-iq",
-  "version": "1.5.4",
+  "version": "1.5.5",
   "description": "Complete Salesforce DX plugin for Claude Code — agents, skills, hooks, commands, and rules for Apex, LWC, SOQL, Flows, and SFDX CI/CD",
   "author": {
     "name": "Bhanu Vakati"

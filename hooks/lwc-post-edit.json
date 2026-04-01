@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node scripts/hooks/lwc-lint.js \"$FILE\""
+            "command": "node scripts/hooks/lwc-lint.js"
           }
         ]
       }

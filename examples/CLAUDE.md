@@ -13,7 +13,7 @@ This is a Salesforce DX project using [org type: scratch/sandbox/production].
 This project uses the **claude-sfdx-iq** plugin for Salesforce development.
 
 ### Plugin Configuration
-- **Installed**: v1.5.4
+- **Installed**: v1.5.5
 - **Rules**: 44 rules in `.claude/rules/` (~43k tokens total)
 - **Token Optimization**: context-assigner agent loads only 5-8 rules per task (5k-15k tokens)
 - **Hook Profile**: `standard` (balanced checks)

@@ -59,14 +59,25 @@ export CSIQ_HOOK_PROFILE=strict
 
 The hook JSON files reference scripts that perform the actual analysis:
 
-- `apex-pmd-check.js` — PMD static analysis for Apex
-- `governor-limit-check.js` — SOQL/DML in loops detection
-- `security-scan.js` — CRUD/FLS and sharing keyword validation
-- `sharing-keyword-check.js` — Ensures sharing keywords on all classes
-- `soql-injection-check.js` — Dynamic SOQL injection detection
-- `trigger-pattern-check.js` — One-trigger-per-object validation
-- `lwc-accessibility-check.js` — LWC accessibility checks
-- `flow-fault-path-check.js` — Flow fault connector validation
+**Active (wired to hook JSON files):**
+- `apex-lint.js` — SOQL/DML in loops, missing sharing keywords, hardcoded IDs
+- `soql-check.js` — SOQL injection, missing LIMIT/WHERE/SECURITY_ENFORCED
+- `trigger-lint.js` — Trigger handler delegation, direct logic in triggers
+- `lwc-lint.js` — innerHTML XSS, @api mutation, missing disconnectedCallback cleanup
+- `flow-check.js` — DML in loops, missing fault connectors, missing descriptions
+- `pre-commit-check.js` — Pre-commit security and quality gate
+
+**Available (not yet wired to a hook JSON file):**
+- `post-bash-deploy-complete.js` — Post-deploy notifications and summary
+- `post-bash-test-complete.js` — Post-test run summary and coverage report
+- `post-edit-debug-warn.js` — Warns on debug log statements left in code
+- `post-edit-governor-scan.js` — Governor limit risk analysis after edits
+- `post-edit-pmd-scan.js` — PMD static analysis after edits
+- `post-edit-security-scan.js` — CRUD/FLS and sharing keyword scan after edits
+- `pre-bash-destructive-warn.js` — Warns before destructive CLI commands
+- `quality-gate.js` — Shared quality gate logic used by other scripts
+- `run-with-flags.js` — Utility to run scripts with profile flag support
+- `session-start.js` — Session initialization and context loading
 
 ## Creating Custom Hooks
 
@@ -83,7 +94,7 @@ The hook JSON files reference scripts that perform the actual analysis:
       },
       "hooks": [
         {
-          "command": "node scripts/hooks/your-custom-check.js $FILE",
+          "command": "node scripts/hooks/your-custom-check.js",
           "description": "Custom check description",
           "profile": "standard"
         }
@@ -104,7 +115,7 @@ The hook JSON files reference scripts that perform the actual analysis:
 
 ```bash
 # Test a hook script directly
-node scripts/hooks/governor-limit-check.js force-app/main/default/classes/MyClass.cls
+node scripts/hooks/apex-lint.js force-app/main/default/classes/MyClass.cls
 
 # Validate all hook configurations
 node scripts/ci/validate-hooks.js
