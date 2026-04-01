@@ -29,20 +29,26 @@ describe('Hook file validation', () => {
         assert.doesNotThrow(() => JSON.parse(raw), `${file} is not valid JSON`);
       });
 
-      it('should have a hooks array', () => {
+      it('should have a hooks object', () => {
         const data = JSON.parse(raw);
-        assert.ok(Array.isArray(data.hooks), `${file} must have a "hooks" array`);
-        assert.ok(data.hooks.length > 0, `${file} hooks array is empty`);
+        assert.ok(data.hooks, `${file} must have a "hooks" property`);
+        assert.ok(typeof data.hooks === 'object' && !Array.isArray(data.hooks), `${file} hooks must be an object`);
       });
 
       it('should have matcher and command in each hook entry', () => {
         const data = JSON.parse(raw);
-        for (let i = 0; i < data.hooks.length; i++) {
-          const hook = data.hooks[i];
-          assert.ok(hook.matcher, `${file} hooks[${i}] missing "matcher"`);
-          assert.ok(hook.command, `${file} hooks[${i}] missing "command"`);
-          assert.ok(typeof hook.matcher === 'object', `${file} hooks[${i}] matcher must be an object`);
-          assert.ok(typeof hook.command === 'string', `${file} hooks[${i}] command must be a string`);
+        for (const [eventName, entries] of Object.entries(data.hooks)) {
+          assert.ok(Array.isArray(entries), `${file} hooks.${eventName} must be an array`);
+          for (let i = 0; i < entries.length; i++) {
+            const entry = entries[i];
+            assert.ok(typeof entry.matcher === 'string', `${file} hooks.${eventName}[${i}] matcher must be a string`);
+            assert.ok(Array.isArray(entry.hooks), `${file} hooks.${eventName}[${i}] inner hooks must be an array`);
+            for (let j = 0; j < entry.hooks.length; j++) {
+              const h = entry.hooks[j];
+              assert.strictEqual(h.type, 'command', `${file} hooks.${eventName}[${i}].hooks[${j}] type must be command`);
+              assert.ok(typeof h.command === 'string', `${file} hooks.${eventName}[${i}].hooks[${j}] command must be a string`);
+            }
+          }
         }
       });
     });

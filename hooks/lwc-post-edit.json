@@ -1,6 +1,6 @@
 {
   "hooks": {
-    "PostEditFile": [
+    "PostToolUse": [
       {
         "matcher": "**/lwc/**/*.js",
         "hooks": [

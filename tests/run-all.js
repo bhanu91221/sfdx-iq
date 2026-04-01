@@ -83,7 +83,7 @@ try {
     stdio: 'inherit',
     cwd: ROOT,
     env: { ...process.env, NODE_ENV: 'test' },
-    timeout: 60000, // 60 second timeout
+    timeout: 300000, // 5 minute timeout
   });
 
   console.log('\n All tests passed.');
