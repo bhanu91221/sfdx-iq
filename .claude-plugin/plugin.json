@@ -5,6 +5,14 @@
   "author": {
     "name": "Bhanu Vakati"
   },
+  "hooks": [
+      "./hooks/apex-post-edit.json",
+      "./hooks/trigger-post-edit.json",
+      "./hooks/lwc-post-edit.json",
+      "./hooks/pre-commit.json",
+      "./hooks/soql-check.json",
+      "./hooks/flow-post-edit.json"
+    ],                              
   "homepage": "https://github.com/bhanu91221/claude-sfdx-iq",
   "repository": "https://github.com/bhanu91221/claude-sfdx-iq",
   "license": "MIT",
