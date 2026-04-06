@@ -10,46 +10,41 @@ This is a Salesforce DX project using [org type: scratch/sandbox/production].
 
 ## claude-sfdx-iq Plugin
 
-This project uses the **claude-sfdx-iq** plugin for Salesforce development.
+This project uses the **claude-sfdx-iq** plugin v2.0.0 for Salesforce development.
 
 ### Plugin Configuration
-- **Installed**: v1.5.6
-- **Rules**: 44 rules in `.claude/rules/` (~43k tokens total)
-- **Token Optimization**: context-assigner agent loads only 5-8 rules per task (5k-15k tokens)
+- **Installed**: v2.0.0
 - **Hook Profile**: `standard` (balanced checks)
 
 ### Available Commands
 
-Run `/help` to see all 53 commands, including:
-- `/deploy` — Deploy to Salesforce org with validation
-- `/test` — Run Apex tests with coverage analysis
-- `/apex-review` — Review Apex code quality
-- `/lwc-review` — Review LWC components
-- `/security-scan` — CRUD/FLS/sharing/injection scan
-- `/governor-check` — Governor limit risk analysis
-- `/tdd` — Test-driven development workflow
-- `/scaffold-trigger` — Generate trigger + handler + test
-- `/scaffold-lwc` — Generate LWC component boilerplate
-- `/code-review` — Full code review with parallel agents
+Commands are self-contained — each includes its domain standards inline. No context loading step needed.
 
-### Rules Loading
+**Domain commands (use flags to select workflow):**
+- `/apex-class --new|--review|--refine|--bug-fix` — Apex classes, service layers, utilities
+- `/trigger --new|--review|--refine|--bug-fix` — Triggers + handler delegation
+- `/async-apex --new|--refine|--bug-fix` — Batch, Queueable, Schedulable, @future
+- `/integration-apex --new|--refine|--bug-fix` — REST/SOAP callouts and inbound services
+- `/lwc --new|--explain|--refine|--bug-fix` — Lightning Web Components
+- `/flow --new|--review|--refine|--explain` — Screen/Record-Triggered/Scheduled Flows
 
-**Rules are loaded dynamically** by the context-assigner agent based on your task:
-- Apex tasks → apex rules + common/security
-- LWC tasks → lwc rules + common/security
-- Full review → broader rule set
+**Cross-domain commands:**
+- `/code-review --apex|--lwc|--flow [file|--all]` — Full review with specialist agents in parallel
+- `/explain --apex|--lwc|--flow|--deep` — Explain code; `--deep` traces across files
+- `/security-scan` — CRUD/FLS, sharing, injection, CSP, guest user scan
 
-**Available Rules:**
-
-@.claude/rules/index.md
-
-**Manual rule selection:** Add `--custom rules` to your message to choose specific rules.
+**Utility commands:**
+- `/org-health` — Org health check and technical debt report
+- `/data-model` — ER design and object relationship analysis
+- `/plan` — Implementation planning with phased roadmap
+- `/package` — 2GP package versioning
+- `/debug-log` — Analyze Salesforce debug logs
+- `/doctor` — Diagnose environment issues
+- `/status` — Plugin and org connection status
 
 ## Development Workflow
 
 - Default org alias: [your-org-alias]
-- Scratch org duration: 7 days
-- Scratch org definition: config/project-scratch-def.json
 - Test minimum: 90% coverage
 - Deployment: validate first, then quick deploy
 

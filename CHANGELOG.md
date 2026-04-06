@@ -4,6 +4,41 @@ All notable changes to claude-sfdx-iq will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/), and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [2.0.0] - 2026-04-06
+
+### Changed (Breaking)
+- **Architecture**: Eliminated dynamic context loading system entirely. Commands are now self-contained — each includes its domain standards inline. No context-assigner invocation per message.
+- **Commands**: Consolidated 56 commands → 19 domain-centric commands with `--flags` per workflow (`--new`, `--review`, `--refine`, `--bug-fix`, `--explain`).
+- **Agents**: Consolidated 15 agents → 7: `apex-code-reviewer`, `solution-designer`, `devops-coordinator`, `lwc-reviewer`, `security-auditor`, `flow-analyst`, `integration-specialist`.
+- **Skills system removed**: 36 skills eliminated. Domain knowledge baked directly into commands.
+- **Rules no longer copied per-project**: `setup-project` no longer copies the `rules/` directory. Project setup is now just 2 config files (settings.json, CLAUDE.md).
+- **Token impact**: ~11,500 fewer tokens per message (~46% reduction vs v1.x).
+
+### Added
+- `/apex-class` — New/review/refine/bug-fix for Apex classes with baked-in domain standards
+- `/trigger` — New/review/refine/bug-fix for triggers with one-per-object enforcement
+- `/async-apex` — New/refine/bug-fix for Batch, Queueable, Schedulable, @future
+- `/integration-apex` — New/refine/bug-fix for REST/SOAP callouts and inbound services
+- `/lwc` — New/explain/refine/bug-fix for Lightning Web Components
+- `/flow` — New/review/refine/explain for Screen, Record-Triggered, and Scheduled Flows
+- `agents/apex-code-reviewer.md` — Merged apex-reviewer + soql-optimizer + governor-limits-checker
+- `agents/solution-designer.md` — Merged architect + planner
+- `agents/devops-coordinator.md` — Merged deployment-specialist + test-guide + metadata-analyst
+- `agents/security-auditor.md` — Renamed and streamlined security-reviewer
+
+### Removed
+- `context-assigner` agent and all dynamic rule loading infrastructure
+- 36 skill files (apex-patterns, governor-limits, lwc-testing, etc.)
+- 40 commands replaced by flag-based domain commands
+- 12 agents (context-assigner, apex-reviewer, soql-optimizer, governor-limits-checker, architect, planner, deployment-specialist, test-guide, metadata-analyst, data-modeler, admin-advisor, security-reviewer)
+- Rules no longer distributed per-project (remain in repo for reference)
+
+### Updated
+- All documentation (README, docs/ARCHITECTURE, docs/INSTALLATION, docs/COMMAND-REFERENCE, docs/CUSTOMIZATION, docs/CONTRIBUTING, AGENTS.md)
+- Context files (develop, review, debug, deploy, admin) — updated agent delegation to new agent names
+- All 5 install manifests rewritten for new component set
+- `.claude-project-template/` — removed rules section, updated to v2.0.0
+
 ## [1.5.6] - 2026-04-03
 
 ### Fixed
