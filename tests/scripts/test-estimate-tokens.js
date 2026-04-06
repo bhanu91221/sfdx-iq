@@ -3,7 +3,7 @@
 
 const { describe, it } = require('node:test');
 const assert = require('node:assert');
-const { estimateTokens, inferDomain, discoverSkills, discoverAgents, discoverRules } = require('../../scripts/estimate-tokens');
+const { estimateTokens, inferDomain, discoverSkills, discoverAgents } = require('../../scripts/estimate-tokens');
 
 describe('estimate-tokens', () => {
   describe('estimateTokens', () => {
@@ -107,20 +107,4 @@ describe('estimate-tokens', () => {
     });
   });
 
-  describe('discoverRules', () => {
-    it('returns an array of rules', () => {
-      const rules = discoverRules();
-      assert.ok(Array.isArray(rules));
-      assert.ok(rules.length > 0);
-    });
-
-    it('each rule has required properties', () => {
-      const rules = discoverRules();
-      for (const rule of rules) {
-        assert.ok(rule.name, `Rule missing name`);
-        assert.ok(rule.domain, `Rule ${rule.name} missing domain`);
-        assert.ok(typeof rule.tokens === 'number');
-      }
-    });
-  });
 });

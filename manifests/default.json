@@ -39,7 +39,6 @@
       "soql-check",
       "trigger-post-edit",
       "governor-scan",
-      "destructive-warn",
       "security-scan"
     ]
   }

@@ -18,7 +18,10 @@ const { parseFrontmatter } = require('./lib/frontmatter-parser');
 const ROOT = path.resolve(__dirname, '..');
 const SKILLS_DIR = path.join(ROOT, 'skills');
 const AGENTS_DIR = path.join(ROOT, 'agents');
-const RULES_DIR = path.join(ROOT, 'rules');
+// Rules are optional — users copy them via setup-project. Fall back to rules-backup/ for tooling.
+const _primaryRulesDir = path.join(ROOT, 'rules');
+const _backupRulesDir = path.join(ROOT, 'rules-backup');
+const RULES_DIR = fs.existsSync(_primaryRulesDir) ? _primaryRulesDir : _backupRulesDir;
 
 // Domain inference from skill/agent name prefixes
 const DOMAIN_MAP = {

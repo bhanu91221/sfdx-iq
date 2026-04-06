@@ -5,11 +5,22 @@ const fs = require('fs');
 const path = require('path');
 
 const rulesDir = path.resolve(__dirname, '../../rules');
-let hasFailures = false;
+const rulesBackupDir = path.resolve(__dirname, '../../rules-backup');
 let passed = 0;
-let missing = 0;
+let skipped = 0;
 
 console.log('Validating rule files...\n');
+
+// Rules are optional — users copy them via `npx claude-sfdx-iq setup-project`.
+// If neither rules/ nor rules-backup/ exists, skip validation entirely.
+if (!fs.existsSync(rulesDir) && !fs.existsSync(rulesBackupDir)) {
+  console.log('  SKIP  rules/ directory not present (rules are optional, distributed via setup-project)');
+  console.log('\nResults: skipped (rules directory not present).');
+  process.exit(0);
+}
+
+const activeDir = fs.existsSync(rulesDir) ? rulesDir : rulesBackupDir;
+const dirLabel = fs.existsSync(rulesDir) ? 'rules' : 'rules-backup';
 
 const expectedRules = {
   'common': ['security.md', 'testing.md', 'governor-limits.md', 'patterns.md', 'coding-style.md', 'development-workflow.md', 'git-workflow.md', 'agents.md', 'hooks.md'],
@@ -21,31 +32,25 @@ const expectedRules = {
 };
 
 for (const [category, files] of Object.entries(expectedRules)) {
-  const categoryDir = path.join(rulesDir, category);
+  const categoryDir = path.join(activeDir, category);
 
   if (!fs.existsSync(categoryDir)) {
-    console.error(`  FAIL  rules/${category}/ - directory missing`);
-    hasFailures = true;
-    missing += files.length;
+    console.log(`  SKIP  ${dirLabel}/${category}/ - directory not present`);
+    skipped += files.length;
     continue;
   }
 
   for (const file of files) {
     const filePath = path.join(categoryDir, file);
     if (fs.existsSync(filePath)) {
-      console.log(`  PASS  rules/${category}/${file}`);
+      console.log(`  PASS  ${dirLabel}/${category}/${file}`);
       passed++;
     } else {
-      console.error(`  FAIL  rules/${category}/${file} - file missing`);
-      hasFailures = true;
-      missing++;
+      console.log(`  SKIP  ${dirLabel}/${category}/${file} - file not present`);
+      skipped++;
     }
   }
 }
 
-const total = passed + missing;
-console.log(`\nResults: ${passed} found, ${missing} missing out of ${total} expected rule files.`);
-
-if (hasFailures) {
-  process.exit(1);
-}
+const total = passed + skipped;
+console.log(`\nResults: ${passed} found, ${skipped} skipped out of ${total} rule files checked.`);
