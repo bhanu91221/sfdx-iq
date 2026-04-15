@@ -1,6 +1,6 @@
 {
-  "name": "claude-sfdx-iq",
-  "version": "2.0.1",
+  "name": "sfdx-iq",
+  "version": "2.0.2",
   "description": "Complete Salesforce DX plugin for Claude Code — agents, commands, and hooks for Apex, LWC, SOQL, Flows, and SFDX CI/CD",
   "author": {
     "name": "Bhanu Vakati"
@@ -12,8 +12,8 @@
     "./hooks/soql-check.json",
     "./hooks/flow-post-edit.json"
   ],
-  "homepage": "https://github.com/bhanu91221/claude-sfdx-iq",
-  "repository": "https://github.com/bhanu91221/claude-sfdx-iq",
+  "homepage": "https://github.com/bhanu91221/sfdx-iq",
+  "repository": "https://github.com/bhanu91221/sfdx-iq",
   "license": "MIT",
   "keywords": [
     "claude-code",

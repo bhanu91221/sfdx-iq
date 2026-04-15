@@ -1,6 +1,6 @@
 # Customization Guide
 
-This guide explains how to extend claude-sfdx-iq with your own agents, commands, and hooks.
+This guide explains how to extend sfdx-iq with your own agents, commands, and hooks.
 
 ## Adding a New Agent
 
@@ -156,7 +156,7 @@ Reference your manifest in `.claude/settings.json`:
 ```json
 {
   "plugins": {
-    "claude-sfdx-iq": {
+    "sfdx-iq": {
       "manifest": "my-team-config"
     }
   }

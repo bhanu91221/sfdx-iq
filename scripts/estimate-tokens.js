@@ -107,7 +107,7 @@ function discoverSkills() {
     skills.push({
       name: data.name || dir,
       description: data.description || '',
-      origin: data.origin || 'claude-sfdx-iq',
+      origin: data.origin || 'sfdx-iq',
       domain,
       tokens,
       filePath,

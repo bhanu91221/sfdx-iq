@@ -8,9 +8,9 @@ This is a Salesforce DX project using [org type: scratch/sandbox/production].
 - API Version: 62.0
 - Package Type: [unlocked/managed/unmanaged]
 
-## claude-sfdx-iq Plugin
+## sfdx-iq Plugin
 
-This project uses the **claude-sfdx-iq** plugin for Salesforce development. Commands are self-contained — each command includes its domain standards inline. Invoke commands directly; no context loading step required.
+This project uses the **sfdx-iq** plugin for Salesforce development. Commands are self-contained — each command includes its domain standards inline. Invoke commands directly; no context loading step required.
 
 ### Available Commands
 

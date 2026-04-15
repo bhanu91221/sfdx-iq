@@ -2,7 +2,7 @@
 'use strict';
 
 /**
- * install-plan.js — Dry-run installer for claude-sfdx-iq
+ * install-plan.js — Dry-run installer for sfdx-iq
  *
  * Shows what a profile/manifest would install without making changes.
  *
@@ -96,7 +96,7 @@ for (const [category, items] of Object.entries(manifest.components || {})) {
 console.log('─'.repeat(50));
 console.log(`  Total components: ${totalComponents}`);
 if (missingComponents > 0) {
-  console.log(`  ❌ Missing: ${missingComponents} (run "npx claude-sfdx-iq repair" to fix)`);
+  console.log(`  ❌ Missing: ${missingComponents} (run "npx sfdx-iq repair" to fix)`);
 } else {
   console.log(`  ✅ All components available`);
 }

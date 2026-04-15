@@ -4,11 +4,11 @@
 
 ## Overview
 
-claude-sfdx-iq is an open-source Claude Code plugin that runs entirely on your local machine. This policy explains what data the plugin accesses, how it is used, and what it does NOT do.
+sfdx-iq is an open-source Claude Code plugin that runs entirely on your local machine. This policy explains what data the plugin accesses, how it is used, and what it does NOT do.
 
 ## What the Plugin Accesses
 
-When you use claude-sfdx-iq, the plugin may read:
+When you use sfdx-iq, the plugin may read:
 
 - **Your local project files** -- Apex classes, LWC components, flows, metadata, and configuration files in your Salesforce project folder
 - **Salesforce CLI output** -- Results from `sf` commands you run (deployments, test results, org status)
@@ -49,7 +49,7 @@ The plugin does not integrate with any third-party services. However, your devel
 
 The plugin copies configuration files to two locations:
 
-1. **Global plugin directory** (`~/.claude/plugins/claude-sfdx-iq/`) -- Agents, skills, commands, and hooks
+1. **Global plugin directory** (`~/.claude/plugins/sfdx-iq/`) -- Agents, skills, commands, and hooks
 2. **Your project folder** (`.claude/rules/`, `.claude/settings.json`, `.claude/CLAUDE.md`) -- Rules and project configuration
 
 These are plain text files (Markdown and JSON). They contain no personal data, credentials, or org-specific information. You can inspect, modify, or delete them at any time.

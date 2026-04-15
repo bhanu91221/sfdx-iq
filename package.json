@@ -1,6 +1,6 @@
 {
-  "name": "claude-sfdx-iq",
-  "version": "2.0.1",
+  "name": "sfdx-iq",
+  "version": "2.0.2",
   "description": "Salesforce DX plugin for Claude Code — self-contained commands with baked-in standards, specialized agents, and hooks for Apex, LWC, Flows, and SFDX CI/CD",
   "keywords": [
     "claude-code",
@@ -27,11 +27,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bhanu91221/claude-sfdx-iq.git"
+    "url": "git+https://github.com/bhanu91221/sfdx-iq.git"
   },
-  "homepage": "https://github.com/bhanu91221/claude-sfdx-iq#readme",
+  "homepage": "https://github.com/bhanu91221/sfdx-iq#readme",
   "bugs": {
-    "url": "https://github.com/bhanu91221/claude-sfdx-iq/issues"
+    "url": "https://github.com/bhanu91221/sfdx-iq/issues"
   },
   "files": [
     "agents/",
@@ -52,8 +52,8 @@
     ".claude-project-template/"
   ],
   "bin": {
-    "claude-sfdx-iq": "scripts/csiq.js",
-    "claude-sfdx-iq-setup": "scripts/setup-project.js"
+    "sfdx-iq": "scripts/csiq.js",
+    "sfdx-iq-setup": "scripts/setup-project.js"
   },
   "scripts": {
     "lint": "eslint . && markdownlint **/*.md --ignore node_modules",

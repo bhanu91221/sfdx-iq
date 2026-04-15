@@ -15,13 +15,13 @@ describe('doctor script', () => {
       const output = execSync(`node "${SCRIPT}"`, {
         encoding: 'utf8', cwd: ROOT, timeout: 30000
       });
-      assert.ok(output.includes('claude-sfdx-iq Doctor'));
+      assert.ok(output.includes('sfdx-iq Doctor'));
       assert.ok(output.includes('Node.js'));
       assert.ok(output.includes('Pass') || output.includes('Warn') || output.includes('Fail'));
     } catch (err) {
       // Doctor might exit 1 if some checks fail, but should still produce output
       const output = err.stdout || '';
-      assert.ok(output.includes('claude-sfdx-iq Doctor'));
+      assert.ok(output.includes('sfdx-iq Doctor'));
       assert.ok(output.includes('Node.js'));
     }
   });

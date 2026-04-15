@@ -1,6 +1,6 @@
 # Claude SFDX IQ — Project Template
 
-This directory contains the project-level configuration template for claude-sfdx-iq.
+This directory contains the project-level configuration template for sfdx-iq.
 
 ## What's Included
 
@@ -14,7 +14,7 @@ This directory contains the project-level configuration template for claude-sfdx
 From your Salesforce DX project root:
 
 ```bash
-npx claude-sfdx-iq setup-project
+npx sfdx-iq setup-project
 # Or if npm is blocked (corporate VPN): use /setup-project slash command in Claude Code
 ```
 
@@ -32,8 +32,8 @@ cd /path/to/your/sfdx-project
 mkdir -p .claude
 
 # Copy configuration templates
-cp ~/.claude/plugins/claude-sfdx-iq/.claude-project-template/settings.json ./.claude/settings.json
-cp ~/.claude/plugins/claude-sfdx-iq/.claude-project-template/CLAUDE.md ./CLAUDE.md
+cp ~/.claude/plugins/sfdx-iq/.claude-project-template/settings.json ./.claude/settings.json
+cp ~/.claude/plugins/sfdx-iq/.claude-project-template/CLAUDE.md ./CLAUDE.md
 ```
 
 ### Option 3: Copy from GitHub
@@ -42,14 +42,14 @@ If you haven't installed the plugin yet:
 
 ```bash
 # Clone the repo temporarily
-git clone https://github.com/bhanu91221/claude-sfdx-iq.git /tmp/claude-sfdx-iq
+git clone https://github.com/bhanu91221/sfdx-iq.git /tmp/sfdx-iq
 
 cd /path/to/your/sfdx-project
 mkdir -p .claude
 
 # Copy templates
-cp /tmp/claude-sfdx-iq/.claude-project-template/settings.json ./.claude/settings.json
-cp /tmp/claude-sfdx-iq/.claude-project-template/CLAUDE.md ./CLAUDE.md
+cp /tmp/sfdx-iq/.claude-project-template/settings.json ./.claude/settings.json
+cp /tmp/sfdx-iq/.claude-project-template/CLAUDE.md ./CLAUDE.md
 ```
 
 ## What Gets Copied
@@ -104,5 +104,5 @@ Edit `CLAUDE.md` to add your team's conventions, integrations, and environment n
 ## Need Help?
 
 - Run `/help` in Claude Code
-- Visit: https://github.com/bhanu91221/claude-sfdx-iq
-- Issues: https://github.com/bhanu91221/claude-sfdx-iq/issues
+- Visit: https://github.com/bhanu91221/sfdx-iq
+- Issues: https://github.com/bhanu91221/sfdx-iq/issues

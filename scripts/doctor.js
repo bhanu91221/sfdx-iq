@@ -2,13 +2,13 @@
 'use strict';
 
 /**
- * doctor.js — Diagnose environment for claude-sfdx-iq
+ * doctor.js — Diagnose environment for sfdx-iq
  *
  * Checks: Node.js, Salesforce CLI, authentication, DevHub, project structure.
  *
  * Usage:
  *   node scripts/doctor.js
- *   npx claude-sfdx-iq doctor
+ *   npx sfdx-iq doctor
  */
 
 const { execSync } = require('child_process');
@@ -49,7 +49,7 @@ function tryExec(cmd) {
   }
 }
 
-console.log('\n🩺 claude-sfdx-iq Doctor\n');
+console.log('\n🩺 sfdx-iq Doctor\n');
 console.log('  Checking environment...\n');
 
 // 1. Node.js version
@@ -147,7 +147,7 @@ check('SFDX Project (sfdx-project.json)', () => {
 });
 
 // 9. Plugin integrity
-check('claude-sfdx-iq Plugin', () => {
+check('sfdx-iq Plugin', () => {
   const pluginJson = path.join(ROOT, '.claude-plugin', 'plugin.json');
   if (fs.existsSync(pluginJson)) {
     const agentCount = fs.readdirSync(path.join(ROOT, 'agents')).filter(f => f.endsWith('.md')).length;
@@ -162,7 +162,7 @@ console.log('\n' + '─'.repeat(40));
 console.log(`  ✅ Pass: ${passCount}  ⚠️  Warn: ${warnCount}  ❌ Fail: ${failCount}`);
 
 if (failCount > 0) {
-  console.log('\n  Some checks failed. Fix the issues above and run "npx claude-sfdx-iq doctor" again.\n');
+  console.log('\n  Some checks failed. Fix the issues above and run "npx sfdx-iq doctor" again.\n');
   process.exit(1);
 } else if (warnCount > 0) {
   console.log('\n  Environment is functional with some warnings.\n');

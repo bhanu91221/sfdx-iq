@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-Before installing claude-sfdx-iq, ensure you have the following:
+Before installing sfdx-iq, ensure you have the following:
 
 | Requirement | Minimum Version | Check Command |
 |-------------|----------------|---------------|
@@ -23,17 +23,17 @@ Open a terminal or command prompt and run these three commands:
 
 **Step 1 -- Add the marketplace:**
 ```
-claude plugin marketplace add bhanu91221/claude-sfdx-iq
+claude plugin marketplace add bhanu91221/sfdx-iq
 ```
 
 **Step 2 -- Install the plugin:**
 ```
-claude plugin install claude-sfdx-iq@claude-sfdx-iq
+claude plugin install sfdx-iq@sfdx-iq
 ```
 
 **Step 3 -- Enable it:**
 ```
-claude plugin enable claude-sfdx-iq
+claude plugin enable sfdx-iq
 ```
 
 ### Inside Claude Code
@@ -42,17 +42,17 @@ If you are already working inside Claude Code (in VS Code, the Desktop app, or t
 
 **Step 1 -- Add the marketplace:**
 ```
-/plugin marketplace add bhanu91221/claude-sfdx-iq
+/plugin marketplace add bhanu91221/sfdx-iq
 ```
 
 **Step 2 -- Install the plugin:**
 ```
-/plugin install claude-sfdx-iq --scope user
+/plugin install sfdx-iq --scope user
 ```
 
 **Step 3 -- Enable it:**
 ```
-/plugin enable claude-sfdx-iq
+/plugin enable sfdx-iq
 ```
 
 ### Installation Scopes
@@ -76,7 +76,7 @@ There are three ways to set up a project:
 From your SFDX project root:
 
 ```bash
-npx claude-sfdx-iq setup-project
+npx sfdx-iq setup-project
 ```
 
 This copies the latest configuration templates directly from npm -- no git clone needed.
@@ -94,13 +94,13 @@ If npm is blocked (corporate VPN), open Claude Code in your SFDX project and run
 Clone the repo and copy files yourself:
 
 ```bash
-git clone https://github.com/bhanu91221/claude-sfdx-iq.git
+git clone https://github.com/bhanu91221/sfdx-iq.git
 cd /path/to/your/sfdx-project
 mkdir -p .claude
 
 # Copy configuration templates
-cp /path/to/claude-sfdx-iq/.claude-project-template/settings.json ./.claude/settings.local.json
-cp /path/to/claude-sfdx-iq/.claude-project-template/CLAUDE.md ./.claude/CLAUDE.md
+cp /path/to/sfdx-iq/.claude-project-template/settings.json ./.claude/settings.local.json
+cp /path/to/sfdx-iq/.claude-project-template/CLAUDE.md ./.claude/CLAUDE.md
 ```
 
 **What gets copied to your project:**
@@ -116,7 +116,7 @@ The plugin installs globally once. Commands are self-contained -- each command i
 
 ```
 Global (installed once via marketplace)
-Location: ~/.claude/plugins/claude-sfdx-iq/
+Location: ~/.claude/plugins/sfdx-iq/
   Agents (7)      -- Domain specialists
   Commands (21)   -- Slash commands with inline domain standards
   Hooks (5)       -- Automated quality checks
@@ -153,11 +153,11 @@ All CLI tools are available both from the terminal (via `npx`) and as slash comm
 
 | CLI Command | Slash Command | Description |
 |---|---|---|
-| `npx claude-sfdx-iq setup-project` | `/setup-project` | Copy config to SFDX project |
-| `npx claude-sfdx-iq help` | `/csiq-help` | Show available commands |
-| `npx claude-sfdx-iq status` | `/status` | Plugin status and component counts |
-| `npx claude-sfdx-iq doctor` | `/doctor` | Diagnose environment |
-| `npx claude-sfdx-iq repair` | `/repair` | Check and repair plugin integrity |
+| `npx sfdx-iq setup-project` | `/setup-project` | Copy config to SFDX project |
+| `npx sfdx-iq help` | `/csiq-help` | Show available commands |
+| `npx sfdx-iq status` | `/status` | Plugin status and component counts |
+| `npx sfdx-iq doctor` | `/doctor` | Diagnose environment |
+| `npx sfdx-iq repair` | `/repair` | Check and repair plugin integrity |
 
 > **Corporate VPN / blocked npm?** All CLI tools are also available as slash commands -- no npm required.
 
@@ -180,7 +180,7 @@ To switch manifests, update your project's `.claude/settings.json`:
 ```json
 {
   "plugins": {
-    "claude-sfdx-iq": {
+    "sfdx-iq": {
       "manifest": "apex-only"
     }
   }
@@ -194,7 +194,7 @@ To control which automated quality checks run on file save, set the `hookProfile
 ```json
 {
   "plugins": {
-    "claude-sfdx-iq": {
+    "sfdx-iq": {
       "hookProfile": "standard"
     }
   }
@@ -251,7 +251,7 @@ sf org login web --alias <your-org-alias>
 3. Run the doctor script to diagnose issues:
 
 ```bash
-npx claude-sfdx-iq doctor
+npx sfdx-iq doctor
 ```
 
 ### "Not an SFDX project" error

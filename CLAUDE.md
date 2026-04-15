@@ -1,16 +1,16 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code when working with the claude-sfdx-iq plugin repository.
+This file provides guidance to Claude Code when working with the sfdx-iq plugin repository.
 
 ## Project Overview
 
-This is the **claude-sfdx-iq plugin repository** — a Claude Code plugin that transforms Claude into a Salesforce development expert.
+This is the **sfdx-iq plugin repository** — a Claude Code plugin that transforms Claude into a Salesforce development expert.
 
 **Distribution Model:**
-- **Global Installation** (marketplace): Agents, commands, hooks → `~/.claude/plugins/claude-sfdx-iq/`
-- **Project Setup** (per SFDX project): Settings + CLAUDE.md template → `.claude/` (via `npx claude-sfdx-iq setup-project`)
+- **Global Installation** (marketplace): Agents, commands, hooks → `~/.claude/plugins/sfdx-iq/`
+- **Project Setup** (per SFDX project): Settings + CLAUDE.md template → `.claude/` (via `npx sfdx-iq setup-project`)
 
-**Architecture (v2.0.1):**
+**Architecture (v2.0.2):**
 - Commands are **self-contained** — domain standards are baked in, no separate rules or context loading required
 - Agents are invoked by commands for domain-specific review and analysis
 - Hooks provide automated quality gates on file save
@@ -36,10 +36,10 @@ node scripts/ci/validate-hooks.js
 - **commands/** — 21 slash commands with baked-in domain standards
 - **hooks/** — 5 hook JSON definitions + 16 hook scripts (quality gates, SOQL checks, Flow checks)
 - **examples/** — Code examples (integration patterns, Apex, LWC)
-- **scripts/** — Cross-platform Node.js utilities (claude-sfdx-iq CLI, hook scripts, lib)
+- **scripts/** — Cross-platform Node.js utilities (sfdx-iq CLI, hook scripts, lib)
 - **mcp-configs/** — MCP server configurations for Salesforce integrations
 
-### Copied Per-Project (via npx claude-sfdx-iq setup-project)
+### Copied Per-Project (via npx sfdx-iq setup-project)
 - **.claude-project-template/** — Project configuration templates (settings.json, CLAUDE.md)
 
 ### Development Only
@@ -74,11 +74,11 @@ node scripts/ci/validate-hooks.js
 
 Available via `npx` or as slash commands:
 
-- `npx claude-sfdx-iq setup-project` or `/setup-project` — Copy config to an SFDX project
-- `npx claude-sfdx-iq help` or `/csiq-help` — Show available CLI commands
-- `npx claude-sfdx-iq status` or `/status` — Check plugin and org status
-- `npx claude-sfdx-iq doctor` or `/doctor` — Diagnose configuration issues
-- `npx claude-sfdx-iq repair` or `/repair` — Auto-fix common configuration problems
+- `npx sfdx-iq setup-project` or `/setup-project` — Copy config to an SFDX project
+- `npx sfdx-iq help` or `/csiq-help` — Show available CLI commands
+- `npx sfdx-iq status` or `/status` — Check plugin and org status
+- `npx sfdx-iq doctor` or `/doctor` — Diagnose configuration issues
+- `npx sfdx-iq repair` or `/repair` — Auto-fix common configuration problems
 
 ## Core Principles
 

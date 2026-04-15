@@ -2,7 +2,7 @@
 'use strict';
 
 /**
- * list-installed.js — List all claude-sfdx-iq components available in the plugin
+ * list-installed.js — List all sfdx-iq components available in the plugin
  *
  * Usage:
  *   node scripts/list-installed.js [--category agents|commands|hooks]
@@ -65,7 +65,7 @@ const categoriesToShow = filterCategory
   ? { [filterCategory]: components[filterCategory] }
   : components;
 
-console.log('\n📦 claude-sfdx-iq — Installed Components\n');
+console.log('\n📦 sfdx-iq — Installed Components\n');
 
 let totalCount = 0;
 

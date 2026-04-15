@@ -13,8 +13,8 @@ const COLORS = {
 const projectFile = path.join(process.cwd(), 'sfdx-project.json');
 
 if (!fs.existsSync(projectFile)) {
-  console.log(`${COLORS.DIM}[claude-sfdx-iq] Not an SFDX project - plugin commands available but context not loaded${COLORS.RESET}`);
-  console.log(`${COLORS.DIM}[claude-sfdx-iq] To use in a Salesforce project: cd your-sfdx-project && npx claude-sfdx-iq setup-project (or /setup-project)${COLORS.RESET}`);
+  console.log(`${COLORS.DIM}[sfdx-iq] Not an SFDX project - plugin commands available but context not loaded${COLORS.RESET}`);
+  console.log(`${COLORS.DIM}[sfdx-iq] To use in a Salesforce project: cd your-sfdx-project && npx sfdx-iq setup-project (or /setup-project)${COLORS.RESET}`);
   process.exit(0);
 }
 

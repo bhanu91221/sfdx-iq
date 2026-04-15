@@ -8,7 +8,7 @@
  *
  * Usage:
  *   node scripts/repair.js [--fix]
- *   npx claude-sfdx-iq repair [--fix]
+ *   npx sfdx-iq repair [--fix]
  */
 
 const fs = require('fs');
@@ -20,7 +20,7 @@ const shouldFix = process.argv.includes('--fix');
 let issues = 0;
 let fixed = 0;
 
-console.log('\n🔧 claude-sfdx-iq Repair Tool\n');
+console.log('\n🔧 sfdx-iq Repair Tool\n');
 console.log(`  Mode: ${shouldFix ? 'FIX (will attempt repairs)' : 'CHECK (read-only, use --fix to repair)'}\n`);
 
 // ──────────────────────────────────────
@@ -181,7 +181,7 @@ if (issues === 0) {
       console.log(`  ${issues - fixed} issue${issues - fixed > 1 ? 's' : ''} require manual intervention.\n`);
     }
   } else {
-    console.log('  Run "npx claude-sfdx-iq repair --fix" to attempt automatic repairs.\n');
+    console.log('  Run "npx sfdx-iq repair --fix" to attempt automatic repairs.\n');
   }
   process.exit(1);
 }

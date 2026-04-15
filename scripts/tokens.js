@@ -2,12 +2,12 @@
 'use strict';
 
 /**
- * tokens.js — Token budget reporter for claude-sfdx-iq
+ * tokens.js — Token budget reporter for sfdx-iq
  *
  * Usage:
- *   npx claude-sfdx-iq tokens                       # Show installed component costs
- *   npx claude-sfdx-iq tokens --profile <name>      # Show costs for a named profile
- *   npx claude-sfdx-iq tokens --all                 # Show all available components
+ *   npx sfdx-iq tokens                       # Show installed component costs
+ *   npx sfdx-iq tokens --profile <name>      # Show costs for a named profile
+ *   npx sfdx-iq tokens --all                 # Show all available components
  */
 
 const fs = require('fs');

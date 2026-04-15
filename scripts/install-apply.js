@@ -2,7 +2,7 @@
 'use strict';
 
 /**
- * install-apply.js — Install claude-sfdx-iq components into a target SFDX project
+ * install-apply.js — Install sfdx-iq components into a target SFDX project
  *
  * Copies/symlinks selected components from the plugin into the user's project.
  * Components are installed to .claude/ directory in the target project.
@@ -219,7 +219,7 @@ try {
 const activeProfilePath = path.join(targetDir, '.claude', 'active-profile.json');
 const activeProfile = {
   version: '1',
-  installedFrom: 'claude-sfdx-iq@1.1.0',
+  installedFrom: 'sfdx-iq@2.0.2',
   baseProfile: manifest.name,
   active: {
     skills: manifest.components.skills || [],
@@ -263,6 +263,6 @@ if (errors > 0) {
 }
 console.log(`\n  Profile "${manifest.name}" installation complete.`);
 console.log(`  Skills installed to .claude/skills-available/ (loaded on-demand by context-assigner)`);
-console.log(`  Run "npx claude-sfdx-iq status" to verify.\n`);
+console.log(`  Run "npx sfdx-iq status" to verify.\n`);
 
 process.exit(errors > 0 ? 1 : 0);

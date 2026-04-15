@@ -2,11 +2,11 @@
 'use strict';
 
 /**
- * status.js — Show claude-sfdx-iq plugin status and component counts
+ * status.js — Show sfdx-iq plugin status and component counts
  *
  * Usage:
  *   node scripts/status.js
- *   npx claude-sfdx-iq status
+ *   npx sfdx-iq status
  */
 
 const fs = require('fs');
@@ -43,7 +43,7 @@ if (fs.existsSync(pluginJsonPath)) {
 
 // Read package.json for version
 const packageJsonPath = path.join(ROOT, 'package.json');
-let version = '2.0.0';
+let version = '2.0.2';
 if (fs.existsSync(packageJsonPath)) {
   try {
     version = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8')).version || version;
@@ -65,7 +65,7 @@ const examples = countRecursive(path.join(ROOT, 'examples'), _f => true);
 // Display
 console.log(`
 ╔══════════════════════════════════════════╗
-║      claude-sfdx-iq  v${version.padEnd(18)}║
+║      sfdx-iq  v${version.padEnd(18)}║
 ║  Salesforce DX plugin for Claude Code    ║
 ╚══════════════════════════════════════════╝
 `);

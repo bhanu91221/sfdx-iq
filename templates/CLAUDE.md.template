@@ -1,8 +1,8 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code when working with Salesforce DX projects using the claude-sfdx-iq plugin.
+This file provides guidance to Claude Code when working with Salesforce DX projects using the sfdx-iq plugin.
 
-## Architecture (v2.0.1)
+## Architecture (v2.0.2)
 
 Commands are **self-contained** — each command includes its domain standards inline. No context loading step required. Invoke commands directly; agents are delegated to for domain-specific review.
 
@@ -47,11 +47,11 @@ Commands are **self-contained** — each command includes its domain standards i
 
 ## CLI Tools
 
-- `npx claude-sfdx-iq help` — Show available CLI commands
-- `npx claude-sfdx-iq setup-project` — Copy config to an SFDX project
-- `npx claude-sfdx-iq status` — Check plugin and org status
-- `npx claude-sfdx-iq doctor` — Diagnose configuration issues
-- `npx claude-sfdx-iq repair` — Auto-fix common configuration problems
+- `npx sfdx-iq help` — Show available CLI commands
+- `npx sfdx-iq setup-project` — Copy config to an SFDX project
+- `npx sfdx-iq status` — Check plugin and org status
+- `npx sfdx-iq doctor` — Diagnose configuration issues
+- `npx sfdx-iq repair` — Auto-fix common configuration problems
 
 ## Development Notes
 

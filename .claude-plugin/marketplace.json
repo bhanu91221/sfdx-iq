@@ -1,15 +1,15 @@
 {
-  "name": "claude-sfdx-iq",
+  "name": "sfdx-iq",
   "owner": {
     "name": "Bhanu Vakati",
     "email": "bhanu91221@github.com"
   },
   "plugins": [
     {
-      "name": "claude-sfdx-iq",
+      "name": "sfdx-iq",
       "source": "./",
       "description": "Salesforce DX plugin for Claude Code — 7 agents, 21 self-contained commands, 5 hooks for Apex, LWC, SOQL, Flows, and SFDX CI/CD",
-      "version": "2.0.1"
+      "version": "2.0.2"
     }
   ]
 }

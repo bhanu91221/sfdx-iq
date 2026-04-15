@@ -3,12 +3,12 @@
 /**
  * Claude SFDX IQ — Project Setup Script
  *
- * Sets up a Salesforce DX project with claude-sfdx-iq configuration.
+ * Sets up a Salesforce DX project with sfdx-iq configuration.
  *
  * Usage:
- *   npx claude-sfdx-iq setup-project [target-directory]
- *   npx claude-sfdx-iq setup-project /path/to/sfdx-project
- *   npx claude-sfdx-iq setup-project  (uses current directory)
+ *   npx sfdx-iq setup-project [target-directory]
+ *   npx sfdx-iq setup-project /path/to/sfdx-project
+ *   npx sfdx-iq setup-project  (uses current directory)
  *
  * What it does:
  *   1. Verifies target is an SFDX project (sfdx-project.json exists)
@@ -36,7 +36,7 @@ if (!fs.existsSync(sfdxProjectPath)) {
   console.error('\nERROR: Not a Salesforce DX project');
   console.error(`   sfdx-project.json not found in: ${absoluteTargetDir}`);
   console.error('\n   Please run this command from an SFDX project root, or specify the path:');
-  console.error('   npx claude-sfdx-iq setup-project /path/to/sfdx-project\n');
+  console.error('   npx sfdx-iq setup-project /path/to/sfdx-project\n');
   process.exit(1);
 }
 
@@ -94,4 +94,4 @@ console.log('   4. Use /code-review to review all changed files');
 
 console.log('\nDocumentation:');
 console.log('   Project docs: .claude/CLAUDE.md');
-console.log('   Plugin repo: https://github.com/bhanu91221/claude-sfdx-iq');
+console.log('   Plugin repo: https://github.com/bhanu91221/sfdx-iq');
