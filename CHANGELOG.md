@@ -1,8 +1,14 @@
 # Changelog
 
-All notable changes to claude-sfdx-iq will be documented in this file.
+All notable changes to sfdx-iq will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/), and this project adheres to [Semantic Versioning](https://semver.org/).
+
+## [2.0.2] - 2026-04-15
+
+### Changed
+- Renamed plugin from `claude-sfdx-iq` to `sfdx-iq` to comply with Claude Code marketplace naming requirements (reserved `claude-` prefix)
+- Updated all npm package references, binary names, plugin manifests, project templates, scripts, docs, and tests to use the new name
 
 ## [2.0.1] - 2026-04-13
 

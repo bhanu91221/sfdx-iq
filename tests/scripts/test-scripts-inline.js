@@ -19,7 +19,7 @@ describe('CLI scripts inline coverage', () => {
   describe('status.js', () => {
     it('shows component summary', () => {
       const r = requireScript(path.join(ROOT, 'scripts/status.js'), []);
-      assert.ok(r.stdout.includes('claude-sfdx-iq'));
+      assert.ok(r.stdout.includes('sfdx-iq'));
       assert.ok(r.stdout.includes('Agents'));
     });
   });
@@ -70,7 +70,7 @@ describe('CLI scripts inline coverage', () => {
   describe('csiq.js', () => {
     it('shows help with no args', () => {
       const r = requireScript(path.join(ROOT, 'scripts/csiq.js'), []);
-      assert.ok(r.stdout.includes('claude-sfdx-iq') || r.stdout.includes('Usage'));
+      assert.ok(r.stdout.includes('sfdx-iq') || r.stdout.includes('Usage'));
     });
 
     it('shows help with help command', () => {

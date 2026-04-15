@@ -1,4 +1,4 @@
-# claude-sfdx-iq
+# sfdx-iq
 
 ![npm test](https://img.shields.io/badge/npm%20test-passing-brightgreen)
 ![License: MIT](https://img.shields.io/badge/License-MIT-blue)
@@ -28,21 +28,21 @@ You can install this plugin two ways -- pick whichever you are most comfortable 
 ### Directly from Your Terminal
 **Add the marketplace (one-time)**
 ```
-claude plugin marketplace add bhanu91221/claude-sfdx-iq
+claude plugin marketplace add bhanu91221/sfdx-iq
 ```
 **Install the plugin**
 ```
-claude plugin install claude-sfdx-iq
+claude plugin install sfdx-iq
 ```
 
 ### Or install in Claude Code
 **Add the marketplace (one-time)**
 ```
-/plugin marketplace add bhanu91221/claude-sfdx-iq
+/plugin marketplace add bhanu91221/sfdx-iq
 ```
 **Install the plugin**
 ```
-/plugin install claude-sfdx-iq
+/plugin install sfdx-iq
 ```
 
 ### Setting Up Your Salesforce Project
@@ -54,7 +54,7 @@ After installing the plugin, copy the plugin configuration into each Salesforce 
 Open a terminal, navigate to your Salesforce project folder, and run:
 
 ```
-npx claude-sfdx-iq setup-project
+npx sfdx-iq setup-project
 ```
 
 #### Option 2 -- Use a slash command inside Claude Code
@@ -69,7 +69,7 @@ This is a good option if npm is blocked on your network (corporate VPN).
 
 #### Option 3 -- Copy files manually
 
-Download the plugin files from [GitHub](https://github.com/bhanu91221/claude-sfdx-iq), then copy the following into the `.claude` folder inside your Salesforce project:
+Download the plugin files from [GitHub](https://github.com/bhanu91221/sfdx-iq), then copy the following into the `.claude` folder inside your Salesforce project:
 
 ```
 your-salesforce-project/
@@ -211,10 +211,10 @@ The plugin includes 7 specialist agents. Commands invoke them automatically -- y
 
 | Problem | Solution |
 |---------|----------|
-| Plugin not loading | Run `npx claude-sfdx-iq doctor` or `/doctor` to diagnose environment issues |
+| Plugin not loading | Run `npx sfdx-iq doctor` or `/doctor` to diagnose environment issues |
 | "Not an SFDX project" error | Make sure you are in a folder with `sfdx-project.json` and have run the setup-project step |
-| Org not connected | Run `npx claude-sfdx-iq status` or `/status` to check your connection, then re-authenticate with `sf org login web` |
-| Something seems broken | Run `npx claude-sfdx-iq repair` or `/repair` to auto-fix common configuration problems |
+| Org not connected | Run `npx sfdx-iq status` or `/status` to check your connection, then re-authenticate with `sf org login web` |
+| Something seems broken | Run `npx sfdx-iq repair` or `/repair` to auto-fix common configuration problems |
 
 For more troubleshooting steps, see the [Installation Guide](docs/INSTALLATION.md#troubleshooting).
 

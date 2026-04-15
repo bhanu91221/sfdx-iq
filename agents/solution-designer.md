@@ -3,7 +3,7 @@ name: solution-designer
 description: Use this agent for Salesforce solution architecture and implementation planning. Covers data model design, integration architecture, scalability planning, packaging strategy, declarative-vs-code decisions, phased implementation roadmaps, and dependency mapping. Best for greenfield projects, major refactors, or complex multi-component features.
 tools: ["Read", "Grep", "Glob"]
 model: opus
-tokens: 1954
+tokens: 1908
 domain: common
 ---
 

@@ -11,7 +11,7 @@ let skipped = 0;
 
 console.log('Validating rule files...\n');
 
-// Rules are optional — users copy them via `npx claude-sfdx-iq setup-project`.
+// Rules are optional — users copy them via `npx sfdx-iq setup-project`.
 // If neither rules/ nor rules-backup/ exists, skip validation entirely.
 if (!fs.existsSync(rulesDir) && !fs.existsSync(rulesBackupDir)) {
   console.log('  SKIP  rules/ directory not present (rules are optional, distributed via setup-project)');

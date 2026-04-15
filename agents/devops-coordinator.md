@@ -3,7 +3,7 @@ name: devops-coordinator
 description: Use this agent for Salesforce DevOps tasks including deployment strategy, test patterns (TDD, TestDataFactory, mocks), org health analysis, metadata dependency mapping, technical debt identification, and CI/CD pipeline configuration.
 tools: ["Read", "Write", "Edit", "Bash", "Grep", "Glob"]
 model: sonnet
-tokens: 2531
+tokens: 2452
 domain: common
 ---
 

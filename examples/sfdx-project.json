@@ -17,7 +17,7 @@
   "sfdcLoginUrl": "https://login.salesforce.com",
   "sourceApiVersion": "62.0",
   "plugins": {
-    "claude-sfdx-iq": {
+    "sfdx-iq": {
       "profile": "developer",
       "hookProfile": "standard"
     }

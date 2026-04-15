@@ -2,7 +2,7 @@
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability in claude-sfdx-iq, please report it responsibly.
+If you discover a security vulnerability in sfdx-iq, please report it responsibly.
 
 **Do NOT open a public GitHub issue for security vulnerabilities.**
 
@@ -17,7 +17,7 @@ You should receive a response within 48 hours. We will work with you to understa
 
 ## Scope
 
-This policy covers the claude-sfdx-iq plugin code, including:
+This policy covers the sfdx-iq plugin code, including:
 
 - Agents, skills, commands, hooks, and rules
 - CLI scripts (`scripts/`)

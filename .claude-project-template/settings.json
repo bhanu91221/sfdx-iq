@@ -1,6 +1,6 @@
 {
   "plugins": {
-    "claude-sfdx-iq": {
+    "sfdx-iq": {
       "enabled": true,
       "hookProfile": "standard"
     }
@@ -12,6 +12,6 @@
   "metadata": {
     "projectType": "sfdx",
     "setupComplete": true,
-    "installedVersion": "2.0.1"
+    "installedVersion": "2.0.2"
   }
 }

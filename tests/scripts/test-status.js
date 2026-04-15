@@ -12,7 +12,7 @@ const ROOT = path.resolve(__dirname, '../..');
 describe('status script', () => {
   it('shows component summary', () => {
     const output = execSync(`node "${SCRIPT}"`, { encoding: 'utf8', cwd: ROOT, timeout: 15000 });
-    assert.ok(output.includes('claude-sfdx-iq'));
+    assert.ok(output.includes('sfdx-iq'));
     assert.ok(output.includes('Component Summary'));
   });
 

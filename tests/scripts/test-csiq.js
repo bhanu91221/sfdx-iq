@@ -18,7 +18,7 @@ describe('csiq CLI entry point', () => {
 
   it('shows help with no arguments', () => {
     const output = run();
-    assert.ok(output.includes('claude-sfdx-iq'));
+    assert.ok(output.includes('sfdx-iq'));
     assert.ok(output.includes('Usage'));
     assert.ok(output.includes('Commands'));
   });
@@ -51,7 +51,7 @@ describe('csiq CLI entry point', () => {
 
   it('runs status command', () => {
     const output = run('status');
-    assert.ok(output.includes('claude-sfdx-iq'));
+    assert.ok(output.includes('sfdx-iq'));
     assert.ok(output.includes('Component Summary') || output.includes('Agents'));
   });
 

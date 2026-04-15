@@ -11,7 +11,7 @@ const SCRIPT = path.resolve(__dirname, '../../scripts/doctor.js');
 describe('doctor (in-process)', () => {
   it('prints Doctor header', () => {
     const result = requireScript(SCRIPT, []);
-    assert.ok(result.stdout.includes('claude-sfdx-iq Doctor'));
+    assert.ok(result.stdout.includes('sfdx-iq Doctor'));
   });
 
   it('checks Node.js version', () => {

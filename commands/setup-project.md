@@ -1,12 +1,12 @@
 ---
-description: Set up an SFDX project with claude-sfdx-iq rules and configuration (alternative to npx claude-sfdx-iq setup-project)
+description: Set up an SFDX project with sfdx-iq rules and configuration (alternative to npx sfdx-iq setup-project)
 argument-hint: ""
 allowed-tools: [Read, Write, Glob, Bash]
 ---
 
 # /setup-project
 
-Copy claude-sfdx-iq rules and configuration templates into the current SFDX project. Use this when `npx claude-sfdx-iq setup-project` is unavailable (e.g., corporate VPN, blocked npm).
+Copy sfdx-iq rules and configuration templates into the current SFDX project. Use this when `npx sfdx-iq setup-project` is unavailable (e.g., corporate VPN, blocked npm).
 
 ## Workflow
 
@@ -15,9 +15,9 @@ Check that `sfdx-project.json` exists in the current working directory. If missi
 
 ### Step 2: Locate the Plugin Directory
 Use Glob to search for the plugin's `CLAUDE.md` template in these locations:
-1. `~/.claude/plugins/claude-sfdx-iq/.claude-project-template/CLAUDE.md`
-2. `.claude/plugins/claude-sfdx-iq/.claude-project-template/CLAUDE.md`
-3. `**/claude-sfdx-iq/.claude-project-template/CLAUDE.md` (fallback broad search)
+1. `~/.claude/plugins/sfdx-iq/.claude-project-template/CLAUDE.md`
+2. `.claude/plugins/sfdx-iq/.claude-project-template/CLAUDE.md`
+3. `**/sfdx-iq/.claude-project-template/CLAUDE.md` (fallback broad search)
 
 The plugin root is the parent directory of the found `.claude-project-template/` folder.
 

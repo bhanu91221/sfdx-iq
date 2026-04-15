@@ -1,6 +1,6 @@
 # Contributing
 
-Thank you for your interest in contributing to claude-sfdx-iq. This guide covers the workflow, conventions, and requirements for submitting changes.
+Thank you for your interest in contributing to sfdx-iq. This guide covers the workflow, conventions, and requirements for submitting changes.
 
 ## Getting Started
 
@@ -8,8 +8,8 @@ Thank you for your interest in contributing to claude-sfdx-iq. This guide covers
 2. Clone your fork and create a feature branch:
 
 ```bash
-git clone https://github.com/bhanu91221/claude-sfdx-iq.git
-cd claude-sfdx-iq
+git clone https://github.com/bhanu91221/sfdx-iq.git
+cd sfdx-iq
 git checkout -b feature/your-feature-name
 ```
 
