@@ -219,7 +219,7 @@ try {
 const activeProfilePath = path.join(targetDir, '.claude', 'active-profile.json');
 const activeProfile = {
   version: '1',
-  installedFrom: 'sfdx-iq@2.0.2',
+  installedFrom: require('../package.json').name + '@' + require('../package.json').version,
   baseProfile: manifest.name,
   active: {
     skills: manifest.components.skills || [],
